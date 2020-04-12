@@ -1,15 +1,15 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * Doppelkopf implementation : © <Your name here> <Your email address here>
+ * dk implementation : © Roland Fredenhagen roland@van-fredenhagen.de
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * doppelkopf.css
+ * dk.css
  *
- * Doppelkopf stylesheet
+ * dk stylesheet
  *
  */
 
@@ -17,8 +17,8 @@
     This is the CSS stylesheet of your game User Interface.
     
     Styles defined on this file will be applied to the HTML elements you define in your
-    HTML template (doppelkopf_doppelkopf.tpl), and to HTML elements you create dynamically
-    (in doppelkopf.js).
+    HTML template (dk_dk.tpl), and to HTML elements you create dynamically
+    (in dk.js).
     
     Usually, you are using CSS to:
     
