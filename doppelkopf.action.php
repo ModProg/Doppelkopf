@@ -2,27 +2,27 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * TestProject implementation : © <Your name here> <Your email address here>
+ * Doppelkopf implementation : © <Your name here> <Your email address here>
  *
- * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
- * See http://en.boardgamearena.com/#!doc/Studio for more information.
+ * This code has been produced on the BGA studio platform for use on https://boardgamearena.com.
+ * See http://en.doc.boardgamearena.com/Studio for more information.
  * -----
  * 
  * doppelkopf.action.php
  *
- * doppelkopf main action entry point
+ * Doppelkopf main action entry point
  *
  *
  * In this file, you are describing all the methods that can be called from your
  * user interface logic (javascript).
  *       
  * If you define a method "myAction" here, then you can call it from your javascript code with:
- * this.ajaxcall( "/testproject/testproject/myAction.html", ...)
+ * this.ajaxcall( "/doppelkopf/doppelkopf/myAction.html", ...)
  *
  */
   
   
-  class action_doppelkopf extends APP_SandboxGameAction
+  class action_doppelkopf extends APP_GameAction
   { 
     // Constructor: please do not modify
    	public function __default()
@@ -34,7 +34,7 @@
   	    }
   	    else
   	    {
-            $this->view = "common_sandbox";
+            $this->view = "doppelkopf_doppelkopf";
             self::trace( "Complete reinitialization of board game" );
       }
   	} 

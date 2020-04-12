@@ -1,15 +1,15 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * EmptyGame implementation : © <Your name here> <Your email address here>
+ * Doppelkopf implementation : © <Your name here> <Your email address here>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * emptygame.css
+ * doppelkopf.css
  *
- * EmptyGame stylesheet
+ * Doppelkopf stylesheet
  *
  */
 
@@ -17,8 +17,8 @@
     This is the CSS stylesheet of your game User Interface.
     
     Styles defined on this file will be applied to the HTML elements you define in your
-    HTML template (emptygame_emptygame.tpl), and to HTML elements you create dynamically
-    (in emptygame.js).
+    HTML template (doppelkopf_doppelkopf.tpl), and to HTML elements you create dynamically
+    (in doppelkopf.js).
     
     Usually, you are using CSS to:
     
@@ -42,7 +42,9 @@
            Consequently, don't hesitate to put as many comments as necessary.
 */
 
-@import url(../../../css/csslayer.css); /* Note: you must not use any @import directive other than this one */
+
+/* Note: you must not use any @import directive */
+
 
 /********* You can start writing your CSS below this line: **********/
 

@@ -3,7 +3,7 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * EmptyGame implementation : © <Your name here> <Your email address here>
+ * Doppelkopf implementation : © <Your name here> <Your email address here>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -11,14 +11,14 @@
  *
  * gameoptions.inc.php
  *
- * EmptyGame game options description
+ * Doppelkopf game options description
  * 
  * In this file, you can define your game options (= game variants).
  *   
  * Note: If your game has no variant, you don't have to modify this file.
  *
  * Note²: All options defined in this file should have a corresponding "game state labels"
- *        with the same ID (see "initGameStateLabels" in emptygame.game.php)
+ *        with the same ID (see "initGameStateLabels" in doppelkopf.game.php)
  *
  * !! It is not a good idea to modify this file when a game is running !!
  *
@@ -26,8 +26,7 @@
 
 $game_options = array(
 
-    /* Example of game variant:
-    
+    /*
     
     // note: game variant ID should start at 100 (ie: 100, 101, 102, ...). The maximum is 199.
     100 => array(
@@ -42,9 +41,10 @@ $game_options = array(
                             2 => array( 'name' => totranslate('option 2'), 'tmdisplay' => totranslate('option 2') ),
 
                             // Another value, with other options:
+                            //  description => this text will be displayed underneath the option when this value is selected to explain what it does
                             //  beta=true => this option is in beta version right now.
                             //  nobeginner=true  =>  this option is not recommended for beginners
-                            3 => array( 'name' => totranslate('option 3'),  'beta' => true, 'nobeginner' => true ),) )
+                            3 => array( 'name' => totranslate('option 3'), 'description' => totranslate('this option does X'), 'beta' => true, 'nobeginner' => true )
                         )
             )
 

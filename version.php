@@ -1,1 +1,3 @@
-<?php $game_version_doppelkopf='200411-2141'; $game_releasenote_doppelkopf="";
+<?php 
+// Please do not modify this file.
+$game_version_doppelkopf ="999999-9999";

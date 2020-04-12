@@ -68,6 +68,10 @@ $gameinfos = array(
 // Example: 'tie_breaker_description' => totranslate( "Number of remaining cards in hand" ),
 'tie_breaker_description' => "",
 
+// If in the game, all losers are equal (no score to rank them or explicit in the rules that losers are not ranked between them), set this to true 
+// The game end result will display "Winner" for the 1st player and "Loser" for all other players
+'losers_not_ranked' => false,
+
 // Game is "beta". A game MUST set is_beta=1 when published on BGA for the first time, and must remains like this until all bugs are fixed.
 'is_beta' => 1,                     
 
@@ -93,6 +97,10 @@ $gameinfos = array(
 // Favorite colors support : if set to "true", support attribution of favorite colors based on player's preferences (see reattributeColorsBasedOnPreferences PHP method)
 'favorite_colors_support' => true,
 
+// When doing a rematch, the player order is swapped using a "rotation" so the starting player is not the same
+// If you want to disable this, set this to false
+'disable_player_order_swap_on_rematch' => false,
+
 // Game interface width range (pixels)
 // Note: game interface = space on the left side, without the column on the right
 'game_interface_width' => array(
@@ -110,6 +118,16 @@ $gameinfos = array(
     'max' => null
 ),
 
+// Game presentation
+// Short game presentation text that will appear on the game description page, structured as an array of paragraphs.
+// Each paragraph must be wrapped with totranslate() for translation and should not contain html (plain text without formatting).
+// A good length for this text is between 100 and 150 words (about 6 to 9 lines on a standard display)
+'presentation' => array(
+//    totranslate("This wonderful game is about geometric shapes!"),
+//    totranslate("It was awarded best triangle game of the year in 2005 and nominated for the Spiel des Jahres."),
+//    ...
+),
+
 // Games categories
 //  You can attribute a maximum of FIVE "tags" for your game.
 //  Each tag has a specific ID (ex: 22 for the category "Prototype", 101 for the tag "Science-fiction theme game")
@@ -125,8 +143,8 @@ $gameinfos = array(
 // simple : A plays, B plays, C plays, A plays, B plays, ...
 // circuit : A plays and choose the next player C, C plays and choose the next player D, ...
 // complex : A+B+C plays and says that the next player is A+B
-  'turnControl' => 'simple',
-  'is_sandbox' => true,
+'is_sandbox' => false,
+'turnControl' => 'simple'
 
 ////////
 );
