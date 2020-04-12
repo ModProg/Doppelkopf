@@ -1,0 +1,27 @@
+<text
+   xml:space="preserve"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Noto Serif';-inkscape-font-specification:'Noto Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+   x="5.1613388"
+   y="28.991005"
+   id="text3788"><tspan
+     sodipodi:role="line"
+     id="tspan3790"
+     x="5.1613388"
+     y="28.991005"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'Card Characters';-inkscape-font-specification:'Card Characters, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">=</tspan></text>
+<text
+   xml:space="preserve"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:0%;font-family:'Noto Serif';-inkscape-font-specification:'Noto Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+   x="-162.4855"
+   y="-213.52193"
+   id="text3788-0"
+   transform="scale(-1)"><tspan
+     sodipodi:role="line"
+     id="tspan3790-6"
+     x="-162.4855"
+     y="-213.52193"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:'Card Characters';-inkscape-font-specification:'Card Characters, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">=</tspan></text></svg>
+
+<text(\n|[^<])*?id([^<\n])*?<(\n|[^<])*?>
+
+<text(\n|[^<])*?scale(\n|[^<])*?<(\n|[^<])*?>
