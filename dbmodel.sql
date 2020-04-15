@@ -19,12 +19,27 @@ CREATE TABLE IF NOT EXISTS `card` (
     `card_type_arg` INT(11) NOT NULL,
     `card_location` VARCHAR(16) NOT NULL,
     `card_location_arg` INT(11) NOT NULL,
+    `card_last_changed` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`card_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;
 
 ALTER TABLE
-    player
+    `player`
 ADD
-    player_re BOOLEAN NOT NULL DEFAULT 0,
-ADD
-    player_points INT(3) UNSIGNED NOT NULL DEFAULT 0;
+    `player_re` BOOLEAN NOT NULL DEFAULT '0';
+
+CREATE TABLE IF NOT EXISTS `fox`(
+    `fox_card` INT(10) UNSIGNED NOT NULL PRIMARY KEY,
+    `fox_catcher` INT(10) UNSIGNED NOT NULL,
+    `fox_looser` INT(10) UNSIGNED NOT NULL,
+    FOREIGN KEY(`fox_catcher`) REFERENCES `player`(`player_id`),
+    FOREIGN KEY(`fox_looser`) REFERENCES `player`(`player_id`),
+    FOREIGN KEY(`fox_card`) REFERENCES `card`(`card_id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;
+
+CREATE TABLE IF NOT EXISTS `doppelkopf`(
+    `doppelkopf_card` INT(10) UNSIGNED NOT NULL PRIMARY KEY,
+    `doppelkopf_owener` INT(10) UNSIGNED NOT NULL,
+    FOREIGN KEY(`doppelkopf_owener`) REFERENCES `player`(`player_id`),
+    FOREIGN KEY(`doppelkopf_card`) REFERENCES `card`(`card_id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;

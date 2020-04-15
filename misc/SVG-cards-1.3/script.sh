@@ -8,5 +8,4 @@ convert q* -append sq.png
 convert k* -append sk.png
 convert a* -append sa.png
 convert s9* s10* sj* sq* sk* sa* +append cards.png
-convert cards.png -background none -extent "$(identify -format '%wx%w' cards.png)" cards.png
 rm s*.png

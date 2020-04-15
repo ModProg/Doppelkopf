@@ -32,6 +32,7 @@ class dk extends Table
         parent::__construct();
 
         self::initGameStateLabels( array(
+            'round' => 10,
             'trickSuite' => 11,
             //    'my_first_global_variable' => 10,
             //    'my_second_global_variable' => 11,
@@ -86,6 +87,10 @@ class dk extends Table
 
         // Init global values with their initial values
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
+
+        self::setGameStateInitialValue( 'round', 1 );
+        self::setGameStateInitialValue( 'trickSuite', 1 );
+
         // Create cards
         $cards = array ();
         foreach ( $this->suits as $suit_id => $suit ) {
@@ -170,6 +175,14 @@ class dk extends Table
     In this space, you can put any utility methods useful for your game logic
     */
 
+    public function getTrump( $card ) {
+        return array_search( array( $card['type'], $card['type_arg'] ), $this->trumps );
+    }
+
+    public function h10( $trump, $best_trump ) {
+        return $trump == $best_trump && $trump == array_search( array( 2, 10 ), $this->trumps );
+    }
+
     //////////////////////////////////////////////////////////////////////////////
     //////////// Player actions
     ////////////
@@ -186,114 +199,163 @@ class dk extends Table
         // XXX check rules here
         $currentCard = $this->cards->getCard( $card_id );
         // And notify
-        $currentTrickSuite = self::getGameStateValue( 'trickSuite' ) ;
-        if ( $currentTrickSuite == 0 )
-        self::setGameStateValue( 'trickSuite', $currentCard['type'] );
         self::notifyAllPlayers( 'playCard', clienttranslate( '${player_name} plays ${value_displayed} ${suite_displayed}' ), array (
             'i18n' => array ( 'suite_displayed', 'value_displayed' ), 'card_id' => $card_id, 'player_id' => $player_id,
             'player_name' => self::getActivePlayerName(), 'value' => $currentCard ['type_arg'],
             'value_displayed' => $this->values_label [$currentCard ['type_arg']], 'suite' => $currentCard ['type'],
             'suite_displayed' => $this->suits [$currentCard ['type']] ['name'] ) );
-        //self::notifyAllPlayers( 'playCard', clienttranslate( 'Test ${player_name} ' ), array( 'player_name' => self::getActivePlayerName(),'card_id' => $card_id, 'player_id' => $player_id, 'value' => $currentCard ['type_arg'], 'suite' => $currentCard ['type'] ) );
-        // Next player
-        $this->gamestate->nextState( 'playCard' );
-    }
-
-    //////////////////////////////////////////////////////////////////////////////
-    //////////// Game state arguments
-    ////////////
-
-    /*
-    Here, you can create methods defined as 'game state arguments' ( see 'args' property in states.inc.php ).
-    These methods function is to return some additional information that is specific to the current
-    game state.
-    */
-
-    /*
-
-    Example for game state 'MyGameState':
-
-    function argMyGameState()
- {
-        // Get some values from the current game situation in database...
-
-        // return values:
-        return array(
-            'variable1' => $value1,
-            'variable2' => $value2,
-            ...
-        );
-    }
-
-    */
-
-    //////////////////////////////////////////////////////////////////////////////
-    //////////// Game state actions
-    ////////////
-
-    /*
-    Here, you can create methods defined as 'game state actions' ( see 'action' property in states.inc.php ).
-    The action method of state X is called everytime the current game state is set to X.
-    */
-
-    function stNewHand() {
-        // Take back all cards ( from any location => null ) to deck
-        $this->cards->moveAllCardsInLocation( null, 'deck' );
-        $this->cards->shuffle( 'deck' );
-        $players = self::loadPlayersBasicInfos();
-        foreach ( $players as $player_id => $player ) {
-            $cards = $this->cards->pickCards( 12, 'deck', $player_id );
-            // Notify player about his cards
-            self::notifyPlayer( $player_id, 'newHand', '', array ( 'cards' => $cards ) );
+            //self::notifyAllPlayers( 'playCard', clienttranslate( 'Test ${player_name} ' ), array( 'player_name' => self::getActivePlayerName(), 'card_id' => $card_id, 'player_id' => $player_id, 'value' => $currentCard ['type_arg'], 'suite' => $currentCard ['type'] ) );
+            // Next player
+            $this->gamestate->nextState( 'playCard' );
         }
-        $this->gamestate->nextState( '' );
-    }
 
-    function stNewTrick() {
-        // New trick: active the player who wins the last trick, or the player who own the club-2 card
-        // Reset trick suite to 0 ( = no suite )
-        self::setGameStateInitialValue( 'trickSuite', 0 );
-        $this->gamestate->nextState();
-    }
+        //////////////////////////////////////////////////////////////////////////////
+        //////////// Game state arguments
+        ////////////
 
-    function stNextPlayer() {
-        // Active next player OR end the trick and go to the next trick OR end the hand
-        if ( $this->cards->countCardInLocation( 'cardsontable' ) == 4 ) {
-            // This is the end of the trick
-            $cards_on_table = $this->cards->getCardsInLocation( 'cardsontable' );
-            $best_value = 0;
-            $best_value_player_id = null;
-            $currentTrickSuite = self::getGameStateValue( 'trickSuite' );
-            foreach ( $cards_on_table as $card ) {
-                // Note: type = card suite
-                if ( $card ['type'] == $currentTrickSuite ) {
-                    if ( $best_value_player_id === null || $card ['type_arg'] > $best_value ) {
-                        $best_value_player_id = $card ['location_arg'];
-                        // Note: location_arg = player who played this card on table
-                        $best_value = $card ['type_arg'];
-                        // Note: type_arg = value of the card
-                    }
-                }
+        /*
+        Here, you can create methods defined as 'game state arguments' ( see 'args' property in states.inc.php ).
+        These methods function is to return some additional information that is specific to the current
+        game state.
+        */
+
+        /*
+
+        Example for game state 'MyGameState':
+
+        function argMyGameState()
+ {
+            // Get some values from the current game situation in database...
+
+            // return values:
+            return array(
+                'variable1' => $value1,
+                'variable2' => $value2,
+                ...
+            );
+        }
+
+        */
+
+        //////////////////////////////////////////////////////////////////////////////
+        //////////// Game state actions
+        ////////////
+
+        /*
+        Here, you can create methods defined as 'game state actions' ( see 'action' property in states.inc.php ).
+        The action method of state X is called everytime the current game state is set to X.
+        */
+
+        function stNewHand() {
+            // Take back all cards ( from any location => null ) to deck
+            $this->cards->moveAllCardsInLocation( null, 'deck' );
+            $this->cards->shuffle( 'deck' );
+            $players = self::loadPlayersBasicInfos();
+            foreach ( $players as $player_id => $player ) {
+                $cards = $this->cards->pickCards( 12, 'deck', $player_id );
+                // Notify player about his cards
+                self::notifyPlayer( $player_id, 'newHand', '', array ( 'cards' => $cards ) );
+            }
+            self::dump( 'trumps', $this->trumps );
+            $this->gamestate->nextState( '' );
+        }
+
+        function stPreRound() {
+
+            if ( self::getUniqueValueFromDB( "  SELECT
+                                                    COUNT(DISTINCT `card_location_arg`)
+                                                FROM
+                                                    `card`
+                                                WHERE
+                                                    `card_type` = 1 AND `card_type_arg` = 12;" )
+            == 1 )
+            $this->gamestate->nextState( 'reshuffle' );
+            self::DbQuery( "UPDATE
+                                `player` p
+                            JOIN
+                                `card` c ON p.`player_id` = c.`card_location_arg` AND c.`card_type` = 1 AND c.`card_type_arg` = 12
+                            SET
+                                p.`player_re` = '1'" );
+            $round = self::getGameStateValue( 'round' )%self::getPlayersNumber() +1;
+            $this->gamestate->changeActivePlayer( self::getUniqueValueFromDb(
+                "SELECT
+                    `player_id`
+                FROM
+                    `player`
+                WHERE
+                    `player_no` = '$round'" ) );
+                $this->gamestate->nextState( 'start' );
+                self::incGameStateValue( 'round', 1 );
+
             }
 
-            // Active this player => he's the one who starts the next trick
-                    $this->gamestate->changeActivePlayer( $best_value_player_id );
+            function stNewTrick() {
+                // New trick: active the player who wins the last trick, or the player who own the club-2 card
+                // Reset trick suite to 0 ( = no suite )
+                self::setGameStateValue( 'trickSuite', 0 );
+                $this->gamestate->nextState();
+            }
+
+            function stNextPlayer() {
+                // Active next player OR end the trick and go to the next trick OR end the hand
+                if ( $this->cards->countCardInLocation( 'cardsontable' ) == 4 ) {
+                    // This is the end of the trick
+                    $cards_on_table = $this->cards->getCardsInLocation( 'cardsontable', null, 'card_last_changed' );
+                    $best_card = null;
+                    $best_trump = FALSE;
+                    self::error( 'wtf' );
+                    foreach ( $cards_on_table as $card ) {
+                        self::error( 'card om table' );
+                        // Note: type = card suite
+                        $trump = self::getTrump( $card );
+                        self::dump( 'Card:', $card );
+                        if ( $best_card == null ) {
+                            $best_card = $card;
+                            $best_trump = $trump;
+                        } else {
+                            self::error( $best_trump );
+                            if ( $best_trump === FALSE ) {
+                                self::error( $trump );
+                                if ( $trump === FALSE ) {
+                                    self::error( $best_card['type'] );
+                                    self::error( $best_card['type_arg'] );
+                                    self::error( $card['type'] );
+                                    self::error( $card['type_arg'] );
+                                    if ( $best_card['type'] == $card['type'] && $card['type_arg']>$best_card['type_arg'] ) {
+                                        $best_card = $card;
+                                    }
+
+                                } else {
+                                    $best_card = $card;
+                                    $best_trump = $trump;
+                                }
+                            } else {
+                                if ( $trump > $best_trump || self::h10( $trump, $best_trump ) ) {
+                                    $best_card = $card;
+                                    $best_trump = $trump;
+                                }
+                            }
+                        }
+                    }
+                    $players = self::loadPlayersBasicInfos();
+                    self::dump( 'Best Card:', $best_card );
+                    self::error( $best_card['location_arg'] );
+                    // Active this player => he's the one who starts the next trick
+                    self::error($players[ $best_card['location_arg'] ]['player_name']);
+                $this->gamestate->changeActivePlayer( $best_card['location_arg'] );
                     
-                    // Move all cards to "cardswon" of the given player
-                    $this->cards->moveAllCardsInLocation('cardsontable', 'cardswon', null, $best_value_player_id);
+                // Move all cards to "cardswon" of the given player
+                $this->cards->moveAllCardsInLocation('cardsontable', 'cardswon', null, $best_card['location_arg']);
                 // Notify
                 // Note: we use 2 notifications here in order we can pause the display during the first notification
                 //  before we move all cards to the winner ( during the second )
-                $players = self::loadPlayersBasicInfos();
-                self::notifyAllPlayers( 'trickWin', clienttranslate( '$ {
-            player_name}
-            wins the trick' ), array(
-                    'player_id' => $best_value_player_id,
-                    'player_name' => $players[ $best_value_player_id ]['player_name']
+                self::notifyAllPlayers( 'trickWin', clienttranslate( '${player_name} wins the trick' ), array(
+                    'player_id' => $best_card['location_arg'],
+                    'player_name' => $players[ $best_card['location_arg'] ]['player_name']
                 ) );
 
                 self::notifyAllPlayers( 'giveAllCardsToPlayer', '', array(
-                    'player_id' => $best_value_player_id
+                    'player_id' => $best_card['location_arg']
                 ) );
                 if ( $this->cards->countCardInLocation( 'hand' ) == 0 ) {
                     // End of the hand
@@ -313,6 +375,11 @@ class dk extends Table
 
         function stEndHand() {
             $this->gamestate->nextState( 'nextHand' );
+        }
+
+        function stEndRound() {
+            $this->gamestate->nextState( 'newHand' );
+
         }
         //////////////////////////////////////////////////////////////////////////////
         //////////// Zombie
@@ -363,38 +430,38 @@ class dk extends Table
         upgradeTableDb:
 
         You don't have to care about this until your game has been published on BGA.
-            Once your game is on BGA, this method is called everytime the system detects a game running with your old
-            Database scheme.
-            In this case, if you change your Database scheme, you just have to apply the needed changes in order to
-            update the game database and allow the game to continue to run with your new version.
+                    Once your game is on BGA, this method is called everytime the system detects a game running with your old
+                    Database scheme.
+                    In this case, if you change your Database scheme, you just have to apply the needed changes in order to
+                    update the game database and allow the game to continue to run with your new version.
 
-            */
+                    */
 
-            function upgradeTableDb( $from_version )
+                    function upgradeTableDb( $from_version )
  {
-                // $from_version is the current version of this game database, in numerical form.
-                // For example, if the game was running with a release of your game named '140430-1345',
-                // $from_version is equal to 1404301345
+                        // $from_version is the current version of this game database, in numerical form.
+                        // For example, if the game was running with a release of your game named '140430-1345',
+                        // $from_version is equal to 1404301345
 
-                // Example:
-                //        if ( $from_version <= 1404301345 )
-                // {
-                //            // ! important ! Use DBPREFIX_<table_name> for all tables
-                //
-                //            $sql = 'ALTER TABLE DBPREFIX_xxxxxxx ....';
-                //            self::applyDbUpgradeToAllDB( $sql );
-                //        }
-                //        if ( $from_version <= 1405061421 )
-                // {
-                //            // ! important ! Use DBPREFIX_<table_name> for all tables
-                //
-                //            $sql = 'CREATE TABLE DBPREFIX_xxxxxxx ....';
-                //            self::applyDbUpgradeToAllDB( $sql );
-                //        }
-                //        // Please add your future database scheme changes here
-                //
-                //
+                        // Example:
+                        //        if ( $from_version <= 1404301345 )
+                        // {
+                        //            // ! important ! Use DBPREFIX_<table_name> for all tables
+                        //
+                        //            $sql = 'ALTER TABLE DBPREFIX_xxxxxxx ....';
+                        //            self::applyDbUpgradeToAllDB( $sql );
+                        //        }
+                        //        if ( $from_version <= 1405061421 )
+                        // {
+                        //            // ! important ! Use DBPREFIX_<table_name> for all tables
+                        //
+                        //            $sql = 'CREATE TABLE DBPREFIX_xxxxxxx ....';
+                        //            self::applyDbUpgradeToAllDB( $sql );
+                        //        }
+                        //        // Please add your future database scheme changes here
+                        //
+                        //
 
-            }
+                    }
 
-        }
+                }

@@ -63,7 +63,7 @@ define([
                 // Player hand
                 this.playerHand = new ebg.stock(); // new stock object for hand
                 this.playerHand.create(this, $('myhand'), this.cardwidth, this.cardheight);
-                this.playerHand.image_items_per_row = 12;
+                this.playerHand.image_items_per_row = 6;
                 dojo.connect(this.playerHand, 'onChangeSelection', this, 'onPlayerHandSelectionChanged');
                 for (var suite = 1; suite <= 4; suite++) {
                     for (var value = 9; value <= 14; value++) {
@@ -184,14 +184,14 @@ define([
             */
             // Get card unique identifier based on its suite and value
             getCardUniqueId: function (suite, value) {
-                return (suite - 1) * 13 + (value - 9);
+                return (suite - 1) * 6 + (value - 9);
             },
 
 
             playCardOnTable: function (player_id, suite, value, card_id) {
                 // player_id => direction
                 dojo.place(this.format_block('jstpl_cardontable', {
-                    x: this.cardwidth * (value - 2),
+                    x: this.cardwidth * (value - 9),
                     y: this.cardheight * (suite - 1),
                     player_id: player_id
                 }), 'playertablecard_' + player_id);
