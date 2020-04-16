@@ -14,13 +14,13 @@
 -- Note: The database schema is created from this file when the game starts. If you modify this file,
 --       you have to restart a game to see your changes in database.
 CREATE TABLE IF NOT EXISTS `card` (
-    `card_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `card_id` INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `card_type` VARCHAR(16) NOT NULL,
     `card_type_arg` INT(11) NOT NULL,
     `card_location` VARCHAR(16) NOT NULL,
     `card_location_arg` INT(11) NOT NULL,
     `card_last_changed` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`card_id`)
+    `card_trump` int(2) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;
 
 ALTER TABLE
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `fox`(
 
 CREATE TABLE IF NOT EXISTS `doppelkopf`(
     `doppelkopf_card` INT(10) UNSIGNED NOT NULL PRIMARY KEY,
-    `doppelkopf_owener` INT(10) UNSIGNED NOT NULL,
-    FOREIGN KEY(`doppelkopf_owener`) REFERENCES `player`(`player_id`),
+    `doppelkopf_owner` INT(10) UNSIGNED NOT NULL,
+    FOREIGN KEY(`doppelkopf_owner`) REFERENCES `player`(`player_id`),
     FOREIGN KEY(`doppelkopf_card`) REFERENCES `card`(`card_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;

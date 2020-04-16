@@ -48,6 +48,7 @@ define([
             */
 
             setup: function (gamedatas) {
+                console.log(this);
                 //dojo.destroy('debug_output');
                 console.log("Starting game setup");
 
@@ -65,32 +66,50 @@ define([
                 this.playerHand.create(this, $('myhand'), this.cardwidth, this.cardheight);
                 this.playerHand.image_items_per_row = 6;
                 dojo.connect(this.playerHand, 'onChangeSelection', this, 'onPlayerHandSelectionChanged');
-                for (var suite = 1; suite <= 4; suite++) {
+                for (var suit = 1; suit <= 4; suit++) {
                     for (var value = 9; value <= 14; value++) {
                         // Build card type id
-                        var card_type_id = this.getCardUniqueId(suite, value);
+                        var card_type_id = this.getCardUniqueId(suit, value);
                         this.playerHand.addItemType(card_type_id, card_type_id, g_gamethemeurl + 'img/cards.png', card_type_id);
                     }
                 }
+                console.log("Placing Cards in Hand");
+
                 // Cards in player's hand
                 for (var i in this.gamedatas.hand) {
+                    console.log(this.gamedatas.hand);
                     var card = this.gamedatas.hand[i];
-                    var suite = card.type;
+                    var suit = card.type;
                     var value = card.type_arg;
-                    this.playerHand.addToStockWithId(this.getCardUniqueId(suite, value), card.id);
+                    console.log(i, card, suit, value);
+                    this.playerHand.addToStockWithId(this.getCardUniqueId(suit, value), card.id);
                 }
+                console.log("Placing Cards on Table");
 
                 // Cards played on table
-                for (i in this.gamedatas.cardsontable) {
-                    var card = this.gamedatas.cardsontable[i];
-                    var suite = card.type;
+                for (i in this.gamedatas.table) {
+                    var card = this.gamedatas.table[i];
+                    var suit = card.type;
                     var value = card.type_arg;
                     var player_id = card.location_arg;
-                    this.playCardOnTable(player_id, suite, value, card.id);
+                    this.playCardOnTable(player_id, suit, value, card.id);
                 }
 
+                console.log("Placing Foxes");
 
+                for (i in this.gamedatas.foxes){
+                    var fox = this.gamedatas.foxes[i];
+                    this.playCardBelowTable(fox.catcher, fox.suit, fox.value, fox.card);
+                }
 
+                console.log("Placing Doppelköpfe");
+
+                for (i in this.gamedatas.doppelköpfe){
+                    var doppelkopf = this.gamedatas.doppelköpfe[i];
+                    this.playCardBelowTable(doppelkopf.owner, doppelkopf.suit, doppelkopf.value, doppelkopf.card);
+                }
+
+                console.log("Setup Notifications");
                 // Setup game notifications to handle (see "setupNotifications" method below)
                 this.setupNotifications();
 
@@ -182,17 +201,17 @@ define([
                 script.
             
             */
-            // Get card unique identifier based on its suite and value
-            getCardUniqueId: function (suite, value) {
-                return (suite - 1) * 6 + (value - 9);
+            // Get card unique identifier based on its suit and value
+            getCardUniqueId: function (suit, value) {
+                return (suit - 1) * 6 + (value - 9);
             },
 
 
-            playCardOnTable: function (player_id, suite, value, card_id) {
+            playCardOnTable: function (player_id, suit, value, card_id) {
                 // player_id => direction
                 dojo.place(this.format_block('jstpl_cardontable', {
                     x: this.cardwidth * (value - 9),
-                    y: this.cardheight * (suite - 1),
+                    y: this.cardheight * (suit - 1),
                     player_id: player_id
                 }), 'playertablecard_' + player_id);
 
@@ -213,7 +232,15 @@ define([
                 // In any case: move it to its final destination
                 this.slideToObject('cardontable_' + player_id, 'playertablecard_' + player_id).play();
             },
-
+            playCardBelowTable: function (player_id, suit, value, card_id) {
+                console.log(player_id, suit, value, card_id);
+                // player_id => direction
+                dojo.place(this.format_block('jstpl_cardbelowtable', {
+                    x: this.cardwidth * (value - 9),
+                    y: this.cardheight * (suit - 1),
+                    card_id: card_id
+                }), 'cardsbelowtable_' + player_id);
+            },
             // /////////////////////////////////////////////////
             // // Player's action
 
@@ -290,6 +317,13 @@ define([
                 dojo.subscribe('trickWin', this, "notif_trickWin");
                 this.notifqueue.setSynchronous('trickWin', 1000);
                 dojo.subscribe('giveAllCardsToPlayer', this, "notif_giveAllCardsToPlayer");
+                dojo.subscribe('wrongCard', this, "notif_wrongCard");
+                dojo.subscribe('giveSpecToPlayer', this, "notif_giveSpecToPlayer");
+                dojo.subscribe('sumCards', this, "notif_sumCards");
+                this.notifqueue.setSynchronous('sumCards', 500);
+            },
+            notif_sumCards: function (notif) {
+                // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
             },
 
             notif_newHand: function (notif) {
@@ -298,18 +332,25 @@ define([
 
                 for (var i in notif.args.cards) {
                     var card = notif.args.cards[i];
-                    var suite = card.type;
+                    var suit = card.type;
                     var value = card.type_arg;
-                    this.playerHand.addToStockWithId(this.getCardUniqueId(suite, value), card.id);
+                    this.playerHand.addToStockWithId(this.getCardUniqueId(suit, value), card.id);
                 }
             },
 
             notif_playCard: function (notif) {
                 // Play a card on the table
-                this.playCardOnTable(notif.args.player_id, notif.args.suite, notif.args.value, notif.args.card_id);
+                this.playCardOnTable(notif.args.player_id, notif.args.suit, notif.args.value, notif.args.card_id);
             },
             notif_trickWin: function (notif) {
                 // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
+            },
+            notif_wrongCard: function (notif) {
+                // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
+            },
+
+            notif_giveSpecToPlayer: function (notif){
+                this.playCardBelowTable(notif.args.player_id, notif.args.suit, notif.args.value, notif.args.card_id);
             },
             notif_giveAllCardsToPlayer: function (notif) {
                 // Move all cards on table to given table, then destroy them

@@ -36,20 +36,25 @@
   	    // Get players & players number
         $players = $this->game->loadPlayersBasicInfos();
         $players_nbr = count( $players );
+        $playerTable = $this->game->getNextPlayerTable();
+        global $g_user;
+        $player = $g_user->get_id();
 
         /*********** Place your code below:  ************/
         $template = self::getGameName() . "_" . self::getGameName();
         
         $directions = array( 'S', 'W', 'N', 'E' );
-        
         // this will inflate our player block with actual players data
         $this->page->begin_block($template, "player");
-        foreach ( $players as $player_id => $info ) {
+
+        $player_id = $player; 
+        for($i = 0; $i < 4; $i++){
             $dir = array_shift($directions);
             $this->page->insert_block("player", array ("PLAYER_ID" => $player_id,
                     "PLAYER_NAME" => $players [$player_id] ['player_name'],
                     "PLAYER_COLOR" => $players [$player_id] ['player_color'],
                     "DIR" => $dir ));
+            $player_id = $playerTable[$player_id];
         }
         // this will make our My Hand text translatable
         $this->tpl['MY_HAND'] = self::_("My hand");

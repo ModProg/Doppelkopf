@@ -33,7 +33,8 @@ class dk extends Table
 
         self::initGameStateLabels( array(
             'round' => 10,
-            'trickSuite' => 11,
+            'trickSuit' => 11,
+            'karlchen' => 12
             //    'my_first_global_variable' => 10,
             //    'my_second_global_variable' => 11,
             //      ...
@@ -62,7 +63,7 @@ class dk extends Table
     */
     protected function setupNewGame( $players, $options = array() )
  {
-
+    
         // Set the colors of the players with HTML color code
         // The default below is red/green/blue/orange/brown
         // The number of colors defined here must correspond to the maximum number of players allowed for the gams
@@ -89,20 +90,37 @@ class dk extends Table
         //self::setGameStateInitialValue( 'my_first_global_variable', 0 );
 
         self::setGameStateInitialValue( 'round', 1 );
-        self::setGameStateInitialValue( 'trickSuite', 1 );
+        self::setGameStateInitialValue( 'trickSuit', 1 );
+        self::setGameStateInitialValue( 'karlchen', 0 );
 
         // Create cards
         $cards = array ();
-        foreach ( $this->suits as $suit_id => $suit ) {
+        for ( $suit = DIAMOND; $suit <= CLUB; $suit++ ) {
             // spade, heart, diamond, club
             for ( $value = 9; $value <= 14; $value ++ ) {
                 //  2, 3, 4, ... K, A
-                $cards [] = array ( 'type' => $suit_id, 'type_arg' => $value, 'nbr' => 1 );
-                $cards [] = array ( 'type' => $suit_id, 'type_arg' => $value, 'nbr' => 1 );
+                $cards [] = array ( 'type' => $suit, 'type_arg' => $value, 'nbr' => 1 );
+                $cards [] = array ( 'type' => $suit, 'type_arg' => $value, 'nbr' => 1 );
             }
         }
 
         $this->cards->createCards( $cards, 'deck' );
+
+        // Create Trumps
+        // TODO Add Trump Change
+        self::addTrump(DIAMOND, 9);
+        self::addTrump(DIAMOND, 10);
+        self::addTrump(DIAMOND, KING);
+        self::addTrump(DIAMOND, ACE);
+        self::addTrump(DIAMOND, JACK);
+        self::addTrump(HEART, JACK);
+        self::addTrump(SPADE, JACK);
+        self::addTrump(CLUB, JACK);
+        self::addTrump(DIAMOND, QUEEN);
+        self::addTrump(HEART, QUEEN);
+        self::addTrump(SPADE, QUEEN);
+        self::addTrump(CLUB, QUEEN);
+        self::addTrump(HEART, 10);
 
         // Init game statistics
         // ( note: statistics used in this file must be defined in your stats.inc.php file )
@@ -140,11 +158,33 @@ class dk extends Table
         $sql = 'SELECT player_id id, player_score score FROM player ';
         $result['players'] = self::getCollectionFromDb( $sql );
 
+        $sql = 'SELECT
+                    `fox_card` `card`,
+                    `card_type` `suit`,
+                    `card_type_arg` `value`,
+                    `fox_catcher` `catcher`,
+                    `fox_looser` `looser`
+                FROM
+                    `fox`
+                JOIN
+                    `card` ON `fox`.`fox_card` = `card`.`card_id`;';
+        $result['foxes'] = self::getCollectionFromDb($sql);
+        $sql = 'SELECT
+                    `doppelkopf_card` `card`,
+                    `card_type` `suit`,
+                    `card_type_arg` `value`,
+                    `doppelkopf_owner` `owner`
+                FROM
+                    `doppelkopf`
+                JOIN
+                    `card` ON `doppelkopf`.`doppelkopf_card` = `card`.`card_id`;';
+        $result['doppelköpfe'] = self::getCollectionFromDb($sql);
+
         // Cards in player hand
         $result['hand'] = $this->cards->getCardsInLocation( 'hand', $current_player_id );
 
         // Cards played on the table
-        $result['cardsontable'] = $this->cards->getCardsInLocation( 'cardsontable' );
+        $result['table'] = $this->cards->getCardsInLocation( 'table' );
 
         return $result;
     }
@@ -162,25 +202,112 @@ class dk extends Table
 
     function getGameProgression()
  {
+    
         // TODO: compute and return the game progression
-
-        return 0;
+       return (self::getUniqueValueFromDB( 
+           "SELECT
+                AVG(mycount)
+            FROM
+                (
+                SELECT
+                    `card`.`card_location_arg`,
+                    COUNT(`card`.`card_location_arg`) mycount
+                FROM
+                    `card`
+                WHERE
+                    `card`.`card_location` = 'hand'
+                GROUP BY
+                    `card`.`card_location_arg`
+            ) test;" )+12*self::getGameStateValue('round')*12)*100/(4*12);
     }
 
     //////////////////////////////////////////////////////////////////////////////
-    //////////// Utility functions
+    //////////// XXX Utility functions
     ////////////
 
     /*
     In this space, you can put any utility methods useful for your game logic
     */
+   // get score
+   function dbGetScore($player_id) {
+    return $this->getUniqueValueFromDB("SELECT player_score FROM player WHERE player_id='$player_id'");
+}
 
-    public function getTrump( $card ) {
-        return array_search( array( $card['type'], $card['type_arg'] ), $this->trumps );
+// set score
+function dbSetScore($player_id, $count) {
+    $this->DbQuery("UPDATE player SET player_score='$count' WHERE player_id='$player_id'");
+}
+
+// set aux score (tie breaker)
+function dbSetAuxScore($player_id, $score) {
+    $this->DbQuery("UPDATE player SET player_score_aux=$score WHERE player_id='$player_id'");
+}
+
+    function dbIncScore($player_id, $inc) {
+        $count = self::dbGetScore($player_id);
+        if ($inc != 0) {
+            $count += $inc;
+            self::dbSetScore($player_id, $count);
+        }
+        return $count;
     }
 
-    public function h10( $trump, $best_trump ) {
-        return $trump == $best_trump && $trump == array_search( array( 2, 10 ), $this->trumps );
+    public function getTrump( $card ) {
+        $card_id = $card['id'];
+        return self::getUniqueValueFromDB(
+            "SELECT MAX(`card_trump`)
+            FROM `card`
+            WHERE
+            `card_id` = $card_id;"
+        );
+        //return array_search( array( $card['type'], $card['type_arg'] ), $this->trumps );
+    }
+
+    public function h10( $card, $best_card ) {
+        return $card['type'] == HEART && $card['type_arg'] == 10 && $best_card['type'] == HEART && $best_card['type_arg'] == 10;
+    }
+
+    public function addTrump($suit, $value){
+         self::DbQuery(
+        "UPDATE
+            `card` AS c1
+        JOIN
+            (
+            SELECT
+                MAX(`card`.`card_trump`) AS max_number
+            FROM
+                `card`
+            ) AS m
+        SET
+            c1.`card_trump` = m.max_number+1
+        WHERE
+            c1.`card_type` = '$suit' AND c1.`card_type_arg` = '$value';"
+         );
+    }
+
+    public function hasSuit($player, $suit){
+        if($suit!=TRUMP)
+            return 0 < self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card`.`card_id`)
+                FROM
+                    `card`
+                WHERE
+                    `card`.`card_location_arg` = '$player' AND `card`.`card_location` = 'hand' AND `card`.`card_trump` = '0' AND `card`.`card_type` = '$suit';");
+        else 
+            return 0< self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card`.`card_id`)
+                FROM
+                    `card`
+                WHERE
+                    `card`.`card_location_arg` = '$player' AND `card`.`card_location` = 'hand' AND `card`.`card_trump` > '0';"
+            );
+            
+    }
+
+    public function fox($card){
+        return $card['type']==DIAMOND && $card['type_arg']==ACE;
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -195,20 +322,39 @@ class dk extends Table
     function playCard( $card_id ) {
         self::checkAction( 'playCard' );
         $player_id = self::getActivePlayerId();
-        $this->cards->moveCard( $card_id, 'cardsontable', $player_id );
-        // XXX check rules here
         $currentCard = $this->cards->getCard( $card_id );
-        // And notify
-        self::notifyAllPlayers( 'playCard', clienttranslate( '${player_name} plays ${value_displayed} ${suite_displayed}' ), array (
-            'i18n' => array ( 'suite_displayed', 'value_displayed' ), 'card_id' => $card_id, 'player_id' => $player_id,
-            'player_name' => self::getActivePlayerName(), 'value' => $currentCard ['type_arg'],
-            'value_displayed' => $this->values_label [$currentCard ['type_arg']], 'suite' => $currentCard ['type'],
-            'suite_displayed' => $this->suits [$currentCard ['type']] ['name'] ) );
-            //self::notifyAllPlayers( 'playCard', clienttranslate( 'Test ${player_name} ' ), array( 'player_name' => self::getActivePlayerName(), 'card_id' => $card_id, 'player_id' => $player_id, 'value' => $currentCard ['type_arg'], 'suite' => $currentCard ['type'] ) );
+        if(self::getGameStateValue('trickSuit')==0){
+            $trick_suit= self::getTrump( $currentCard ) == 0?  $currentCard['type']:5;
+            self::setGameStateValue( 'trickSuit', $trick_suit);
+        }
+        else
+            $trick_suit = self::getGameStateValue('trickSuit');
+
+        if( $trick_suit==$currentCard['type'] && self::getTrump($currentCard)==0 || 
+            $trick_suit==5 &&   self::getTrump( $currentCard ) > 0 ||
+            !self::hasSuit($player_id, $trick_suit) ){
+                
+            $this->cards->moveCard( $card_id, 'table', $player_id );
+            // XXX check rules here
+            // And notify
+            self::notifyAllPlayers( 'playCard', clienttranslate( '${player_name} plays ${value_displayed} of ${suit_displayed}s' ), array (
+                'i18n' => array ( 'suit_displayed', 'value_displayed' ), 'card_id' => $card_id, 'player_id' => $player_id,
+                'player_name' => self::getActivePlayerName(), 'value' => $currentCard ['type_arg'],
+                'value_displayed' => $this->values_label [$currentCard ['type_arg']], 'suit' => $currentCard ['type'],
+                'suit_displayed' => $this->suits [$currentCard ['type']] ['name'] ) );
             // Next player
             $this->gamestate->nextState( 'playCard' );
+        } else{
+            self::notifyPlayer($player_id, 'wrongCard', clienttranslate('You cannot play ${value_displayed} of ${suit_displayed}s when ${trick_suit_displayed} is played.'), array(
+                'i18n' => array('value_displayed', 'suit_displayed', 'trick_suit_displayed'),
+                'value_displayed' => $this->values_label[$currentCard['type_arg']],
+                'suit_displayed' => $this->suits [$currentCard ['type']] ['name'],
+                'trick_suit_displayed' => $this->suits [$trick_suit] ['name']));
+            
+            $this->gamestate->nextState( 'wrongCard' );
+        
         }
-
+    }
         //////////////////////////////////////////////////////////////////////////////
         //////////// Game state arguments
         ////////////
@@ -256,7 +402,6 @@ class dk extends Table
                 // Notify player about his cards
                 self::notifyPlayer( $player_id, 'newHand', '', array ( 'cards' => $cards ) );
             }
-            self::dump( 'trumps', $this->trumps );
             $this->gamestate->nextState( '' );
         }
 
@@ -273,11 +418,11 @@ class dk extends Table
             self::DbQuery( "UPDATE
                                 `player` p
                             JOIN
-                                `card` c ON p.`player_id` = c.`card_location_arg` AND c.`card_type` = 1 AND c.`card_type_arg` = 12
+                                `card` c ON p.`player_id` = c.`card_location_arg` AND c.`card_type` = 4 AND c.`card_type_arg` = 12
                             SET
                                 p.`player_re` = '1'" );
             $round = self::getGameStateValue( 'round' )%self::getPlayersNumber() +1;
-            $this->gamestate->changeActivePlayer( self::getUniqueValueFromDb(
+            $this->gamestate->changeActivePlayer( self::getUniqueValueFromDB(
                 "SELECT
                     `player_id`
                 FROM
@@ -291,22 +436,24 @@ class dk extends Table
 
             function stNewTrick() {
                 // New trick: active the player who wins the last trick, or the player who own the club-2 card
-                // Reset trick suite to 0 ( = no suite )
-                self::setGameStateValue( 'trickSuite', 0 );
+                // Reset trick suit to 0 ( = no suit )
+                self::setGameStateValue( 'trickSuit', 0 );
                 $this->gamestate->nextState();
             }
 
             function stNextPlayer() {
                 // Active next player OR end the trick and go to the next trick OR end the hand
-                if ( $this->cards->countCardInLocation( 'cardsontable' ) == 4 ) {
+                if ( $this->cards->countCardInLocation( 'table' ) == 4 ) {
                     // This is the end of the trick
-                    $cards_on_table = $this->cards->getCardsInLocation( 'cardsontable', null, 'card_last_changed' );
+                    $cards_on_table = $this->cards->getCardsInLocation( 'table', null, 'card_last_changed' );
                     $best_card = null;
-                    $best_trump = FALSE;
-                    self::error( 'wtf' );
+                    $best_trump = 0;
+                    $foxes = array();
                     foreach ( $cards_on_table as $card ) {
+                        if(self::fox($card))
+                            array_push($foxes, $card);
                         self::error( 'card om table' );
-                        // Note: type = card suite
+                        // Note: type = card suit
                         $trump = self::getTrump( $card );
                         self::dump( 'Card:', $card );
                         if ( $best_card == null ) {
@@ -314,23 +461,17 @@ class dk extends Table
                             $best_trump = $trump;
                         } else {
                             self::error( $best_trump );
-                            if ( $best_trump === FALSE ) {
-                                self::error( $trump );
-                                if ( $trump === FALSE ) {
-                                    self::error( $best_card['type'] );
-                                    self::error( $best_card['type_arg'] );
-                                    self::error( $card['type'] );
-                                    self::error( $card['type_arg'] );
+                            if ( $best_trump == 0 ) {
+                                if ( $trump == 0 ) {
                                     if ( $best_card['type'] == $card['type'] && $card['type_arg']>$best_card['type_arg'] ) {
                                         $best_card = $card;
                                     }
-
                                 } else {
                                     $best_card = $card;
                                     $best_trump = $trump;
                                 }
                             } else {
-                                if ( $trump > $best_trump || self::h10( $trump, $best_trump ) ) {
+                                if ( $trump > $best_trump || self::h10( $best_card, $card ) ) {
                                     $best_card = $card;
                                     $best_trump = $trump;
                                 }
@@ -338,51 +479,402 @@ class dk extends Table
                         }
                     }
                     $players = self::loadPlayersBasicInfos();
-                    self::dump( 'Best Card:', $best_card );
-                    self::error( $best_card['location_arg'] );
                     // Active this player => he's the one who starts the next trick
-                    self::error($players[ $best_card['location_arg'] ]['player_name']);
-                $this->gamestate->changeActivePlayer( $best_card['location_arg'] );
+                    $this->gamestate->changeActivePlayer( $best_card['location_arg'] );
+                        
+                    // Notify
+                    // Note: we use 2 notifications here in order we can pause the display during the first notification
+                    //  before we move all cards to the winner ( during the second )
                     
-                // Move all cards to "cardswon" of the given player
-                $this->cards->moveAllCardsInLocation('cardsontable', 'cardswon', null, $best_card['location_arg']);
-                // Notify
-                // Note: we use 2 notifications here in order we can pause the display during the first notification
-                //  before we move all cards to the winner ( during the second )
-                self::notifyAllPlayers( 'trickWin', clienttranslate( '${player_name} wins the trick' ), array(
-                    'player_id' => $best_card['location_arg'],
-                    'player_name' => $players[ $best_card['location_arg'] ]['player_name']
-                ) );
+                    self::notifyAllPlayers( 'trickWin', clienttranslate( '${player_name} wins the trick' ), array(
+                        'player_id' => $best_card['location_arg'],
+                        'player_name' => $players[ $best_card['location_arg'] ]['player_name']
+                        ) );
+                        
+                    foreach($foxes as $fox){
+                        if($fox['location_arg']!=$best_card['location_arg']){
+                            $card_id = $fox['id'];
+                            $player_id = $best_card['location_arg'];
+                            $victim_id = $fox['location_arg'];
+                            self::notifyAllPlayers('giveSpecToPlayer', clienttranslate( '${player_name} takes a fox from ${victim_name}'),array(
+                                'player_name' => $players[ $player_id ]['player_name'],
+                                'player_id' => $player_id,
+                                'victim_name' => $players[ $victim_id ]['player_name'],
+                                'victim_id' => $victim_id,
+                                'card_id' => $card_id,
+                                'suit' => DIAMOND,
+                                'value' => ACE
+                                ) );
+                            self::DbQuery(
+                                "INSERT INTO `fox` 
+                                VALUES ($card_id, $player_id, $victim_id);"
+                            );
+                        }
+                    }
+                    //TODO switching FOX
+                    if(4 == self::getUniqueValueFromDB(
+                        "SELECT
+                            COUNT(`card_id`)
+                        FROM
+                            `card`
+                        WHERE
+                            `card`.`card_location` = 'table' AND(
+                                `card`.`card_type_arg` = '14' OR `card`.`card_type_arg` = '10'
+                            );"
+                    )){
+                        $player_id = $best_card['location_arg'];
+                        $card = self::getObjectFromDB(
+                            "SELECT
+                                `card`.`card_id` id,
+                                `card`.`card_type` `type`,
+                                `card`.`card_type_arg` `type_arg`
+                            FROM
+                                `card`
+                            WHERE
+                                `card`.`card_location` = 'table' AND NOT(
+                                    `card`.`card_type` = 1 AND `card`.`card_type_arg` = 14
+                                )
+                            LIMIT 1;"
+                        );
+                        $card_id = $card['id'];
+                        self::DbQuery(
+                            "INSERT INTO `doppelkopf` 
+                            VALUES ($card_id, $player_id);"
+                        );
+                        self::notifyAllPlayers('giveSpecToPlayer', clienttranslate( '${player_name} takes a Doppelkopf'),array(
+                            'player_name' => $players[ $player_id ]['player_name'],
+                            'player_id' => $player_id,
+                            'card_id' => $card['id'],
+                            'suit' => $card['type'],
+                            'value' =>  $card['type_arg']
+                            ) ); 
+                    }
 
-                self::notifyAllPlayers( 'giveAllCardsToPlayer', '', array(
-                    'player_id' => $best_card['location_arg']
-                ) );
-                if ( $this->cards->countCardInLocation( 'hand' ) == 0 ) {
-                    // End of the hand
-                    $this->gamestate->nextState( 'endHand' );
+                    // Move all cards to "won" of the given player
+                    $this->cards->moveAllCardsInLocation('table', 'won', null, $best_card['location_arg']);
+
+                    self::notifyAllPlayers( 'giveAllCardsToPlayer', '', array(
+                        'player_id' => $best_card['location_arg']
+                    ) );
+
+                    if ( $this->cards->countCardInLocation( 'hand' ) == 0 ) {
+                        if($best_card['type']==CLUB && $best_card['type_arg']==JACK){
+                            self::setGameStateValue('karlchen', $best_card['location_arg']);
+                            self::notifyAllPlayers('giveSpecToPlayer', clienttranslate( '${player_name} takes a Karlchen Müller'),array(
+                                'player_name' => $players[$best_card['location_arg'] ]['player_name'],
+                                'player_id' => $best_card['location_arg'],
+                                'card_id' => $best_card['id'],
+                                'suit' => $best_card['type'],
+                                'value' =>  $best_card['type_arg']
+                                ) ); 
+                                                        // TODO KARLCHEN
+                        }
+                        // End of the hand
+                        $this->gamestate->nextState( 'endHand' );
+                    } else {
+                        // End of the trick
+                        $this->gamestate->nextState( 'nextTrick' );
+                    }
                 } else {
-                    // End of the trick
-                    $this->gamestate->nextState( 'nextTrick' );
+                    // Standard case ( not the end of the trick )
+                    // => just active the next player
+                    $player_id = self::activeNextPlayer();
+                    self::giveExtraTime( $player_id );
+                    $this->gamestate->nextState( 'nextPlayer' );
                 }
-            } else {
-                // Standard case ( not the end of the trick )
-                // => just active the next player
-                $player_id = self::activeNextPlayer();
-                self::giveExtraTime( $player_id );
-                $this->gamestate->nextState( 'nextPlayer' );
-            }
         }
 
         function stEndHand() {
-            $this->gamestate->nextState( 'nextHand' );
-        }
+// #region RE
+            $re = array();
+            $re['9']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re` AND `card`.`card_type_arg` = '9'"
+            );
+            $re['10']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re` AND `card`.`card_type_arg` = '10'"
+            );
+            $re['jacks']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re` AND `card`.`card_type_arg` = '11'"
+            );
+            $re['queens']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re` AND `card`.`card_type_arg` = '12'"
+            );
+            $re['kings']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re` AND `card`.`card_type_arg` = '13'"
+            );
+            $re['aces']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re` AND `card`.`card_type_arg` = '14'"
+            );
+// #region KONTRA
+            $kontra = array();
+            $kontra['9']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re`=0 AND `card`.`card_type_arg` = '9'"
+            );
+            $kontra['10']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re`=0 AND `card`.`card_type_arg` = '10'"
+            );
+            $kontra['jacks']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re`=0 AND `card`.`card_type_arg` = '11'"
+            );
+            $kontra['queens']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re`=0 AND `card`.`card_type_arg` = '12'"
+            );
+            $kontra['kings']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re`=0 AND `card`.`card_type_arg` = '13'"
+            );
+            $kontra['aces']=self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`card_id`)
+                FROM
+                    `card`
+                JOIN
+                    `player` ON `card`.`card_location_arg` = `player`.`player_id`
+                WHERE
+                    `player`.`player_re`=0 AND `card`.`card_type_arg` = '14'"
+            );
+// #endregion RE       
+            $re_score = $re['jacks'] * 2 + $re['queens'] * 3 + $re['kings'] * 4 + $re['10'] * 10 + $re['aces']*11;
+            $kontra_score = $kontra['jacks'] * 2 + $kontra['queens'] * 3 + $kontra['kings'] * 4 + $kontra['10'] * 10 + $kontra['aces']*11;
+            // $re_players = join(", ", self::getCollectionFromDB(
+            //     "SELECT
+            //     `player`.`player_id`,
+            //     `player`.`player_name`
+            //   FROM
+            //     `player`
+            //   WHERE
+            //     `player`.`player_re`"
+            // ));
 
-        function stEndRound() {
-            $this->gamestate->nextState( 'newHand' );
+            // $kontra_players = join(", ", self::getCollectionFromDB(
+            //     "SELECT
+            //     `player`.`player_id`,
+            //     `player`.`player_name`
+            //   FROM
+            //     `player`
+            //   WHERE
+            //     NOT `player`.`player_re`"
+            // ));
+            $re_fox_count = self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`fox_card`)
+                FROM
+                    `fox` f
+                JOIN
+                    `player` c ON c.`player_id` = f.`fox_catcher`
+                JOIN
+                    `player` l ON l.`player_id` = f.`fox_looser`
+                WHERE
+                    c.`player_re` AND NOT l.`player_re`"
+            );
+            $re_dk_count = self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`doppelkopf_card`)
+                FROM
+                    `doppelkopf`
+                JOIN
+                    `player` ON `doppelkopf`.`doppelkopf_owner`= `player`.`player_id`
+                WHERE
+                    `player`.`player_re`"
+            );
+            $kontra_fox_count = self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`fox_card`)
+                FROM
+                    `fox` f
+                JOIN
+                    `player` c ON c.`player_id` = f.`fox_catcher`
+                JOIN
+                    `player` l ON l.`player_id` = f.`fox_looser`
+                WHERE
+                    l.`player_re` AND NOT c.`player_re`"
+            );
+            $kontra_dk_count = self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`doppelkopf_card`)
+                FROM
+                    `doppelkopf`
+                JOIN
+                    `player` ON `doppelkopf`.`doppelkopf_owner`= `player`.`player_id`
+                WHERE
+                    NOT `player`.`player_re`"
+            );
+            $karlchen_id = self::getGameStateValue('karlchen');
+            $re_karlchen = self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`player_id`)
+                FROM
+                    `player`
+                WHERE
+                    `player`.`player_re` AND
+                    `player`.`player_id` = $karlchen_id"
+            );
+            $kontra_karlchen = self::getUniqueValueFromDB(
+                "SELECT
+                    COUNT(`player_id`)
+                FROM
+                    `player`
+                WHERE
+                    NOT `player`.`player_re` AND
+                    `player`.`player_id` = $karlchen_id"
+            );
 
+            self::notifyAllPlayers('sumCards', clienttranslate( 'RE got ${nines} Nines, ${tens} Tens,${jacks} Jacks, ${queens} Queens, ${kings} Kings and ${aces} Aces'),array(
+                
+                'nines'=>$re[9],
+                'tens'=>$re[10],
+                'jacks'=>$re['jacks'],
+                'queens'=>$re['queens'],
+                'kings'=>$re['kings'],
+                'aces'=>$re['aces']
+                ) ); 
+            
+            self::notifyAllPlayers('sumCards', clienttranslate( 'KONTRA got ${nines} Nines, ${tens} Tens,${jacks} Jacks, ${queens} Queens, ${kings} Kings and ${aces} Aces'),array(
+                
+                'nines'=>$kontra[9],
+                'tens'=>$kontra[10],
+                'jacks'=>$kontra['jacks'],
+                'queens'=>$kontra['queens'],
+                'kings'=>$kontra['kings'],
+                'aces'=>$kontra['aces']
+                ) ); 
+            if($re_score>$kontra_score)            
+                self::notifyAllPlayers('winner', clienttranslate( 'RE won with ${re_score}, ${re_karlchen} Karlchen Müller, ${re_fox_count} Foxes and ${re_doppelkopf_count} Doppelköpfen, vs 
+                ${kontra_score}, ${kontra_karlchen} Karlchen Müller, ${kontra_fox_count} Foxes and ${kontra_doppelkopf_count}.'),array(
+                    'kontra_score'=>$kontra_score,
+                    're_score'=>$re_score,
+                    'kontra_fox_count' => $kontra_fox_count,
+                    're_fox_count' => $re_fox_count,
+                    'kontra_doppelkopf_count' => $kontra_dk_count,
+                    're_doppelkopf_count' => $re_dk_count,
+                    'kontra_karlchen' => $kontra_karlchen,
+                    're_karlchen' => $re_karlchen
+                    ) ); 
+            else 
+                self::notifyAllPlayers('winner', clienttranslate( 'KONTRA won with ${kontra_score},${kontra_karlchen} Karlchen Müller, ${kontra_fox_count} Foxes and ${kontra_doppelkopf_count} Doppelköpfen, vs 
+                ${re_score}, ${re_karlchen} Karlchen Müller, ${re_fox_count} Foxes and ${re_doppelkopf_count}.'),array(
+                    'kontra_score'=>$kontra_score,
+                    're_score'=>$re_score,
+                    'kontra_fox_count' => $kontra_fox_count,
+                    're_fox_count' => $re_fox_count,
+                    'kontra_doppelkopf_count' => $kontra_dk_count,
+                    're_doppelkopf_count' => $re_dk_count,
+                    'kontra_karlchen' => $kontra_karlchen,
+                    're_karlchen' => $re_karlchen
+                    ) ); 
+            
+            $re_player_ids = self::getCollectionFromDB(
+                "SELECT
+                `player`.`player_id`,
+                `player`.`player_no`
+                FROM
+                `player`
+                WHERE
+                `player`.`player_re`"
+            );
+            
+            $kontra_player_ids = self::getCollectionFromDB(
+                "SELECT
+                `player`.`player_id`,
+                `player`.`player_no`
+                FROM
+                `player`
+                WHERE
+                NOT `player`.`player_re`"
+            );
+
+            foreach ($re_player_ids as $key => $value) {
+                self::dbIncScore($key, ($re_score>$kontra_score? 4- intdiv($kontra_score,30):0)+$re_fox_count+$re_dk_count+$re_karlchen);
+            }
+
+            foreach ($kontra_player_ids as $key => $value) {
+                self::dbIncScore($key, ($re_score<=$kontra_score? 5- intdiv($re_score,30):0)+$kontra_fox_count+$kontra_dk_count+$kontra_karlchen);
+            }
+
+
+            if(self::getGameStateValue('round')>4)
+                $this->gamestate->nextState( 'endGame' );
+            else
+                $this->gamestate->nextState( 'nextHand' );
         }
         //////////////////////////////////////////////////////////////////////////////
-        //////////// Zombie
+        //////////// TODO Zombie
         ////////////
 
         /*

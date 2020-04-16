@@ -17,6 +17,9 @@
         </div>
         <div class="playertablecard" id="playertablecard_{PLAYER_ID}">
         </div>
+        <div class="cardsbelowtable" id="cardsbelowtable_{PLAYER_ID}">
+
+        </div>
     </div>
     <!-- END player -->
 
@@ -33,6 +36,9 @@
     // Javascript HTML templates
 
     var jstpl_cardontable = '<div class="cardontable" id="cardontable_${player_id}" style="background-position:-${x}px -${y}px">\
+                        </div>';
+
+    var jstpl_cardbelowtable = '<div class="cardbelowtable" id="cardbelowtable_${card_id}" style="background-position:-${x}px -${y}px">\
                         </div>';
 </script>
 
