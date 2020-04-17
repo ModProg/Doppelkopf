@@ -681,7 +681,7 @@ function dbSetAuxScore($player_id, $score) {
                     'player_id' => $best_card['location_arg']
                 ) );
 
-                if ( $this->cards->countCardInLocation( 'hand' ) <= 40 ) {
+                if ( $this->cards->countCardInLocation( 'hand' ) == 0 ) {
                     if($best_card['type']==CLUB && $best_card['type_arg']==JACK){
                         self::setGameStateValue('karlchen', $best_card['location_arg']);
                         self::notifyAllPlayers('giveSpecToPlayer', clienttranslate( '${player_name} takes a Karlchen Müller'),array(
