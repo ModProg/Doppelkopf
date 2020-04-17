@@ -50,7 +50,7 @@
 #playertables {
     position: relative;
     width: 710px;
-    height: 500px;
+    height: 410px;
     margin-left: 10px;
 }
 
@@ -74,7 +74,7 @@
     left: 50%;
     bottom: 0px;
     margin-left: -100px; /* half of 180 */
-    margin-bottom: 75px;
+    margin-bottom: 40px;
 }
 .playertable_W {
     left: 0px;
@@ -113,7 +113,7 @@
 .cardbelowtable{
     display: inline-block;
     width: 36px;
-    height: 52px;
+    height: 40px;
     background-image: url('img/cards.png'); 
 }
 

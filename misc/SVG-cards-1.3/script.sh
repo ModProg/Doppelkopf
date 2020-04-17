@@ -7,5 +7,5 @@ convert j* -append sj.png
 convert q* -append sq.png
 convert k* -append sk.png
 convert a* -append sa.png
-convert s9* s10* sj* sq* sk* sa* +append cards.png
+convert s9* sj* sq* sk* s10* sa* +append cards.png
 rm s*.png

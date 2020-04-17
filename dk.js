@@ -48,7 +48,6 @@ define([
             */
 
             setup: function (gamedatas) {
-                console.log(this);
                 //dojo.destroy('debug_output');
                 console.log("Starting game setup");
 
@@ -66,28 +65,21 @@ define([
                 this.playerHand.create(this, $('myhand'), this.cardwidth, this.cardheight);
                 this.playerHand.image_items_per_row = 6;
                 dojo.connect(this.playerHand, 'onChangeSelection', this, 'onPlayerHandSelectionChanged');
-                for (var suit = 1; suit <= 4; suit++) {
-                    for (var value = 9; value <= 14; value++) {
-                        // Build card type id
-                        var card_type_id = this.getCardUniqueId(suit, value);
-                        this.playerHand.addItemType(card_type_id, card_type_id, g_gamethemeurl + 'img/cards.png', card_type_id);
-                    }
+                for (let card of this.gamedatas.cardSorting) {
+                        let type = this.getCardUniqueId(card.suit, card.value);
+                        this.playerHand.addItemType(type, type + card.trump*30, g_gamethemeurl + 'img/cards.png', type);
+                    
                 }
                 console.log("Placing Cards in Hand");
 
                 // Cards in player's hand
-                for (var i in this.gamedatas.hand) {
-                    console.log(this.gamedatas.hand);
-                    var card = this.gamedatas.hand[i];
-                    var suit = card.type;
-                    var value = card.type_arg;
-                    console.log(i, card, suit, value);
-                    this.playerHand.addToStockWithId(this.getCardUniqueId(suit, value), card.id);
+                for (let card of this.gamedatas.hand) {
+                    this.playerHand.addToStockWithId(this.getCardUniqueId(card.suit, card.value), card.id);
                 }
                 console.log("Placing Cards on Table");
 
                 // Cards played on table
-                for (i in this.gamedatas.table) {
+                for (let i in this.gamedatas.table) {
                     var card = this.gamedatas.table[i];
                     var suit = card.type;
                     var value = card.type_arg;
@@ -97,14 +89,14 @@ define([
 
                 console.log("Placing Foxes");
 
-                for (i in this.gamedatas.foxes){
+                for (let i in this.gamedatas.foxes){
                     var fox = this.gamedatas.foxes[i];
                     this.playCardBelowTable(fox.catcher, fox.suit, fox.value, fox.card);
                 }
 
                 console.log("Placing Doppelköpfe");
 
-                for (i in this.gamedatas.doppelköpfe){
+                for (let i in this.gamedatas.doppelköpfe){
                     var doppelkopf = this.gamedatas.doppelköpfe[i];
                     this.playCardBelowTable(doppelkopf.owner, doppelkopf.suit, doppelkopf.value, doppelkopf.card);
                 }
@@ -124,7 +116,7 @@ define([
             //                  You can use this method to perform some user interface changes at this moment.
             //
             onEnteringState: function (stateName, args) {
-                console.log('Entering state: ' + stateName);
+                //console.log('Entering state: ' + stateName);
 
                 switch (stateName) {
 
@@ -148,7 +140,7 @@ define([
             //                 You can use this method to perform some user interface changes at this moment.
             //
             onLeavingState: function (stateName) {
-                console.log('Leaving state: ' + stateName);
+                //console.log('Leaving state: ' + stateName);
 
                 switch (stateName) {
 
@@ -172,7 +164,7 @@ define([
             //                        action status bar (ie: the HTML links in the status bar).
             //        
             onUpdateActionButtons: function (stateName, args) {
-                console.log('onUpdateActionButtons: ' + stateName);
+                //console.log('onUpdateActionButtons: ' + stateName);
 
                 if (this.isCurrentPlayerActive()) {
                     switch (stateName) {
@@ -233,7 +225,6 @@ define([
                 this.slideToObject('cardontable_' + player_id, 'playertablecard_' + player_id).play();
             },
             playCardBelowTable: function (player_id, suit, value, card_id) {
-                console.log(player_id, suit, value, card_id);
                 // player_id => direction
                 dojo.place(this.format_block('jstpl_cardbelowtable', {
                     x: this.cardwidth * (value - 9),
@@ -321,9 +312,20 @@ define([
                 dojo.subscribe('giveSpecToPlayer', this, "notif_giveSpecToPlayer");
                 dojo.subscribe('sumCards', this, "notif_sumCards");
                 this.notifqueue.setSynchronous('sumCards', 500);
+                dojo.subscribe('winner', this, "notif_winner");
             },
             notif_sumCards: function (notif) {
                 // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
+            },
+            notif_winner: function (notif) {
+                // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
+                for (var player_id in this.gamedatas.players) { 
+                    console.log("Score:")
+                    console.log(notif.args.score);
+                    this.scoreCtrl[ player_id ].setValue( notif.args.score[player_id] );
+                    while( dojo.query(".cardbelowtable").length>0)
+                        dojo.destroy(dojo.query(".cardbelowtable")[0]);
+                }
             },
 
             notif_newHand: function (notif) {
@@ -332,8 +334,8 @@ define([
 
                 for (var i in notif.args.cards) {
                     var card = notif.args.cards[i];
-                    var suit = card.type;
-                    var value = card.type_arg;
+                    var suit = card.suit;
+                    var value = card.value;
                     this.playerHand.addToStockWithId(this.getCardUniqueId(suit, value), card.id);
                 }
             },

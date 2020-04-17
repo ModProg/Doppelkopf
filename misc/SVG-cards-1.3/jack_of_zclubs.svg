@@ -15,8 +15,8 @@
    xml:space="preserve"
    id="svg2"
    version="1.1"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="jack_of_clubs.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="jack_of_zclubs.svg"
    inkscape:export-filename="/home/byron/art/cards/final/PNGs/jack_of_clubs2.png"
    inkscape:export-xdpi="215.44792"
    inkscape:export-ydpi="215.44792"><metadata
@@ -60,15 +60,15 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="2560"
-   inkscape:window-height="1353"
+   inkscape:window-width="1920"
+   inkscape:window-height="1001"
    id="namedview39"
    showgrid="false"
-   inkscape:zoom="2.4336873"
-   inkscape:cx="-80.699104"
-   inkscape:cy="158.36198"
-   inkscape:window-x="0"
-   inkscape:window-y="58"
+   inkscape:zoom="9.7347492"
+   inkscape:cx="215.61615"
+   inkscape:cy="41.943245"
+   inkscape:window-x="-9"
+   inkscape:window-y="-9"
    inkscape:window-maximized="1"
    inkscape:current-layer="svg2" />
 	<g
@@ -181,6 +181,7 @@
 
 
 
+
 <g
    transform="matrix(2.0738852,0,0,2.0738852,-55.382858,-5.1569218)"
    id="layer1-1-4"><path
@@ -204,4 +205,22 @@
      id="cl-9-1"
      d="m 50.291466,22.698228 c 0,0 2.375,-1.9 2.375,-4.534 0,-1.542 -1.369,-4.102 -4.534,-4.102 -3.165,0 -4.534,2.561 -4.534,4.102 0,2.634 2.375,4.534 2.375,4.534 -2.638,-2.055 -7.341,-0.652 -7.341,3.455 0,2.056 1.68,4.318 4.318,4.318 3.165,0 4.534,-3.455 4.534,-3.455 0,0 0.402,3.938 -1.943,6.046 h 5.182 c -2.345,-2.107 -1.943,-6.046 -1.943,-6.046 0,0 1.369,3.455 4.534,3.455 2.639,0 4.318,-2.263 4.318,-4.318 0,-4.107 -4.703,-5.51 -7.341,-3.455 z"
      inkscape:connector-curvature="0"
-     style="fill:#000000" /></g></svg>
+     style="fill:#000000" /></g><text
+   id="text858"
+   y="-217.90022"
+   x="155.94624"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Card Characters';-inkscape-font-specification:'Card Characters, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+   xml:space="preserve"
+   transform="scale(1,-1)"><tspan
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25px;line-height:1.25;font-family:'Card Characters';-inkscape-font-specification:'Card Characters, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle"
+     y="-217.90022"
+     x="155.94624"
+     id="tspan856"
+     sodipodi:role="line">B</tspan></text>
+<g
+   id="g862"
+   transform="matrix(1.0012222,0,0,-1.0012222,107.75007,226.30797)"><path
+     style="fill:#000000"
+     inkscape:connector-curvature="0"
+     d="m 50.291466,22.698228 c 0,0 2.375,-1.9 2.375,-4.534 0,-1.542 -1.369,-4.102 -4.534,-4.102 -3.165,0 -4.534,2.561 -4.534,4.102 0,2.634 2.375,4.534 2.375,4.534 -2.638,-2.055 -7.341,-0.652 -7.341,3.455 0,2.056 1.68,4.318 4.318,4.318 3.165,0 4.534,-3.455 4.534,-3.455 0,0 0.402,3.938 -1.943,6.046 h 5.182 c -2.345,-2.107 -1.943,-6.046 -1.943,-6.046 0,0 1.369,3.455 4.534,3.455 2.639,0 4.318,-2.263 4.318,-4.318 0,-4.107 -4.703,-5.51 -7.341,-3.455 z"
+     id="path860" /></g></svg>

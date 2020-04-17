@@ -18,7 +18,7 @@
         <div class="playertablecard" id="playertablecard_{PLAYER_ID}">
         </div>
         <div class="cardsbelowtable" id="cardsbelowtable_{PLAYER_ID}">
-
+<!-- <div class="cardbelowtable"> </div> -->
         </div>
     </div>
     <!-- END player -->

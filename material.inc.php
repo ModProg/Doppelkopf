@@ -39,9 +39,11 @@ if (!defined('ACE')) { // ensure this block is only invoked once, since it is in
   define("HEART", 2);
   define("SPADE", 3);
   define("CLUB", 4);
-  define("JACK", 11);
-  define("QUEEN", 12);
-  define("KING", 13);
+  define("NINE", 9);
+  define("JACK", 10);
+  define("QUEEN", 11);
+  define("KING", 12);
+  define("TEN", 13);
   define("ACE", 14);
 }
 
@@ -59,32 +61,10 @@ $this->suits = array(
 );
 
 $this->values_label = array(
-  9 => '9',
-  10 => '10',
+  NINE => '9',
+  TEN => '10',
   JACK => clienttranslate('Jack'),
   QUEEN => clienttranslate('Queen'),
   KING => clienttranslate('King'),
   ACE => clienttranslate('Ace')
 );
-
-
-$this->jacks = array(
-  array(1,11),
-  array(2,11),
-  array(3,11),
-  array(4,11)
-);
-
-$this->queens = array(
-  array(1,12),
-  array(2,12),
-  array(3,12));
-
-$this->diamonds=array(
-array(1,9),
-array(1,10),
-array(1,13),
-array(1,14),
-);
-
-$this->trumps = array_merge($this->diamonds, $this->jacks, $this->queens, array( array(2,10)));
