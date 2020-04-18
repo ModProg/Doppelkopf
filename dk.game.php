@@ -421,6 +421,7 @@ function dbSetAuxScore($player_id, $score) {
             $TEN = TEN;
             $KING = KING;
             $ACE = ACE;
+            $HEART = HEART;
             $round = self::getGameStateValue( 'round' )%self::getPlayersNumber() +1;
             $this->gamestate->changeActivePlayer( self::getUniqueValueFromDB(
                 "SELECT
@@ -520,20 +521,26 @@ function dbSetAuxScore($player_id, $score) {
             //TODO ohne h10 / schweinchen
             //TODO Übernahme
             $goodTrump = 3>= self::getUniqueValueFromDB(
-                "SELECT
-                    MIN(neunenCount)
+               "SELECT
+                    MIN(`count`)
                 FROM
                     (
                     SELECT
-                        `card`.`card_location_arg`,
-                        COUNT(`card`.`card_location_arg`) neunenCount
+                    COUNT(`card_location_arg`) `count`
                     FROM
-                        `card`
-                    WHERE
-                        `card`.`card_type_arg` = '$JACK' OR `card`.`card_type_arg` = '$QUEEN' OR `card`.`card_type_arg` = '$TEN' AND `card`.`card_type_arg` = '2'
-                    GROUP BY
-                        `card`.`card_location_arg`
-                ) test"
+                    `player`
+                    LEFT JOIN
+                        (
+                        SELECT
+                            *
+                        FROM
+                            `card`
+                        WHERE
+                            `card`.`card_type_arg` = '$JACK' OR `card`.`card_type_arg` = '$QUEEN' OR `card`.`card_type_arg` = '$TEN' AND `card`.`card_type` = '$HEART'
+                        ) temp2 ON temp2.`card_location_arg` = `player`.`player_id`
+                GROUP BY
+                    `player`.`player_id`
+                ) temp"
             );
 
             // XXX Schmeißen
