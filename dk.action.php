@@ -46,10 +46,6 @@ class action_dk extends APP_GameAction
         $this->game->playCard( $card_id );
         self::ajaxResponse();
     }
-
-    function argGiveCards() {
-        return array ();
-    }
     /*
 
     Example:

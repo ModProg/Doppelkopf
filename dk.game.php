@@ -421,7 +421,10 @@ function dbSetAuxScore($player_id, $score) {
             $TEN = TEN;
             $KING = KING;
             $ACE = ACE;
+            $DIAMOND = DIAMOND;
             $HEART = HEART;
+            $SPADE = SPADE;
+            $CLUB = CLUB;
             $round = self::getGameStateValue( 'round' )%self::getPlayersNumber() +1;
             $this->gamestate->changeActivePlayer( self::getUniqueValueFromDB(
                 "SELECT
@@ -437,7 +440,7 @@ function dbSetAuxScore($player_id, $score) {
                 FROM
                     `card`
                 WHERE
-                    `card_type` = 4 AND `card_type_arg` = '$QUEEN';" );
+                    `card_type` = $CLUB AND `card_type_arg` = '$QUEEN';" );
             
             $neunen= 5<= self::getUniqueValueFromDB( 
                 "SELECT
@@ -520,7 +523,16 @@ function dbSetAuxScore($player_id, $score) {
             );
             //TODO ohne h10 / schweinchen
             //TODO Übernahme
-            $goodTrump = 3>= self::getUniqueValueFromDB(
+            $diamondJack = self::getUniqueValueFromDB(
+               "SELECT
+                    `card`.`card_trump`
+                FROM
+                    `card`
+                WHERE
+                    `card`.`card_type` = $DIAMOND AND `card`.`card_type_arg` = $JACK
+                LIMIT 1"
+            );
+            $goodTrump = 0== self::getUniqueValueFromDB(
                "SELECT
                     MIN(`count`)
                 FROM
@@ -536,15 +548,48 @@ function dbSetAuxScore($player_id, $score) {
                         FROM
                             `card`
                         WHERE
-                            `card`.`card_type_arg` = '$JACK' OR `card`.`card_type_arg` = '$QUEEN' OR `card`.`card_type_arg` = '$TEN' AND `card`.`card_type` = '$HEART'
+                            `card`.`card_trump` >= '$diamondJack'
                         ) temp2 ON temp2.`card_location_arg` = `player`.`player_id`
                 GROUP BY
                     `player`.`player_id`
                 ) temp"
             );
+            $fox = self::getUniqueValueFromDB(
+                "SELECT
+                     `card`.`card_trump`
+                 FROM
+                     `card`
+                 WHERE
+                     `card`.`card_type` = $DIAMOND AND `card`.`card_type_arg` = $ACE
+                 LIMIT 1"
+            );
+
+            
+            $trump = 3>= self::getUniqueValueFromDB(
+                "SELECT
+                     MIN(`count`)
+                 FROM
+                     (
+                     SELECT
+                     COUNT(`card_location_arg`) `count`
+                     FROM
+                     `player`
+                     LEFT JOIN
+                         (
+                         SELECT
+                             *
+                         FROM
+                             `card`
+                         WHERE
+                             `card`.`card_trump` != '$fox' AND `card`.`card_trump` > '0'
+                         ) temp2 ON temp2.`card_location_arg` = `player`.`player_id`
+                 GROUP BY
+                     `player`.`player_id`
+                 ) temp"
+             );
 
             // XXX Schmeißen
-            if($hochzeit||$neunen||$zehnen||$neunenFarb||$neunenKönige||$goodTrump)
+            if($hochzeit||$neunen||$zehnen||$neunenFarb||$neunenKönige||$goodTrump||$trump)
                 return $this->gamestate->nextState( 'reshuffle' );
             // XXX Set RE
             self::DbQuery( 
@@ -1019,13 +1064,13 @@ function dbSetAuxScore($player_id, $score) {
                         `player`", true
                     )
                     ) ); 
-            
-            self::DbQuery(
-                "DELETE FROM `fox`;"
+            self::DBQuery(
+                
+                "DELETE FROM `fox`;" // NOI18N 
             );
             
-            self::DbQuery(
-                "DELETE FROM `doppelkopf`;"
+            self::DBQuery(
+                "DELETE FROM `doppelkopf`;" // NOI18N 
             );
 
             if(self::getGameStateValue('round')>4)
