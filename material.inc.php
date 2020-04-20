@@ -33,38 +33,37 @@ $this->card_types = array(
 */
 
 
-if (!defined('ACE')) { // ensure this block is only invoked once, since it is included multiple times
-  define("TRUMP", 5);
-  define("DIAMOND", 1);
-  define("HEART", 2);
-  define("SPADE", 3);
-  define("CLUB", 4);
-  define("NINE", 9);
-  define("JACK", 10);
-  define("QUEEN", 11);
-  define("KING", 12);
-  define("TEN", 13);
-  define("ACE", 14);
-}
+$DIAMOND = 1;
+$HEART = 2;
+$SPADE = 3;
+$CLUB = 4;
+$TRUMP = 5;
+$NINE= 9;
+$JACK= 10;
+$QUEEN= 11;
+$KING= 12;
+$TEN= 13;
+$ACE= 14;
+
 
 $this->suits = array(
-  DIAMOND => array( 'name' => clienttranslate('diamond'),
+  $DIAMOND => array( 'name' => clienttranslate('diamond'),
               'nametr' => self::_('diamond') ),
-  HEART => array( 'name' => clienttranslate('heart'),
+  $HEART => array( 'name' => clienttranslate('heart'),
               'nametr' => self::_('heart') ),
-  SPADE => array( 'name' => clienttranslate('spade'),
+  $SPADE => array( 'name' => clienttranslate('spade'),
               'nametr' => self::_('spade') ),
-  CLUB => array( 'name' => clienttranslate('club'),
+  $CLUB => array( 'name' => clienttranslate('club'),
               'nametr' => self::_('club') ),
-  TRUMP => array( 'name' => clienttranslate('trump'),
+  $TRUMP => array( 'name' => clienttranslate('trump'),
               'nametr' => self::_('trump') )
 );
 
 $this->values_label = array(
-  NINE => '9',
-  TEN => '10',
-  JACK => clienttranslate('Jack'),
-  QUEEN => clienttranslate('Queen'),
-  KING => clienttranslate('King'),
-  ACE => clienttranslate('Ace')
+  $NINE => '9',
+  $TEN => '10',
+  $JACK => clienttranslate('Jack'),
+  $QUEEN => clienttranslate('Queen'),
+  $KING => clienttranslate('King'),
+  $ACE => clienttranslate('Ace')
 );

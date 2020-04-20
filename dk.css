@@ -49,9 +49,9 @@
 /********* You can start writing your CSS below this line: **********/
 #playertables {
     position: relative;
-    width: 710px;
-    height: 410px;
-    margin-left: 10px;
+    width: 625  px;
+    height: 332px;
+    margin-left: 5px;
 }
 
 .playertablename {
@@ -68,23 +68,24 @@
 .playertable_N {
     left: 50%;
     top: 0px;
-    margin-left: -100px; /* half of 180 */
+    margin-left: -100px; /* half of 200 */
+    margin-top: 2px;
 }
 .playertable_S {
     left: 50%;
     bottom: 0px;
-    margin-left: -100px; /* half of 180 */
-    margin-bottom: 40px;
+    margin-left: -100px; /* half of 200 */
+    margin-bottom: 0px;
 }
 .playertable_W {
     left: 0px;
     top: 50%;
-    margin-top: -75px; /* half of 130 */
+    margin-top: -75px; /* half of 150 */
 }
 .playertable_E {
     right: 0px;
     top: 50%;
-    margin-top: -75px; /* half of 130 */
+    margin-top: -75px; /* half of 150 */
 }
 
 .playertablecard {

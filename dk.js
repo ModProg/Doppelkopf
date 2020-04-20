@@ -27,8 +27,8 @@ define([
                 console.log('dk constructor');
                 // TODO remove on release
                 // XXX hide Expressswitch
-                while( dojo.query(".expressswitch").length>0)
-                    dojo.destroy(dojo.query(".expressswitch")[0]);
+                // while( dojo.query(".expressswitch").length>0)
+                //     dojo.destroy(dojo.query(".expressswitch")[0]);
 
                 this.cardwidth = 72;
                 this.cardheight = 105;
@@ -58,6 +58,10 @@ define([
                 // Setting up player boards
                 for (var player_id in gamedatas.players) {
                     var player = gamedatas.players[player_id];
+
+                    dojo.place(this.format_block('jstpl_cardsbelowtable', {
+                        player_id: player_id
+                    }), $('player_board_'+player_id);
 
                     // TODO: Setting up players boards if needed
                 }
