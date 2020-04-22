@@ -22,7 +22,7 @@
 
 </div>
 
-<div id="myhand_wrap" class="whiteblock">
+<div id="myhand_wrap" class="whiteblock" style="box-shadow: 0 3px 8px rgba(0, 0, 0, .3);    ">
     <h3>{MY_HAND} Development Version</h3>
     <div id="myhand">
     </div>

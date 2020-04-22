@@ -16,6 +16,7 @@
  * In this PHP file, you are going to defines the rules of the game.
  *
  */
+
 require_once APP_GAMEMODULE_PATH . 'module/table/table.game.php';
 
 class dk extends Table
@@ -90,7 +91,18 @@ class dk extends Table
 
         // Create cards
         $cards = array();
-        global $DIAMOND, $HEART, $SPADE, $CLUB, $TRUMP, $NINE, $JACK, $QUEEN, $KING, $TEN, $ACE;
+        $DIAMOND = DIAMOND;
+        $HEART = HEART;
+        $SPADE = SPADE;
+        $CLUB = CLUB;
+        $TRUMP = TRUMP;
+        $NINE = NINE;
+        $JACK = JACK;
+        $QUEEN = QUEEN;
+        $KING = KING;
+        $TEN = TEN;
+        $ACE = ACE;
+
         for ($suit = $DIAMOND; $suit <= $CLUB; $suit++) {
             // spade, heart, diamond, club
             for ($value = $NINE; $value <= $ACE; $value++) {
@@ -126,7 +138,7 @@ class dk extends Table
         // Init a player statistics ( for all players )
 
         // Activate first player ( which is in general a good idea : ) )
-        $this->activeNextPlayer();
+        self::activeNextPlayer();
 
         /************ End of the game initialization *****/
     }
@@ -142,6 +154,7 @@ class dk extends Table
      */
     protected function getAllDatas()
     {
+        self::error(self::getCurrentPlayerColor());
         $result = array('players' => array());
 
         $current_player_id = self::getCurrentPlayerId();
@@ -234,19 +247,19 @@ class dk extends Table
     // get score
     public function dbGetScore($player_id)
     {
-        return $this->getUniqueValueFromDB("SELECT player_score FROM player WHERE player_id='$player_id'");
+        return self::getUniqueValueFromDB("SELECT player_score FROM player WHERE player_id='$player_id'");
     }
 
     // set score
     public function dbSetScore($player_id, $count)
     {
-        $this->DBQuery("UPDATE player SET player_score='$count' WHERE player_id='$player_id'");
+        self::DBQuery("UPDATE player SET player_score='$count' WHERE player_id='$player_id'");
     }
 
     // set aux score (tie breaker)
     public function dbSetAuxScore($player_id, $score)
     {
-        $this->DBQuery("UPDATE player SET player_score_aux=$score WHERE player_id='$player_id'");
+        self::DBQuery("UPDATE player SET player_score_aux=$score WHERE player_id='$player_id'");
     }
 
     public function dbIncScore($player_id, $inc)
@@ -273,7 +286,8 @@ class dk extends Table
 
     public function h10($card, $best_card)
     {
-        global $HEART, $TEN;
+        $HEART = HEART;
+        $TEN = TEN;
         return $card['type'] == $HEART && $card['type_arg'] == $TEN && $best_card['type'] == $HEART && $best_card['type_arg'] == $TEN;
     }
 
@@ -298,8 +312,7 @@ class dk extends Table
 
     public function hasSuit($player, $suit)
     {
-        global $TRUMP;
-        if ($suit != $TRUMP) {
+        if ($suit != TRUMP) {
             return 0 < self::getUniqueValueFromDB(
                 "SELECT
                     COUNT(`card`.`card_id`)
@@ -322,8 +335,7 @@ class dk extends Table
 
     public function fox($card)
     {
-        global $DIAMOND, $ACE;
-        return $card['type'] == $DIAMOND && $card['type_arg'] == $ACE;
+        return $card['type'] == DIAMOND && $card['type_arg'] == ACE;
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -359,17 +371,17 @@ class dk extends Table
             self::notifyAllPlayers('playCard', clienttranslate('${player_name} plays ${value_displayed} of ${suit_displayed}s'), array(
                 'i18n' => array('suit_displayed', 'value_displayed'), 'card_id' => $card_id, 'player_id' => $player_id,
                 'player_name' => self::getActivePlayerName(), 'value' => $currentCard['type_arg'],
-                'value_displayed' => $this->values_label[$currentCard['type_arg']], 'suit' => $currentCard['type'],
-                'suit_displayed' => $this->suits[$currentCard['type']]['name']
+                'value_displayed' => $this->values_label[$currentCard['type_arg']]['name'], 'suit' => $currentCard['type'],
+                'suit_displayed' => $this->suits[$currentCard['type']]['name'],
             ));
             // Next player
             $this->gamestate->nextState('playCard');
         } else {
-            self::notifyPlayer($player_id, 'wrongCard', clienttranslate('You cannot play ${value_displayed} of ${suit_displayed}s when ${trick_suit_displayed} is played.'), array(
-                'i18n' => array('value_displayed', 'suit_displayed', 'trick_suit_displayed'),
-                'value_displayed' => $this->values_label[$currentCard['type_arg']],
-                'suit_displayed' => $this->suits[$currentCard['type']]['name'],
-                'trick_suit_displayed' => $this->suits[$trick_suit]['name']
+            throw new BgaUserException(sprintf(
+                _('You cannot play %s of %ss when %s is played.'),
+                $this->values_label[$currentCard['type_arg']]['nametr'],
+                $this->suits[$currentCard['type']]['nametr'],
+                $this->suits[$trick_suit]['nametr']
             ));
 
             $this->gamestate->nextState('wrongCard');
@@ -434,7 +446,18 @@ class dk extends Table
 
     public function stPreRound()
     {
-        global $DIAMOND, $HEART, $SPADE, $CLUB, $TRUMP, $NINE, $JACK, $QUEEN, $KING, $TEN, $ACE;
+        $DIAMOND = DIAMOND;
+        $HEART = HEART;
+        $SPADE = SPADE;
+        $CLUB = CLUB;
+        $TRUMP = TRUMP;
+        $NINE = NINE;
+        $JACK = JACK;
+        $QUEEN = QUEEN;
+        $KING = KING;
+        $TEN = TEN;
+        $ACE = ACE;
+
         $round = self::getGameStateValue('round') % self::getPlayersNumber() + 1;
         $this->gamestate->changeActivePlayer(self::getUniqueValueFromDB(
             "SELECT
@@ -630,7 +653,18 @@ class dk extends Table
 
     public function stNextPlayer()
     {
-        global $DIAMOND, $HEART, $SPADE, $CLUB, $TRUMP, $NINE, $JACK, $QUEEN, $KING, $TEN, $ACE;
+        $DIAMOND = DIAMOND;
+        $HEART = HEART;
+        $SPADE = SPADE;
+        $CLUB = CLUB;
+        $TRUMP = TRUMP;
+        $NINE = NINE;
+        $JACK = JACK;
+        $QUEEN = QUEEN;
+        $KING = KING;
+        $TEN = TEN;
+        $ACE = ACE;
+
         // Active next player OR end the trick and go to the next trick OR end the hand
         if ($this->cards->countCardInLocation('table') == 4) {
             // This is the end of the trick
@@ -776,7 +810,18 @@ class dk extends Table
 
     public function stEndHand()
     {
-        global $DIAMOND, $HEART, $SPADE, $CLUB, $TRUMP, $NINE, $JACK, $QUEEN, $KING, $TEN, $ACE;
+        $DIAMOND = DIAMOND;
+        $HEART = HEART;
+        $SPADE = SPADE;
+        $CLUB = CLUB;
+        $TRUMP = TRUMP;
+        $NINE = NINE;
+        $JACK = JACK;
+        $QUEEN = QUEEN;
+        $KING = KING;
+        $TEN = TEN;
+        $ACE = ACE;
+
         // #region RE
         $re = array();
         $re['9'] = self::getUniqueValueFromDB(

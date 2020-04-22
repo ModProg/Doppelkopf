@@ -61,7 +61,7 @@ define([
 
                     dojo.place(this.format_block('jstpl_cardsbelowtable', {
                         player_id: player_id
-                    }), $('player_board_'+player_id);
+                    }), 'player_board_'+player_id)
 
                     // TODO: Setting up players boards if needed
                 }
