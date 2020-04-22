@@ -95,7 +95,7 @@ $machinestates = array(
         'descriptionmyturn' => clienttranslate( '${you} must play a card' ),
         'type' => 'activeplayer',
         'possibleactions' => array( 'playCard' ),
-        'transitions' => array( 'playCard' => 42, 'wrongCard' => 41 )
+        'transitions' => array( 'playCard' => 42 )
     ),
     42 => array(
         'name' => 'nextPlayer',

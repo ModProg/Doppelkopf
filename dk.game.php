@@ -383,8 +383,6 @@ class dk extends Table
                 $this->suits[$currentCard['type']]['nametr'],
                 $this->suits[$trick_suit]['nametr']
             ));
-
-            $this->gamestate->nextState('wrongCard');
         }
     }
     //////////////////////////////////////////////////////////////////////////////
