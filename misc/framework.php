@@ -28,9 +28,18 @@ class Table
     static function getGameinfos()
     {
     }
+
+
+    /**
+     * Not documented
+     */
     static function reattributeColorsBasedOnPreferences(array $players, array $colors)
     {
     }
+
+    /**
+     * Not documented
+     */
     static function reloadPlayersBasicInfos()
     {
     }
@@ -157,6 +166,22 @@ class Table
     {
     }
 
+    /**
+     * Eliminate a player from the game in order he/she can start another game without waiting for the current game end
+     * Player to eliminate should NOT be active anymore (preferably use the feature in a "game" type game state).
+     */
+    static function eliminatePlayer(int $player_id)
+    {
+    }
+
+    /**
+     * Give standard extra time to this player. 
+     * 
+     * Standard extra time depends on the speed of the game (small with "slow" game option, bigger with other options). 
+     * 
+     * You can also specify an exact time to add, in seconds, with the "specified_time" argument (rarely used). 
+     */
+    static function  giveExtraTime( int $player_id, float $specific_time=null ) {}
     // Turn Order
 
     /**
@@ -348,9 +373,6 @@ class Table
      * @return int Return the final value of the global.
      */
     static function incGameStateValue(string $value_label, int $increment)
-    {
-    }
-    static function giveExtraTime(int $player_id)
     {
     }
 
@@ -599,9 +621,10 @@ class Gamestate
 }
 // Exceptions
 
-class BgaUserException{
-    function __construct(string $message){
-
+class BgaUserException
+{
+    function __construct(string $message)
+    {
     }
 }
 
@@ -613,8 +636,6 @@ class feException
 }
 
 // .action.php
-
-define("AT_posint", "");
 
 class APP_GameAction
 {
@@ -645,3 +666,47 @@ class game_view
     {
     }
 }
+
+//////// Argument Types
+
+/**
+ * An argument type.
+ * 'AT_alphanum' for a string with 0-9a-zA-Z_ and space
+ */
+define('AT_alphanum', '');
+
+/**
+ * An argument type.
+ * 'AT_numberlist' for a list of several numbers separated with "," or ";" (ex: exemple: 1,4;2,3;-1,2).
+ */
+define('AT_numberlist', '');
+
+/**
+ * An argument type.
+ * 'AT_posint' for a positive integer
+ */
+define('AT_posint', '');
+
+/**
+ * An argument type.
+ * 'AT_float' for a float
+ */
+define('AT_float', '');
+
+/**
+ * An argument type.
+ * 'AT_bool' for 1/0/true/false
+ */
+define('AT_bool', '');
+
+/**
+ * An argument type.
+ * 'AT_enum' for an enumeration (argTypeDetails list the possible values as an array)
+ */
+define('AT_enum', '');
+
+/**
+ * An argument type.
+ * 'AT_int' for an integer
+ */
+define('AT_int', '');
