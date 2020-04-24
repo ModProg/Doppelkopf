@@ -27,8 +27,8 @@ define([
                 console.log('dk constructor');
                 // TODO remove on release
                 // XXX hide Expressswitch
-                // while( dojo.query(".expressswitch").length>0)
-                //     dojo.destroy(dojo.query(".expressswitch")[0]);
+                while (dojo.query(".expressswitch").length > 0)
+                    dojo.destroy(dojo.query(".expressswitch")[0]);
 
                 this.cardwidth = 72;
                 this.cardheight = 105;
