@@ -40,6 +40,8 @@
 
     var jstpl_cardbelowtable = '<div class="cardbelowtable" id="cardbelowtable_${card_id}" style="background-position:-${x}px -${y}px">\
                         </div>';
+    var jstpl_weddingrings = '<div class="weddingrings" id="weddingrings_${player_id}">\
+                        </div>';
 </script>
 
 {OVERALL_GAME_FOOTER}

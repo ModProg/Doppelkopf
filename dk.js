@@ -59,9 +59,13 @@ define([
                 for (var player_id in gamedatas.players) {
                     var player = gamedatas.players[player_id];
 
+                    if (gamedatas.wedding && player_id == gamedatas.wedding)
+                        dojo.place(this.format_block('jstpl_weddingrings', {
+                            player_id: player_id
+                        }), 'player_board_' + player_id)
                     dojo.place(this.format_block('jstpl_cardsbelowtable', {
                         player_id: player_id
-                    }), 'player_board_'+player_id)
+                    }), 'player_board_' + player_id)
 
                     // TODO: Setting up players boards if needed
                 }
@@ -74,9 +78,9 @@ define([
                 this.playerHand.image_items_per_row = 6;
                 dojo.connect(this.playerHand, 'onChangeSelection', this, 'onPlayerHandSelectionChanged');
                 for (let card of this.gamedatas.cardSorting) {
-                        let type = this.getCardUniqueId(card.suit, card.value);
-                        this.playerHand.addItemType(type, type + card.trump*30, g_gamethemeurl + 'img/cards.png', type);
-                    
+                    let type = this.getCardUniqueId(card.suit, card.value);
+                    this.playerHand.addItemType(type, type + card.trump * 30, g_gamethemeurl + 'img/cards.png', type);
+
                 }
                 console.log("Placing Cards in Hand");
 
@@ -97,14 +101,14 @@ define([
 
                 console.log("Placing Foxes");
 
-                for (let i in this.gamedatas.foxes){
+                for (let i in this.gamedatas.foxes) {
                     var fox = this.gamedatas.foxes[i];
                     this.playCardBelowTable(fox.catcher, fox.suit, fox.value, fox.card);
                 }
 
                 console.log("Placing Doppelköpfe");
 
-                for (let i in this.gamedatas.doppelköpfe){
+                for (let i in this.gamedatas.doppelköpfe) {
                     var doppelkopf = this.gamedatas.doppelköpfe[i];
                     this.playCardBelowTable(doppelkopf.owner, doppelkopf.suit, doppelkopf.value, doppelkopf.card);
                 }
@@ -321,17 +325,31 @@ define([
                 dojo.subscribe('sumCards', this, "notif_sumCards");
                 this.notifqueue.setSynchronous('sumCards', 500);
                 dojo.subscribe('winner', this, "notif_winner");
+                dojo.subscribe('wedding', this, "notif_wedding");
+                dojo.subscribe('weddingComplete', this, "notif_weddingComplete");
             },
+
+            notif_wedding: function (notif) {
+                console.log("wedding");
+                dojo.place(this.format_block('jstpl_weddingrings', {
+                    player_id: notif.args.player_id
+                }), 'player_board_' + notif.args.player_id)
+            },
+
+            notif_weddingComplete: function (notif) {
+                dojo.destroy(dojo.query(".weddingrings")[0]);
+            },
+
             notif_sumCards: function (notif) {
                 // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
             },
             notif_winner: function (notif) {
                 // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
-                for (var player_id in this.gamedatas.players) { 
+                for (var player_id in this.gamedatas.players) {
                     console.log("Score:")
                     console.log(notif.args.score);
-                    this.scoreCtrl[ player_id ].setValue( notif.args.score[player_id] );
-                    while( dojo.query(".cardbelowtable").length>0)
+                    this.scoreCtrl[player_id].setValue(notif.args.score[player_id]);
+                    while (dojo.query(".cardbelowtable").length > 0)
                         dojo.destroy(dojo.query(".cardbelowtable")[0]);
                 }
             },
@@ -359,7 +377,7 @@ define([
                 // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
             },
 
-            notif_giveSpecToPlayer: function (notif){
+            notif_giveSpecToPlayer: function (notif) {
                 this.playCardBelowTable(notif.args.player_id, notif.args.suit, notif.args.value, notif.args.card_id);
             },
             notif_giveAllCardsToPlayer: function (notif) {

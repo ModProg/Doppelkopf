@@ -118,3 +118,10 @@
     background-image: url('img/cards.png'); 
 }
 
+
+.weddingrings{
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-image: url('img/wedding-rings.png'); 
+}
