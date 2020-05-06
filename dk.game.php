@@ -446,6 +446,7 @@ class dk extends Table
         $this->cards->moveAllCardsInLocation(null, 'deck');
         $this->cards->shuffle('deck');
         $players = self::loadPlayersBasicInfos();
+        self::setGameStateValue('charlie', 0 );
         foreach ($players as $player_id => $player) {
             $this->cards->pickCards(12, 'deck', $player_id);
             $cards = $result['hand'] = self::getObjectListFromDB(

@@ -318,7 +318,7 @@ define([
                 dojo.subscribe('newHand', this, "notif_newHand");
                 dojo.subscribe('playCard', this, "notif_playCard");
                 dojo.subscribe('trickWin', this, "notif_trickWin");
-                this.notifqueue.setSynchronous('trickWin', 1000);
+                this.notifqueue.setSynchronous('trickWin', 1500);
                 dojo.subscribe('giveAllCardsToPlayer', this, "notif_giveAllCardsToPlayer");
                 dojo.subscribe('wrongCard', this, "notif_wrongCard");
                 dojo.subscribe('giveSpecToPlayer', this, "notif_giveSpecToPlayer");
