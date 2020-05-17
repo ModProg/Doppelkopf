@@ -54,15 +54,18 @@ define([
             setup: function (gamedatas) {
                 //dojo.destroy('debug_output');
                 console.log("Starting game setup");
-
+                console.log("DK:", this);
                 // Setting up player boards
                 for (var player_id in gamedatas.players) {
                     var player = gamedatas.players[player_id];
 
-                    if (gamedatas.wedding && player_id == gamedatas.wedding)
+                    if (gamedatas.wedding && player_id == gamedatas.wedding) {
+
+                        this.showMessage(_("Wedding!"), "info")
                         dojo.place(this.format_block('jstpl_weddingrings', {
                             player_id: player_id
                         }), 'player_board_' + player_id)
+                    }
                     dojo.place(this.format_block('jstpl_cardsbelowtable', {
                         player_id: player_id
                     }), 'player_board_' + player_id)
@@ -330,7 +333,8 @@ define([
             },
 
             notif_wedding: function (notif) {
-                console.log("wedding");
+                this.showMessage(_("Wedding!"), "info")
+
                 dojo.place(this.format_block('jstpl_weddingrings', {
                     player_id: notif.args.player_id
                 }), 'player_board_' + notif.args.player_id)
