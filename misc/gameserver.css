@@ -1,0 +1,1596 @@
+#overall-content {
+ overflow: hidden;
+}
+.lockedInterface {
+ cursor: progress !important;
+}
+#left-side-wrapper {
+ float: left;
+ width: 100%;
+ margin-top: 5px;
+}
+#left-side {
+ margin-right: 245px;
+ margin-left: 2px;
+}
+#right-side {
+ margin-top: 5px;
+ float: left;
+ width: 240px;
+ margin-left: -240px;
+}
+.mobile_version #left-side {
+ margin-right: 2px;
+}
+.mobile_version #right-side {
+ display: block;
+ width: 100%;
+ margin-left: 0px;
+ position: absolute;
+ top: 62px;
+ left: 0px;
+}
+.mobile_version #right-side.premiumbar {
+ top: 114px;
+}
+.mobile_version #right-side-second-part {
+ display: none;
+}
+.mobile_version .player-board {
+ width: 234px;
+ margin-right: 3px;
+ margin-bottom: 5px;
+ float: left;
+ clear: none;
+ border-radius: 8px;
+}
+.mobile_version #chatbardock {
+ right: -5px;
+}
+.mobile_version #spectatorbox_wrapper {
+ display: none;
+}
+@media only screen and (max-width: 600px) {
+ .mobile_version #tableinfos {
+  display: none;
+ }
+ .mobile_version #reflexiontimevalues,
+ #previously_on {
+  margin-left: 60px;
+  margin-right: 125px;
+  font-size: 80%;
+  padding-top: 2px;
+ }
+ .mobile_version #reflexiontime_value {
+  font-size: 16px;
+ }
+}
+.touch-device #game_play_area {
+ -webkit-touch-callout: none;
+ -webkit-user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+}
+#game_play_area {
+ margin-top: 5px;
+ position: relative;
+}
+#maingameview_menuheader {
+ text-align: center;
+ display: none;
+}
+.logs_on_additional_column #left-side {
+ margin-right: 500px;
+}
+.logs_on_additional_column #right-side {
+ width: 490px;
+ margin-left: -490px;
+}
+.logs_on_additional_column #right-side-first-part {
+ width: 240px;
+ float: left;
+}
+.logs_on_additional_column #right-side-second-part {
+ width: 240px;
+ float: left;
+ margin-left: 10px;
+}
+.tutorial_ingame {
+ margin: 10px;
+ max-width: 350px;
+ font-size: 16px;
+}
+.tutorial_footer {
+ text-align: center;
+ margin-top: 10px;
+}
+#site-logo {
+ position: absolute;
+ top: 0px;
+ left: 0px;
+}
+#logoicon_inprogress {
+ position: relative;
+ left: 3px;
+ top: -1px;
+}
+#upperrightmenu {
+ position: absolute;
+ right: 0px;
+ top: 0px;
+ height: 100%;
+}
+#upperrightmenu a {
+ text-decoration: none;
+ opacity: 0.8;
+}
+.notouch-device #upperrightmenu a:hover {
+ opacity: 1;
+}
+.upperrightmenu_item {
+ float: left;
+ height: 100%;
+ margin-left: 12px;
+}
+.upperrightmenu_item .icon20,
+.upperrightmenu_item i {
+ margin-top: 18px;
+}
+.upperrightmenu_item .icon32 {
+ margin-top: 14px;
+}
+.upperrightmenu_item i {
+ color: gray;
+}
+#ingame_menu {
+ cursor: pointer;
+ opacity: 0.8;
+}
+.notouch-device #ingame_menu:hover {
+ opacity: 1;
+}
+#ingame_menu.menu_open {
+ opacity: 1;
+}
+#ingame_menu_wheel {
+ position: relative;
+ margin-right: 12px;
+ margin-top: 2px;
+ margin-left: 4px;
+ font-size: 130%;
+}
+#ingame_menu_content {
+ width: 630px;
+ position: absolute;
+ background: -prefixe-linear-gradient(top, #f8f8f8, #e7e9e8);
+ background: linear-gradient(to bottom, #f8f8f8, #e7e9e8);
+ right: 0px;
+ top: 62px;
+ z-index: 1055;
+ padding: 10px 20px 10px 20px;
+ display: none;
+ border: 1px solid rgba(0, 0, 0, .15);
+ border-top: none;
+ box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+}
+.ingame_menu_item {
+ float: left;
+ width: 280px;
+ height: 70px;
+ margin-right: 10px;
+ padding-left: 5px;
+ cursor: pointer;
+}
+a.ingame_menu_item {
+ color: black;
+ font-weight: normal;
+ text-decoration: none;
+}
+.ingame_menu_item p {
+ margin-top: 23px;
+ margin-left: 70px;
+}
+.ingame_menu_item .icon64 {
+ float: left;
+}
+.notouch-device .ingame_menu_item:hover {
+ background-color: #cccccc;
+}
+@media only screen and (max-width: 700px) {
+ #ingame_menu_content {
+  width: 350px;
+ }
+}
+@media only screen and (max-width: 500px) {
+ #ingame_menu_content {
+  width: 272px;
+ }
+ .ingame_menu_item {
+  width:272px;
+ }
+}
+.preference_control {
+ display: inline;
+}
+#turnbased_notes {
+ width: 400px;
+}
+#turnbased_notes_content {
+ margin: 5px;
+ width: 380px;
+ height: 100px;
+}
+#turnbased_notes_commands {
+ text-align: right;
+}
+@media only screen and (max-width: 450px) {
+ #turnbased_notes {
+  width: 100%;
+ }
+ #turnbased_notes_content {
+  margin: 5px;
+  width: 90%;
+  height: 250px;
+ }
+}
+#turnBasedNotesPopupIncentContent {
+ max-width: 150px;
+}
+#active_player_statusbar {
+ height: 18px;
+}
+#active_player_statusbar_icon {
+ top: -3px;
+}
+#go_to_next_table_active_player,
+#go_to_next_table_inactive_player {
+ float: right;
+ position: relative;
+ top: 2px;
+}
+.replay_last_move_button {
+ padding-bottom: 12px;
+}
+#scoreDlgContent .score-entry {
+ margin-top: 0px;
+ padding-top: 0px;
+}
+.solo_game #reflexiontime_value {
+ display: none;
+}
+.solo_game #wouldlikethink {
+ display: none;
+}
+.solo_game .timeToThink {
+ display: none;
+}
+.opponent_cursor {
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ font-size: 30px;
+ font-weight: bold;
+ z-index: 1099;
+ pointer-events: none;
+}
+.player_showcursor {
+ margin-top: 5px;
+ margin-bottom: 5px;
+ margin-left: 22px;
+ display: none;
+}
+#player_boards .player_status {
+ position: absolute;
+ top: -2px;
+ right: 20px;
+}
+#player_boards .player_status.fa-circle {
+ top: 2px;
+}
+.mobile_version #player_boards {
+ margin-right: -3px;
+}
+.player_board_inner {
+ position: relative;
+}
+.player_panel_content {
+ position: relative;
+ clear: both;
+}
+.timeToThink {
+ font-size: 80%;
+ position: absolute;
+ right: 0px;
+ top: 20px;
+}
+.no_time_limit .timeToThink {
+ display: none;
+}
+.player-board {
+ clear: both;
+ background-color: #ebd5bd;
+ padding: 5px 3px 5px 3px;
+ border-radius: 8px 0px 0px 8px;
+ box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+}
+.player-board.roundedboxdisabled {
+ background-color: #dac6af;
+}
+.player-board.roundedboxenlighted {
+ background-color: #faf5ef;
+}
+.player-board .icon16_point {
+ top: 0px;
+}
+.player-board .flag {
+ position: absolute;
+ top: 4px;
+ right: 0px;
+}
+.player-board .emblemwrap {
+ position: relative;
+ left: -3px;
+}
+.active_player_iconinfos .emblemwrap_xxl {
+ margin:auto;
+ margin:20px;
+}
+.active_player_small_infos_block {
+ padding:10px;
+}
+.player-board .emblemwrap {
+ float: left;
+ margin: 4px;
+ margin-right: 10px;
+ width: 32px;
+ height: 32px;
+}
+.player-board .emblemwrap .avatar {
+ margin: 0px;
+}
+.expelPlayer_wrap {
+ text-align: center;
+ margin: 5px;
+ display: none;
+}
+.spectator-mode {
+ text-align: left;
+}
+.mobile_version .spectator-mode {
+ width: 100%;
+ clear: both;
+}
+.boardblock {
+ clear: both;
+}
+#player_boards .this_is_night {
+ position: absolute;
+ top:7px;
+ left:7px;
+}
+.this_is_night {
+ display: none;
+}
+.night_mode .this_is_night {
+ display: inline-block;
+}
+.disable_selection {
+ -webkit-touch-callout: none;
+ -webkit-user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+}
+#chatinput {
+ margin-top: 5px;
+ width: 240px;
+ overflow: hidden;
+}
+#page-title {
+ text-align: center;
+ font-size: 110%;
+ font-weight: bold;
+ line-height: 32px;
+ box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+}
+#page-title.fixed-page-title {
+ position: fixed;
+ top: 0px;
+ z-index: 948;
+ width: 100%;
+}
+#generalactions {
+ display: inline;
+}
+#page-title .action-button {
+ display: inline-block;
+}
+#page-title .action-button.bgabutton {
+ margin-top: 0px;
+ margin-bottom: 2px;
+ line-height: normal;
+}
+#page-title .bgabutton {
+ margin-top: 0px;
+ margin-bottom: 2px;
+ line-height: normal;
+}
+#page-title {
+ background-color: #f0f0f0;
+}
+.current_player_is_active #page-title {
+ background-color: #f8f8f8;
+}
+.gamestate_gameEnd #page-title {
+ background-color: #f8f8f8;
+}
+#reflexiontimevalues.yourturn_animation {
+ animation-duration:.8s;
+ animation-timing-function:ease-in-out;
+ animation-name:inputShake
+}
+#reflexiontimevalues.short_yourturn_animation {
+ animation-duration:.4s;
+ animation-timing-function:ease-in-out;
+ animation-name:inputShake
+}
+#ai_not_playing {
+ display: none;
+}
+#skip_player_turn {
+ display: none;
+}
+#not_playing_help {
+ display: none;
+ font-size: 50%;
+ position: relative;
+ top: 1px;
+ line-height: 10px;
+}
+.playmode_turnbased #not_playing_help {
+ display: none;
+}
+#undo_button,
+#redo_button {
+ float: right;
+ position: relative;
+ color: #ccc;
+ top: 8px;
+ display: none;
+}
+#redo_button {
+ right: 5px;
+}
+#undo_button {
+ right: 25px;
+}
+.current_player_is_active #undo_button.enabled,
+.current_player_is_active #redo_button.enabled,
+#undo_button.enabled_even_if_inactive,
+#redo_button.enabled_even_if_inactive {
+ display:block;
+ color: black;
+}
+#archivecontrol {
+ display: none;
+ text-align: center;
+ margin-left: 160px;
+ margin-right: 300px;
+}
+.mobile_version #archivecontrol {
+ margin-left: 62px;
+ margin-right: 110px;
+}
+.mobile_version #archive_next_turn {
+ display: none;
+}
+#archivecontrol img {
+ position: relative;
+ top: 2px;
+ left: 0px;
+}
+#archivecontrol a {
+ margin: 10px;
+ color: black;
+ text-decoration: underline;
+}
+#archive_go_to_move_wrap,
+#advanced_replay_features {
+ font-size: 75%;
+ margin: 5px;
+ margin-top: 0px;
+}
+#advanced_replay_features {
+ margin-top: 10px;
+}
+#archive_go_to_move_wrap input {
+ width: 50px;
+}
+#archivecontrol #archive_addcomment {
+ display: inline-block;
+}
+.mobile_version #archivecontrol #archive_addcomment {
+ display: none;
+}
+.replay_advanced {
+ display: none;
+}
+.game_tutorial_mode #logs .timestamp {
+ display: none;
+}
+.game_tutorial_mode .newArchiveCommentNo {
+ display: none;
+}
+.replaylogs_move {
+ position: relative;
+ padding-left: 30px;
+ padding-top: 8px;
+ padding-bottom: 1px;
+ padding-right: 10px;
+ margin-bottom: 2px;
+ cursor: pointer;
+}
+.replaylogs_move:hover {
+ background-color: rgba( 210,32,39, 0.1 );
+}
+.replaylogs_progression {
+ border-left: 10px #858585 solid;
+ width: 10px;
+ height: 100%;
+ display: inline;
+ position: absolute;
+ left: 0px;
+ top: 0px;
+}
+.viewed .replaylogs_progression {
+ border-left: 10px #d22027 solid;
+}
+.replaylogs_progression_bottom {
+ position: absolute;
+ width: 10px;
+ height: 0px;
+ bottom: 0px;
+ left: 0px;
+}
+#archivecursor {
+ position: absolute;
+ left: -18px;
+ top: -25px;
+ color: #d22027;
+}
+#replaylogs .archiveComment {
+ padding-left: 30px;
+}
+.replaylogs_move .archiveComment_author,
+.replaylogs_move .archiveComment_no {
+ display: none;
+}
+.gamelog_archivecomment {
+ background-color: #a8c9d1;
+ position: relative;
+}
+.replaylogs_move .archiveComment_text {
+ display: inline-block;
+ cursor: text;
+ white-space:pre-wrap;
+}
+.replaylogs_edit_inplace {
+}
+.replaylogs_edit_inplace textarea {
+ width: 400px;
+ height: 200px;
+}
+.replaylogs_move .archiveComment_anchor {
+ display: block;
+ margin-top: 5px;
+ font-size: 80%;
+ font-style: italic;
+}
+.gamelog_archivecomment .fa-trash {
+ position: absolute;
+ top: 5px;
+ right: 5px;
+ cursor: pointer;
+ display: none;
+}
+.gamelog_archivecomment .fa-trash:hover {
+ color: red;
+}
+.gamelog_archivecomment.own_comment .fa-trash {
+ display: block;
+}
+#archive_history_backtotop {
+ position: fixed;
+ bottom: 10px;
+ right: 10px;
+ display:none;
+}
+#page-content {
+ position: relative;
+ min-height: 400px;
+ margin-bottom: 5px;
+ clear: left;
+}
+#gamehelp-section {
+}
+#spectatorlist {
+ font-size: 80%;
+}
+#spectatorbox {
+ clear: both;
+}
+#globalactions {
+ height: 26px;
+ clear: both;
+}
+.globalaction {
+ display: inline-block;
+ position: relative;
+ top: 2px;
+ left: 0px;
+ width: 20px;
+ height: 20px;
+}
+#toggleSound {
+ display: inline-block;
+ position: relative;
+ top: 5px;
+}
+#toggleSound i {
+ color: #777;
+}
+#soundControls {
+ top: 48px;
+ left: -2px;
+}
+.globalaction_quit {
+ margin-right: 5px;
+}
+#globalaction_zoom_wrap {
+ display: none;
+ position: fixed;
+ bottom: 10px;
+ left: 5px;
+ width: 50px;
+ height: 50px;
+ background-color: white;
+ border-radius: 25px;
+ border: 1px solid #777;
+ -moz-box-shadow: 3px 5px 5px 0px rgb(0, 0, 0);
+ -webkit-box-shadow: 3px 5px 5px 0px rgb(0, 0, 0);
+ -o-box-shadow: 3px 5px 5px 0px rgb(0, 0, 0);
+ box-shadow: 3px 5px 5px 0px rgb(0, 0, 0);
+ filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=180, Strength=100);
+ cursor: pointer;
+ z-index: 949;
+}
+#globalaction_zoom_wrap .fa {
+ font-size:28px;
+ position: absolute;
+ top: 14px;
+ left: 12px;
+ color: black;
+}
+#globalaction_3d {
+ color: gray;
+ font-size: 18px;
+ position: relative;
+ top: 19px;
+}
+#logsdetached {
+ display: none;
+ margin-top: 60px;
+}
+#fireplayer_wrap {
+ display: none;
+}
+#fireDlgContent {
+}
+#detached_notifwindow #chatinput {
+ width: 100%;
+}
+.dice_inner_wrap {
+ position: relative;
+}
+.dice2d6 {
+ background-image: url("../img/common/2d6sprite.png");
+ width: 80px;
+ height: 47px;
+}
+.dice2d6_inner {
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ background-image: url("../img/common/2d6sprite.png");
+ width: 80px;
+ height: 47px;
+}
+.dice1d6 {
+ background-image: url("../img/common/1d6sprite.png");
+ width: 40px;
+ height: 47px;
+}
+.dice1d6_inner {
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ background-image: url("../img/common/1d6sprite.png");
+ width: 40px;
+ height: 47px;
+}
+.cube25 {
+ height: 25px;
+ width: 25px;
+ background-image: url("../img/common/cubes25.png");
+}
+.cube25_888888 {
+ background-position: 0px -0px
+}
+.cube25_0000ff {
+ background-position: -25px -0px
+}
+.cube25_ff0000 {
+ background-position: -50px -0px
+}
+.cube25_ffa500 {
+ background-position: -75px -0px
+}
+.cube25_008000 {
+ background-position: -100px -0px
+}
+.cube25_ffffff {
+ background-position: -125px -0px
+}
+.cube25_000000 {
+ background-position: -150px -0px
+}
+.cube25_a04000 {
+ background-position: -175px -0px
+}
+.cube25_600060 {
+ background-position: -200px -0px
+}
+.cube25_ff00ff {
+ background-position: -225px -0px
+}
+.cube25_ff7700 {
+ background-position: -250px -0px
+}
+.cube20 {
+ height: 20px;
+ width: 20px;
+ background-image: url("../img/common/cubes20.png");
+}
+.cube20_888888 {
+ background-position: 0px -0px
+}
+.cube20_0000ff {
+ background-position: -20px -0px
+}
+.cube20_ff0000 {
+ background-position: -40px -0px
+}
+.cube20_ffa500 {
+ background-position: -60px -0px
+}
+.cube20_008000 {
+ background-position: -80px -0px
+}
+.cube20_ffffff {
+ background-position: -100px -0px
+}
+.cube20_000000 {
+ background-position: -120px -0px
+}
+.cube20_a04000 {
+ background-position: -140px -0px
+}
+.cube20_600060 {
+ background-position: -160px -0px
+}
+.cube20_ff00ff {
+ background-position: -180px -0px
+}
+.cube20_ff7700 {
+ background-position: -200px -0px
+}
+#gamehelp-section,
+#game_preferences {
+ position: relative;
+}
+.returntogame {
+ position: absolute;
+ top: 5px;
+ right: 5px;
+}
+#actionhelpsection {
+ font-weight: normal;
+ font-style: italic;
+ font-size: 80%;
+ display: none;
+}
+#showactionhelp {
+ display: inline-block;
+ width: 20px;
+ height: 20px;
+ position: relative;
+ top: 4px;
+ background-image: url("../img/common/icons20.png");
+ background-position: 0px -100px;
+ cursor: pointer;
+}
+.tableWindow {
+ font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+ font-size: 12px;
+ min-width: 480px;
+ border-collapse: collapse;
+ text-align: center;
+}
+.tableWindow th {
+ font-size: 14px;
+ font-weight: normal;
+ color: #039;
+ padding: 10px 8px;
+ border-bottom: 2px solid #6678b1;
+}
+.tableWindow td {
+ border-bottom: 1px solid #ccc;
+ color: #669;
+ padding: 6px 8px;
+}
+.tableWindow tbody tr:hover td {
+ color: #009;
+}
+.notifparams {
+ margin-left: 20px;
+}
+#inactiveplayermessage .shopbanner_wrap {
+ position: relative;
+}
+#inactiveplayermessage .shopbanner_footer {
+ position: absolute;
+ top:0px;
+ left: 0px;
+ width: 100%;
+}
+#inactiveplayermessage .shopbanner {
+ border-bottom: none;
+ border-left: none;
+ border-right: none;
+}
+#overall-footer .site-logo {
+ position: relative;
+ width: 180px;
+ height: 70px;
+}
+#head_infomsg {
+ top: 5px;
+}
+#topbar {
+ position: relative;
+ width: 100%;
+ height: 62px;
+ z-index: 1053;
+ margin-bottom: 8px;
+ background: -prefixe-linear-gradient(top, #f8f8f8, #e7e9e8);
+ background: linear-gradient(to bottom, #f8f8f8, #e7e9e8);
+ -moz-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.3);
+ -o-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.3);
+ box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.3);
+ filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=15);
+}
+#topbar_content {
+ position: relative;
+}
+#topbar #logoiconimg {
+ position: absolute;
+ left: 5px;
+ top: 0px;
+ width: 54px;
+}
+#topbar #site-logo #logotitle {
+ position: absolute;
+ top: 0px;
+ left: 65px;
+}
+#tableinfos {
+ position: absolute;
+ left: 70px;
+ top: 4px;
+ color: #999999;
+ font-size: 12px;
+}
+.table_ref_item {
+ display: block;
+ margin-bottom: 5px;
+}
+#reflexiontimevalues,
+#previously_on {
+ color: red;
+ position: relative;
+ top: 0px;
+ margin-left: 160px;
+ margin-right: 100px;
+ padding-top: 2px;
+ text-align: center;
+ font-weight: bold;
+ font-size: 15px;
+ line-height: 17px;
+}
+#reflexiontime {
+ display: none;
+}
+#reflexiontimelabel {
+ font-size: 80%;
+}
+#previously_on {
+ position: absolute;
+ font-size: 20px;
+ display: none;
+ top: 20px;
+}
+#reflexiontime_value {
+ font-size: 25px;
+ line-height: 28px;
+}
+.no_time_limit #reflexiontime_value {
+ display: none;
+}
+#wouldlikethink {
+ font-size: 8px;
+}
+#wouldlikethink a {
+}
+.playmode_turnbased #wouldlikethink {
+ display: none;
+}
+.no_time_limit #wouldlikethink {
+ display: none;
+}
+.training_mode .player_elo_wrap,
+.arena_mode .player_elo_wrap {
+ visibility:hidden;
+}
+.arena_mode #revenge_btn {
+ display: none;
+}
+.adddetails_arena {
+ display: none;
+}
+#zombieBack {
+ text-align: center;
+}
+#neutralized_game_panel {
+ text-align: center;
+}
+#inactiveplayermessage {
+ position: relative;
+ top: 1px;
+ height: 60px;
+ text-align: center;
+ margin-left: 160px;
+ margin-right: 300px;
+}
+#inactiveplayermessage .pubbanner {
+ display: inline-block;
+}
+.mobile_version #inactiveplayermessage .pubbanner {
+ display: none;
+}
+#overall-footer-content {
+ margin-left: 40px;
+}
+#footer_footer {
+ margin-left: 40px;
+}
+#topbar.reducedheader {
+ height: 48px;
+}
+#topbar.reducedheader #logoiconimg {
+ position: relative;
+ left: 6px;
+ top: 4px;
+ height: 46px;
+ width: 46px;
+}
+#topbar.reducedheader #site-logo #logotitle {
+ position: absolute;
+ top: 1px;
+ left: 60px;
+ background-position: 0px -120px;
+}
+#topbar.reducedheader #its_your_turn {
+ display: none;
+}
+.no_time_limit #its_your_turn {
+ font-size: 22px;
+ top: 18px;
+ position: relative;
+}
+#logcontent_log {
+ width: 800px;
+ height: 500px;
+ font-size: 90%;
+}
+.log_replayable {
+ cursor: pointer;
+}
+.log_replayable:hover {
+ background-color: #faf5ef;
+}
+#tutorial_support {
+ background-color: black;
+ width: 100%;
+ height: 100%;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ opacity: 0.9;
+ filter:alpha(opacity=90);
+}
+.tuto_arrow {
+ position: absolute;
+ background-image: url("../img/layout/tuto_arrows.png");
+}
+#tuto_arrow1,
+#tuto_arrow2 {
+ width: 102px;
+ height: 69px;
+ background-position: 0px 0px;
+}
+#tuto_arrow3 {
+ width: 69px;
+ height: 102px;
+ background-position: -141px 0px;
+}
+#tuto_arrow4 {
+ width: 71px;
+ height: 108px;
+ background-position: -0px -78px;
+}
+#tuto_arrow1 {
+ top: 2px;
+ left: 35%;
+}
+#tuto_arrow2 {
+ top: 5px;
+ right: 0px;
+}
+#tuto_arrow3 {
+ top: 100px;
+ right: 0px;
+}
+#tuto_arrow4 {
+ position: fixed;
+ bottom: 0px;
+ left: 15px;
+}
+.tuto_text {
+ position: absolute;
+ color: white;
+ font-weight: bold;
+ width: 200px;
+}
+#tuto_text1 {
+ top: 80px;
+ left: 25%;
+}
+#tuto_text2 {
+ top: 30px;
+ right: 90px;
+}
+#tuto_text3 {
+ top: 180px;
+ right: 70px;
+}
+#tuto_text4 {
+ position: fixed;
+ bottom: 100px;
+ left: 45px;
+}
+#close_tutorial {
+ position: absolute;
+ top: 300px;
+ left: 45%;
+}
+#loader_mask {
+ background-color: white;
+ width: 100%;
+ height: 100%;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ z-index: 9999;
+}
+#loader_mask_background {
+ width: 3000px;
+ height: 3000px;
+ position: absolute;
+ top: -300px;
+ left: -30%;
+ opacity: 0.1;
+}
+#loader_mask_inner {
+ position: absolute;
+ width: 500px;
+ height: 400px;
+ left: 50%;
+ top: 25px;
+ margin-left: -250px;
+ text-align: center;
+ color: white;
+}
+@media only screen and (max-width: 600px) {
+ #loader_mask_inner {
+  width: 250px;
+  height: 200px;
+  top: 25px;
+  margin-left: -125px;
+ }
+}
+#loader_mask .site-logo {
+ position: absolute;
+ left: 120px;
+}
+#game_box_loader {
+ width: 500px;
+ height: 500px;
+ position: relative;
+}
+@media only screen and (max-width: 600px) {
+ #game_box_loader {
+  width: 250px;
+  height: 250px;
+  top: 33px;
+ }
+}
+#loader_mask .game_box {
+ width: 500px;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+}
+@media only screen and (max-width: 600px) {
+ #loader_mask .game_box {
+  width: 250px;
+ }
+}
+#game_box_loader_back {
+ opacity: 0.2;
+}
+#game_box_loader_front_wrap {
+ width: 1%;
+ height: 100%;
+ overflow: hidden;
+ position: absolute;
+}
+#loader_mask #progress_bar {
+ position: absolute;
+ top: 690px;
+ width: 500px;
+}
+@media only screen and (max-width: 600px) {
+ #loader_mask #progress_bar {
+  top: 400px;
+  width: 250px;
+ }
+}
+#loader_skip {
+ position: absolute;
+ top: 789px;
+ width: 500px;
+ text-align: center;
+ color: black;
+}
+@media only screen and (max-width: 600px) {
+ #loader_skip {
+  top: 500px;
+  width: 250px;
+ }
+}
+#loader_skip a {
+ color: black;
+}
+#gameUpdated {
+ margin-bottom: 5px;
+ text-align: center;
+ display: none;
+}
+#skip_last_moves {
+ color: white;
+}
+#skip_last_moves a {
+ color: white;
+}
+.loader_skip_warning {
+ font-size: 120%;
+}
+#gotonexttable_wrap {
+ display: none;
+}
+.player_table_status {
+ font-size: 75%;
+ text-align: left;
+ margin: 5px;
+ display: none;
+}
+#concede_alternate_button,
+#abandon_alternate_button {
+ display: none;
+}
+.chatwindowtype_tablelog .chatbarinput_predefined {
+ display: none;
+}
+.chatwindowtype_table .chatwindowremove,
+.chatwindowtype_tablelog .chatwindowremove {
+ display: none;
+}
+.desktop_version #chatbardock {
+ right: 238px;
+}
+.desktop_version .chatwindowtype_table .chatbarinput {
+ width: 380px;
+}
+.desktop_version .chatwindowtype_table .chatwindowexpanded {
+ width: 400px;
+}
+.desktop_version .chatwindowtype_table .chatwindowcollapsed {
+ width: 300px;
+}
+.desktop_version .chatwindowtype_table .chatwindowpreview {
+ width: 300px;
+}
+.desktop_version .chatwindowtype_table .chatwindowcollapsedtitle {
+ max-width: 300px;
+}
+.chatwindowtype_table .chatwindowremovec,
+.chatwindowtype_table .chatwindowcollapsed:hover .chatwindowremovec,
+.touch-device .chatwindowtype_table .chatwindowremovec,
+.chatwindowtype_tablelog .chatwindowremovec,
+.chatwindowtype_tablelog .chatwindowcollapsed:hover .chatwindowremovec,
+.touch-device .chatwindowtype_tablelog .chatwindowremovec {
+ display: none;
+}
+.chatwindowtype_table .chatwindowcollapse,
+.chatwindowtype_tablelog .chatwindowcollapse {
+ right: 2px;
+}
+.chatwindowtype_table .chatwindowlogstitle,
+.chatwindowtype_tablelog .chatwindowlogstitle {
+ max-width: 360px;
+}
+.chatwindowtype_table .chatwindowlogstitlebar,
+.chatwindowtype_tablelog .chatwindowlogstitlebar {
+ max-width: 400px;
+}
+.mobile_version .chatwindowtype_table .chatwindowlogstitlebar,
+.mobile_version .chatwindowtype_tablelog .chatwindowlogstitlebar {
+ max-width: none;
+}
+.desktop_version .chatwindowtype_tablelog {
+ display: none;
+}
+.counter_in_progress {
+ color: red !important;
+ font-weight: bold;
+ transition:font-weight 1000ms ease;
+}
+.scorenumber {
+ font-size: 1em;
+ font-weight: bold;
+ color: maroon;
+ position: absolute;
+ text-shadow: 1px 0 1px #fff, 0 -1px 1px #fff, 0 1px 1px #fff, -1px 0 1px #fff;
+ transition: transform 0.3s ease-in-out;
+}
+.scorenumber_anim {
+ -webkit-transform: rotate(-360deg) scale(3);
+ transform: rotate(-360deg) scale(3);
+}
+#pagesection_gameresult {
+ max-width: 750px;
+ margin: auto;
+}
+#tournament_frame {
+ width: 100%;
+ height: 100px;
+}
+#lock_screen {
+ width: 100%;
+ display: none;
+ margin-top: 20px;
+}
+.gamestate_gameSetup #lock_screen {
+ display: block;
+}
+.gamestate_gameSetup #game_play_area {
+ display: none;
+}
+.lock_screen_main {
+ font-size: 110%;
+ padding-left: 8px;
+ padding-right: 8px;
+}
+.lock_screen_main p {
+ padding-top: 20px;
+ clear: both;
+}
+.locking_time {
+ position: relative;
+ top: 2px;
+ font-size: 150%;
+}
+#lock_screen_thankyou {
+ font-size: 120%;
+ text-transform: uppercase;
+ font-weight: bold;
+ margin-left: 20px;
+}
+#lock_screen_gamelist {
+}
+#lock_screen_gamelist_wrap {
+ text-align: center;
+ float: left;
+ position: relative;
+ left: 50%;
+ margin-top: -15px;
+}
+#lock_screen_gamelist {
+ float: left;
+ position: relative;
+ left: -50%;
+}
+#expandable_offer {
+ display: none;
+}
+#game_payment_buttons {
+ margin: 10px;
+}
+#controls3d_wrap {
+ display: none;
+ background-color: #535353;
+}
+.mode_3d #controls3d_wrap {
+ display: block;
+}
+.mode_3d.mobile_version #controls3d_wrap {
+ position: absolute;
+ z-index: 1;
+ right: 0px;
+}
+.mode_3d {
+ transform-style: inherit;
+ background: linear-gradient(to bottom, #f8f8f8, #ebd5bd);
+ ;
+}
+.mode_3d #game_play_area_wrap {
+ perspective: 2000px;
+ perspective-origin: 55% 50%;
+ flex-wrap: wrap;
+ flex-direction: row;
+ align-items: flex-start;
+ transform-style: preserve-3d;
+ -webkit-transform-style: preserve-3d;
+ transform-origin: center center;
+}
+.mode_3d #game_play_area {
+}
+.mode_3d.enableTransitions #game_play_area {
+ transition: transform 0.5s ease;
+}
+.mode_3d #game_play_area_wrap div {
+ transform-style: preserve-3d;
+ -webkit-transform-style: preserve-3d;
+}
+#game_play_area_background {
+ display: none;
+}
+.mode_3d #game_play_area_background {
+ display: block;
+ position: absolute;
+ top: -50%;
+ left: -50%;
+ width: 200%;
+ min-height:1000px;
+ height: 200%;
+ background: url("../img/layout/back-main.jpg");
+ transform: translatez(-10px);
+ border-radius: 15%;
+}
+.mode_3d #page-title {
+ z-index: 1;
+}
+.mode_3d #table-decision,
+.mode_3d #zombieBack,
+.mode_3d #connect_status,
+.mode_3d #maingameview_menuheader {
+ position: relative;
+ z-index: 1;
+}
+#controls3d {
+ height: 90px;
+ width: 100%;
+ position: relative;
+}
+#controls3d_img {
+ width: 186px;
+ height: 88px;
+ background-image: url("../img/layout/3dcontrols.png");
+}
+#c3dZoomIn,
+#c3dZoomOut {
+ color: white;
+ position: absolute;
+ right: 5px;
+ cursor: pointer;
+}
+.notouch-device #c3dZoomIn:hover,
+.notouch-device #c3dZoomOut:hover {
+ transform: scale( 1.1 );
+}
+#c3dZoomIn {
+ top: 5px;
+}
+#c3dZoomOut {
+ top: 57px;
+}
+.button3d {
+ position: absolute;
+ width: 20px;
+ height: 20px;
+ cursor: pointer;
+}
+#c3dRotateL {
+ left: 0px;
+ top: 33px;
+}
+.notouch-device #c3dRotateL:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -0px -121px;
+}
+#c3dRotateR {
+ left: 69px;
+ top: 35px;
+}
+.notouch-device #c3dRotateR:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -69px -123px;
+}
+#c3dAngleUp {
+ left: 33px;
+ top: -1px;
+}
+.notouch-device #c3dAngleUp:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -33px -87px;
+}
+#c3dAngleDown {
+ left: 33px;
+ top: 69px;
+}
+.notouch-device #c3dAngleDown:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -33px -157px;
+}
+#c3dUp {
+ left: 136px;
+ top: -1px;
+}
+.notouch-device #c3dUp:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -136px -87px;
+}
+#c3dDown {
+ left: 136px;
+ top: 69px;
+}
+.notouch-device #c3dDown:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -136px -157px;
+}
+#c3dLeft {
+ left: 106px;
+ top: 33px;
+}
+.notouch-device #c3dLeft:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -106px -121px;
+}
+#c3dRight {
+ left: 167px;
+ top: 33px;
+}
+.notouch-device #c3dRight:hover {
+ background-image: url("../img/layout/3dcontrols.png");
+ background-position: -167px -121px;
+}
+#tooltip3d {
+ color: white;
+ text-align: center;
+ height: 0px;
+ overflow: hidden;
+ transition: height 300ms ease;
+ position: relative;
+ top: 10px;
+}
+.notouch-device #controls3d_wrap:hover #tooltip3d {
+ height: 30px;
+}
+.mode_3d .thickness::after {
+ content: "";
+ background: rgba(0, 0, 0, 0.72);
+ box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.72);
+ z-index: 1;
+ border: 0px;
+ position: absolute;
+ transform: translatez(-3px);
+ left: 0px;
+ top: 0px;
+ width:100%;
+ height: 100%;
+}
+.mode_3d .roundthickness::after {
+ border-radius: 50%;
+}
+.mode_3d .whitethickness::after {
+ background: white;
+ box-shadow: 0px 0px 0px 3px white;
+}
+.mode_3d .floatingabove::after {
+ content: "";
+ background: rgba(0, 0, 0, 0.72);
+ box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.72);
+ z-index: 1;
+ border: 0px;
+ position: absolute;
+ transform: translatez(-10px);
+ left: 0px;
+ top: 0px;
+ width:100%;
+ height: 100%;
+}
+.mode_3d .roundfloatingabove::after {
+ border-radius: 50%;
+}
+.hotseat_iframe {
+ position: fixed;
+ top: 0px;
+ left: 200%;
+ width: 100%;
+ height: 100%;
+ z-index: 2000;
+}
+#hotseat_mask {
+ position: fixed;
+ top: 0px;
+ left: 0px;
+ width: 100%;
+ height: 100%;
+ z-index: 2000;
+ background-color: #f6f6f6;
+ display: none;
+ cursor: pointer;
+}
+#hotseat_msg {
+ text-align: center;
+ position: absolute;
+ left:0px;
+ top:50%;
+ width: 100%;
+ margin-top: -40px;
+ font-size: 250%;
+}
+.fullscreen_iframe {
+ height: 99%;
+ overflow: hidden;
+}
+#globalaction_ping {
+ display: none;
+}
+#globalaction_annotation {
+ display: none;
+}
