@@ -1,18 +1,18 @@
 <?php
 /**
-*------
-* BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
-* dk implementation : © Roland Fredenhagen roland@van-fredenhagen.de
-*
-* This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
-* See http://en.boardgamearena.com/#!doc/Studio for more information.
-* -----
-*
-* states.inc.php
-*
-* dk game states description
-*
-*/
+ *------
+ * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
+ * dk implementation : © Roland Fredenhagen roland@van-fredenhagen.de
+ *
+ * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
+ * See http://en.boardgamearena.com/#!doc/Studio for more information.
+ * -----
+ *
+ * states.inc.php
+ *
+ * dk game states description
+ *
+ */
 
 /*
 Game state machine is a tool used to facilitate game developpement by doing common stuff that can be set up
@@ -57,7 +57,7 @@ $machinestates = array(
         'description' => '',
         'type' => 'manager',
         'action' => 'stGameSetup',
-        'transitions' => array( '' => 20 )
+        'transitions' => array('' => 20)
     ),
 
     // Note: ID = 2 => your first state
@@ -69,15 +69,30 @@ $machinestates = array(
         'type' => 'game',
         'action' => 'stNewHand',
         'updateGameProgression' => true,
-        'transitions' => array( '' => 30 )
+        'transitions' => array('' => 30)
     ),
 
     30 => array(
-        'name'=>'preGame',
+        'name' => 'preGame',
         'description' => '',
         'type' => 'game',
         'action' => 'stPreRound',
-        'transitions' => array( 'reshuffle' => 20, 'start' => 40 )
+        'transitions' => array('playerChoose' => 31, 'reshuffle' => 20)
+    ),
+    31 => array(
+        'name' => 'playerChoose',
+        'description' => clienttranslate( '${actplayer} must choose how to play'),
+        'descriptionmyturn' => clienttranslate('${you} must choose:'),
+        'type' => 'activeplayer',
+        'possibleactions' => array('gesund', 'vorbehalt'),
+        'transitions' => array('nextPlayer' => 32)
+    ),
+    32 => array(
+        'name' => 'nextChoose',
+        'description' => '',
+        'type' => 'game',
+        'action' => 'stNextChoose',
+        'transitions' => array('nextPlayer' => 31, 'startGame' => 40, 'reshuffle' => 20)
     ),
 
     // Trick
@@ -87,22 +102,23 @@ $machinestates = array(
         'description' => '',
         'type' => 'game',
         'action' => 'stNewTrick',
-        'transitions' => array( '' => 41 )
+        'transitions' => array('' => 41)
     ),
     41 => array(
         'name' => 'playerTurn',
-        'description' => clienttranslate( '${actplayer} must play a card' ),
-        'descriptionmyturn' => clienttranslate( '${you} must play a card' ),
+        'description' => clienttranslate( '${actplayer} must play a card'),
+        'descriptionmyturn' => clienttranslate('${you} must play a card'),
         'type' => 'activeplayer',
-        'possibleactions' => array( 'playCard' ),
-        'transitions' => array( 'playCard' => 42 )
+        'possibleactions' => array('playCard'),
+        'transitions' => array('playCard' => 42)
     ),
     42 => array(
         'name' => 'nextPlayer',
         'description' => '',
         'type' => 'game',
         'action' => 'stNextPlayer',
-        'transitions' => array( 'nextPlayer' => 41, 'nextTrick' => 40, 'endHand' => 50 )
+        'updateGameProgression' => true,
+        'transitions' => array('nextPlayer' => 41, 'nextTrick' => 40, 'endHand' => 50)
     ),
 
     // End of the hand ( scoring, etc... )
@@ -111,18 +127,18 @@ $machinestates = array(
         'description' => '',
         'type' => 'game',
         'action' => 'stEndHand',
-        'transitions' => array( 'nextHand' => 20, 'endGame' => 99 )
+        'updateGameProgression' => true,
+        'transitions' => array('nextHand' => 20, 'endGame' => 99)
     ),
 
     // Final state.
     // Please do not modify ( and do not overload action/args methods ).
     99 => array(
         'name' => 'gameEnd',
-        'description' => clienttranslate( 'End of game' ),
+        'description' => clienttranslate('End of game'),
         'type' => 'manager',
         'action' => 'stGameEnd',
         'args' => 'argGameEnd'
     )
 
 );
-

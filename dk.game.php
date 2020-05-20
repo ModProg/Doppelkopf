@@ -36,7 +36,9 @@ class dk extends Table
             'round' => 10,
             'trickSuit' => 11,
             'charlie' => 12,
-            'wedding' => 13
+            'wedding' => 13,
+            'res2' => 14,
+            'choosen' => 15
             //    'my_first_game_variant' => 100,
             //    'my_second_game_variant' => 101,
             //      ...
@@ -52,13 +54,6 @@ class dk extends Table
         return 'dk';
     }
 
-    /*
-    setupNewGame:
-
-    This method is called only once, when a new game is launched.
-    In this method, you must setup the game according to the game rules, so that
-    the game is ready to be played.
-     */
     protected function setupNewGame($players, $options = array())
     {
 
@@ -90,6 +85,8 @@ class dk extends Table
         self::setGameStateInitialValue('trickSuit', 1);
         self::setGameStateInitialValue('charlie', 0);
         self::setGameStateInitialValue('wedding', 0);
+        self::setGameStateInitialValue('res2', 0);
+        self::setGameStateInitialValue('choosen', 0);
 
         // Create cards
         $cards = array();
@@ -145,15 +142,6 @@ class dk extends Table
         /************ End of the game initialization *****/
     }
 
-    /*
-    // XXX getAllDatas:
-
-    Gather all informations about current game situation ( visible by the current player ).
-
-    The method is called each time the game interface is displayed to a player, ie:
-    _ when the game starts
-    _ when a player refreshes the game page ( F5 )
-     */
     protected function getAllDatas()
     {
         self::error(self::getCurrentPlayerColor());
@@ -211,6 +199,18 @@ class dk extends Table
                 FROM `player`
                 WHERE `player_re` = 1"
             );
+        // if (self::getGameStateValue('wedding'))
+        //     $result['wedding'] = self::getGameStateValue('wedding');
+
+        // if (self::getGameStateValue('res2') == $current_player_id)
+        //     $result['res2'] = true;
+
+        // $result['throw'] = self::getUniqueValueFromDB(
+        //     "SELECT `player_vorbehalt`
+        //     FROM `player`
+        //     WHERE `player_id` = '$current_player_id'"
+        // );
+
         return $result;
     }
 
@@ -403,33 +403,75 @@ class dk extends Table
             ));
         }
     }
+
+    public function gesund()
+    {
+        self::checkAction('gesund');
+        $player_id = self::getActivePlayerId();
+
+        self::DbQuery(
+            "UPDATE `player`
+            SET `player_vorbehalt` = 0
+            WHERE `player_id` = $player_id"
+        );
+
+        self::notifyAllPlayers('gesund', '${player_name} is GESUND.', array(
+            'player_name' => self::getUniqueValueFromDB(
+                "SELECT `player_name` FROM `player` WHERE `player_id` = $player_id"
+            )
+        ));
+
+        $this->gamestate->nextState(('nextPlayer'));
+
+    }
+
+    public function vorbehalt()
+    {
+        self::checkAction('vorbehalt');
+        $player_id = self::getActivePlayerId();
+
+        self::DbQuery(
+            "UPDATE `player`
+            SET `player_vorbehalt` = 1
+            WHERE `player_id` = $player_id"
+        );
+
+        self::notifyAllPlayers('vorbehalt', '${player_name} has VORBEHALT.', array(
+            'player_name' => self::getUniqueValueFromDB(
+                "SELECT `player_name` FROM `player` WHERE `player_id` = $player_id"
+            )
+        ));
+
+        $this->gamestate->nextState(('nextPlayer'));
+    }
+
     //////////////////////////////////////////////////////////////////////////////
     //////////// Game state arguments
     ////////////
 
     /*
-    Here, you can create methods defined as 'game state arguments' ( see 'args' property in states.inc.php ).
-    These methods function is to return some additional information that is specific to the current
-    game state.
-     */
+        Here, you can create methods defined as 'game state arguments' ( see 'args' property in states.inc.php ).
+        These methods function is to return some additional information that is specific to the current
+        game state.
+    */
 
     /*
 
-    Example for game state 'MyGameState':
+        Example for game state 'MyGameState':
 
-    function argMyGameState()
-    {
-    // Get some values from the current game situation in database...
+        function argMyGameState()
+        {
+        // Get some values from the current game situation in database...
 
-    // return values:
-    return array(
-    'variable1' => $value1,
-    'variable2' => $value2,
-    ...
-    );
-    }
+        // return values:
+        return array(
+        'variable1' => $value1,
+        'variable2' => $value2,
+        ...
+        );
+        }
 
-     */
+    */
 
     //////////////////////////////////////////////////////////////////////////////
     //////////// Game state actions
@@ -476,6 +518,9 @@ class dk extends Table
         $ACE = ACE;
 
         $round = self::getGameStateValue('round') % self::getPlayersNumber() + 1;
+
+        self::error("Round: $round");
+
         $this->gamestate->changeActivePlayer(self::getUniqueValueFromDB(
             "SELECT
                     `player_id`
@@ -641,9 +686,9 @@ class dk extends Table
         );
 
         // XXX Schmeißen
-        if ($neunen || $zehnen || $neunenFarb || $neunenKönige || $goodTrump || $trump) {
-            return $this->gamestate->nextState('reshuffle');
-        }
+        // if ($neunen || $zehnen || $neunenFarb || $neunenKönige || $goodTrump || $trump) {
+        //     return $this->gamestate->nextState('reshuffle');
+        // }
 
         // XXX Set RE
         self::DBQuery(
@@ -657,28 +702,61 @@ class dk extends Table
                     p.`player_re` = '1';"
         );
 
-        if ($wedding) {
-            self::error("WEDDING");
-            $player = self::getObjectFromDB(
-                "SELECT
-                `player`.`player_id`,
-                `player`.`player_name`
-              FROM
+        // if ($wedding) {
+        //     self::error("WEDDING");
+        //     $player = self::getObjectFromDB(
+        //         "SELECT
+        //         `player`.`player_id`,
+        //         `player`.`player_name`
+        //       FROM
+        //         `player`
+        //       WHERE
+        //         `player`.`player_re`"
+        //     );
+        //     self::setGameStateValue('wedding', 1);
+        //     self::notifyAllPlayers('wedding', clienttranslate('Wedding by ${player_name}.'), array(
+        //         'player_id' => $player['player_id'],
+        //         'player_name' => $player['player_name'],
+        //     ));
+        // } else
+        //     self::setGameStateValue('wedding', 0);
+        $res = self::getObjectListFromDB(
+            "SELECT
+                `player_id`
+            FROM
                 `player`
-              WHERE
-                `player`.`player_re`"
-            );
-            self::setGameStateValue('wedding', 1);
-            self::notifyAllPlayers('wedding', clienttranslate('Wedding by ${player_name}.'), array(
-                'player_id' => $player['player_id'],
-                'player_name' => $player['player_name'],
-            ));
-        } else
-            self::setGameStateValue('wedding', 0);
+            WHERE
+                `player`.`player_id` = 1;",
+            true
+        );
+        if (count($res) == 1) {
+            self::notifyPlayer($res[0], 'res2', "", array());
+            self::setGameStateValue("res2", $res[0]);
+        } 
+        //  else{
+        //     self::setGameStateValue("res2", 0);
+        //     $this->gamestate->nextState('reshuffle');
+        // }
+        //TODO move in playerChoose
+        self::setGameStateValue("choosen", 0);
+        $this->gamestate->nextState('playerChoose');
+    }
 
+    public function stNextChoose()
+    {
+        self::incGameStateValue('choosen', 1);
 
-        self::incGameStateValue('round', 1);
-        $this->gamestate->nextState('start');
+        if (self::getGameStateValue('choosen') == 4) {
+            // End of the trick
+            $this->gamestate->nextState('startGame');
+            self::incGameStateValue('round', 1);
+        } else {
+            // Standard case ( not the end of the trick )
+            // => just active the next player
+            $player_id = self::activeNextPlayer();
+            self::giveExtraTime($player_id);
+            $this->gamestate->nextState('nextPlayer');
+        }
     }
 
     public function stNewTrick()
