@@ -31,7 +31,7 @@ class Table {
      * @param $arr
      * @param $arr
      */
-    public function reattributeColorsBasedOnPreferences($arr, $arr)
+    public function reattributeColorsBasedOnPreferences($arr1, $arr2)
     {
     }
 
@@ -594,60 +594,60 @@ class GameState {
     }
 }
 
-// /**
-//  * Class APP_GameAction
-//  * @property array viewArgs
-//  * @property Table game
-//  * @property string view
-//  */
-// class APP_GameAction
-// {
+/**
+ * Class APP_GameAction
+ * @property array viewArgs
+ * @property Table game
+ * @property string view
+ */
+class APP_GameAction
+{
 
-//     /**
-//      * @param string $arg
-//      * @return bool
-//      */
-//     function isArg($arg)
-//     {
-//         return true;
-//     }
+    /**
+     * @param string $arg
+     * @return bool
+     */
+    function isArg($arg)
+    {
+        return true;
+    }
 
-//     /**
-//      * @param string $message
-//      */
-//     function trace($message)
-//     {
+    /**
+     * @param string $message
+     */
+    function trace($message)
+    {
 
-//     }
+    }
 
-//     /**
-//      * @param string $arg
-//      * @param string $type
-//      * @param bool $required
-//      * @return mixed
-//      */
-//     function getArg($arg, $type, $required)
-//     {
-//         return '';
-//     }
+    /**
+     * @param string $arg
+     * @param string $type
+     * @param bool $required
+     * @return mixed
+     */
+    function getArg($arg, $type, $required)
+    {
+        return '';
+    }
 
-//     /**
-//      *
-//      */
-//     function setAjaxMode()
-//     {
+    /**
+     *
+     */
+    function setAjaxMode()
+    {
 
-//     }
+    }
 
-//     /**
-//      *
-//      */
-//     function ajaxResponse()
-//     {
+    /**
+     *
+     */
+    function ajaxResponse()
+    {
 
-//     }
+    }
 
-// }
+}
 
 /**
  * Class Deck

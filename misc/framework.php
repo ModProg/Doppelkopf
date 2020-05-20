@@ -15,6 +15,7 @@ function bga_rand(int $min, int $max)
 {
 }
 
+
 class Table
 {
 
@@ -505,6 +506,26 @@ class Table
     static function dump(string $message, $object)
     {
     }
+
+    // Protected:
+
+    /** 
+     * Gather all informations about current game situation ( visible by the current player ).
+     * 
+     * The method is called each time the game interface is displayed to a player, ie:
+     * - when the game starts
+     * - when a player refreshes the game page ( F5 )
+     * @return array Assosiative array storing the information
+     */
+    protected function getAllDatas(){}
+
+    /**
+     * This method is called only once, when a new game is launched.
+     * In this method, you must setup the game according to the game rules, so that
+     * the game is ready to be played.
+     */
+    protected function setupNewGame(array $players, $options = array())
+    {}
 }
 
 class Gamestate
@@ -636,7 +657,9 @@ class feException
 }
 
 // .action.php
-
+/**
+ * @property dk game
+ */
 class APP_GameAction
 {
     static function isArg()
@@ -654,6 +677,7 @@ class APP_GameAction
     static function ajaxResponse()
     {
     }
+
 }
 
 // .view.php

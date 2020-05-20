@@ -47,5 +47,18 @@ class action_dk extends APP_GameAction
         self::ajaxResponse();
     }
 
+
+    public function gesund() {
+        self::setAjaxMode();
+        $this->game->gesund();
+        self::ajaxResponse();
+    }
+
+    public function vorbehalt(){
+        self::setAjaxMode();
+        $this->game->vorbehalt();
+        self::ajaxResponse();
+    }
+
 }
 
