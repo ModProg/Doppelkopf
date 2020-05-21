@@ -31,6 +31,7 @@ class dk extends Table
         // Note: afterwards, you can get/set the global variables with getGameStateValue/setGameStateInitialValue/setGameStateValue
 
         parent::__construct();
+        // XXX global vars
 
         self::initGameStateLabels(array(
             'round' => 10,
@@ -38,7 +39,8 @@ class dk extends Table
             'charlie' => 12,
             'wedding' => 13,
             'res2' => 14,
-            'choosen' => 15
+            'choosen' => 15,
+            'solo' => 16
             //    'my_first_game_variant' => 100,
             //    'my_second_game_variant' => 101,
             //      ...
@@ -87,6 +89,7 @@ class dk extends Table
         self::setGameStateInitialValue('wedding', 0);
         self::setGameStateInitialValue('res2', 0);
         self::setGameStateInitialValue('choosen', 0);
+        self::setGameStateInitialValue('solo', 0);
 
         // Create cards
         $cards = array();
@@ -193,37 +196,27 @@ class dk extends Table
         // Cards played on the table
         $result['table'] = $this->cards->getCardsInLocation('table');
 
-        if (self::getGameStateValue('wedding'))
-            $result['wedding'] = self::getUniqueValueFromDB(
-                "SELECT `player_id`
-                FROM `player`
-                WHERE `player_re` = 1"
-            );
         // if (self::getGameStateValue('wedding'))
-        //     $result['wedding'] = self::getGameStateValue('wedding');
+        //     $result['wedding'] = self::getUniqueValueFromDB(
+        //         "SELECT `player_id`
+        //         FROM `player`
+        //         WHERE `player_re` = 1"
+        //     );
+        if (self::getGameStateValue('wedding'))
+            $result['wedding'] = self::getGameStateValue('wedding');
 
-        // if (self::getGameStateValue('res2') == $current_player_id)
-        //     $result['res2'] = true;
+        if (self::getGameStateValue('res2') == $current_player_id)
+            $result['res2'] = true;
 
-        // $result['throw'] = self::getUniqueValueFromDB(
-        //     "SELECT `player_vorbehalt`
-        //     FROM `player`
-        //     WHERE `player_id` = '$current_player_id'"
-        // );
+        $result['throw'] = self::getUniqueValueFromDB(
+            "SELECT `player_vorbehalt`
+            FROM `player`
+            WHERE `player_id` = '$current_player_id'"
+        );
 
         return $result;
     }
 
-    /*
-    getGameProgression:
-
-    Compute and return the current game progression.
-    The number returned must be an integer beween 0 ( = the game just started ) and
-    100 ( = the game is finished or almost finished ).
-
-    This method is called each time we are in a game state with the 'updateGameProgression' property set to true
-    ( see states.inc.php )
-     */
 
     public function getGameProgression()
     {
@@ -248,11 +241,6 @@ class dk extends Table
     //////////////////////////////////////////////////////////////////////////////
     //////////// XXX Utility functions
     ////////////
-
-    /*
-    In this space, you can put any utility methods useful for your game logic
-     */
-
 
     public function loadPlayersBasicInfos()
     {
@@ -302,11 +290,9 @@ class dk extends Table
         //return array_search( array( $card['type'], $card['type_arg'] ), $this->trumps );
     }
 
-    public function h10($card, $best_card)
+    public function h10($best_card, $card)
     {
-        $HEART = HEART;
-        $TEN = TEN;
-        return $card['type'] == $HEART && $card['type_arg'] == $TEN && $best_card['type'] == $HEART && $best_card['type_arg'] == $TEN;
+        return $card['type'] == HEART && $card['type_arg'] == TEN && $best_card['type'] == HEART && $best_card['type_arg'] == TEN;
     }
 
     public function addTrump($suit, $value)
@@ -354,6 +340,76 @@ class dk extends Table
     public function fox($card)
     {
         return $card['type'] == DIAMOND && $card['type_arg'] == ACE;
+    }
+
+    public function getTrumpN($card)
+    {
+        switch ($card["type"]) {
+            case DIAMOND:
+                switch ($card["type_arg"]) {
+                    case NINE:
+                        return 1;
+                    case KING:
+                        return 2;
+                    case TEN:
+                        return 3;
+                    case ACE:
+                        return 4;
+                    case JACK:
+                        return 5;
+                    case QUEEN:
+                        9;
+                }
+            case HEART:
+                switch ($card["type_arg"]) {
+                    case JACK:
+                        return 6;
+                    case QUEEN:
+                        return 10;
+                    case TEN:
+                        return 13;
+                    default:
+                        return 0;
+                }
+            case SPADE:
+                switch ($card["type_arg"]) {
+                    case JACK:
+                        return 7;
+                    case QUEEN:
+                        return 11;
+                    default:
+                        return 0;
+                }
+            case CLUB:
+                switch ($card["type_arg"]) {
+                    case JACK:
+                        return 8;
+                    case QUEEN:
+                        return 12;
+                    default:
+                        return 0;
+                }
+            default:
+                # code...
+                break;
+        }
+    }
+
+    public function beatsNormal($firstCard, $secondCard)
+    {
+        return $firstCard["type"] == $secondCard["type"] && $secondCard["type_arg"] > $firstCard["type_arg"];
+    }
+
+    public function beats($firstCard, $secondCard)
+    {
+        switch (self::getGameStateValue("solo")) {
+            default:
+                if (self::getTrumpN($secondCard) > self::getTrumpN($firstCard))
+                    return true;
+                if (self::beatsNormal($firstCard, $secondCard))
+                    return true;
+                break;
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -416,13 +472,11 @@ class dk extends Table
         );
 
         self::notifyAllPlayers('gesund', '${player_name} is GESUND.', array(
-            'player_name' => self::getUniqueValueFromDB(
-                "SELECT `player_name` FROM `player` WHERE `player_id` = $player_id"
-            )
+            'player_name' => self::getActivePlayerName(),
+            'player_id' => $player_id
         ));
 
         $this->gamestate->nextState(('nextPlayer'));
-
     }
 
     public function vorbehalt()
@@ -437,9 +491,8 @@ class dk extends Table
         );
 
         self::notifyAllPlayers('vorbehalt', '${player_name} has VORBEHALT.', array(
-            'player_name' => self::getUniqueValueFromDB(
-                "SELECT `player_name` FROM `player` WHERE `player_id` = $player_id"
-            )
+            'player_name' => self::getActivePlayerName(),
+            'player_id' => $player_id
         ));
 
         $this->gamestate->nextState(('nextPlayer'));
@@ -484,11 +537,14 @@ class dk extends Table
 
     public function stNewHand()
     {
+        // XXX reset Vars:
+        self::setGameStateValue("solo", 0);
+        self::setGameStateValue('charlie', 0);
+
         // Take back all cards ( from any location => null ) to deck
         $this->cards->moveAllCardsInLocation(null, 'deck');
         $this->cards->shuffle('deck');
         $players = self::loadPlayersBasicInfos();
-        self::setGameStateValue('charlie', 0 );
         foreach ($players as $player_id => $player) {
             $this->cards->pickCards(12, 'deck', $player_id);
             $cards = $result['hand'] = self::getObjectListFromDB(
@@ -518,8 +574,6 @@ class dk extends Table
         $ACE = ACE;
 
         $round = self::getGameStateValue('round') % self::getPlayersNumber() + 1;
-
-        self::error("Round: $round");
 
         $this->gamestate->changeActivePlayer(self::getUniqueValueFromDB(
             "SELECT
@@ -732,7 +786,7 @@ class dk extends Table
         if (count($res) == 1) {
             self::notifyPlayer($res[0], 'res2', "", array());
             self::setGameStateValue("res2", $res[0]);
-        } 
+        }
         //  else{
         //     self::setGameStateValue("res2", 0);
         //     $this->gamestate->nextState('reshuffle');
@@ -786,41 +840,21 @@ class dk extends Table
             // This is the end of the trick
             $cards_on_table = $this->cards->getCardsInLocation('table', null, 'card_last_changed');
             $best_card = null;
-            $best_trump = 0;
             $foxes = array();
             foreach ($cards_on_table as $card) {
                 if (self::fox($card)) {
                     array_push($foxes, $card);
                 }
-
-                self::error('card om table');
-                // Note: type = card suit
-                $trump = self::getTrump($card);
-                self::dump('Card:', $card);
                 if ($best_card == null) {
                     $best_card = $card;
-                    $best_trump = $trump;
                 } else {
-                    self::error($best_trump);
-                    if ($best_trump == 0) {
-                        if ($trump == 0) {
-                            if ($best_card['type'] == $card['type'] && $card['type_arg'] > $best_card['type_arg']) {
-                                $best_card = $card;
-                            }
-                        } else {
-                            $best_card = $card;
-                            $best_trump = $trump;
-                        }
-                    } else {
-                        if ($trump > $best_trump || self::h10($best_card, $card)) {
-                            $best_card = $card;
-                            $best_trump = $trump;
-                        }
-                    }
+                    if (self::beats($best_card, $card))
+                        $best_card = $card;
                 }
             }
             $players = self::loadPlayersBasicInfos();
-            // Active this player => he's the one who starts the next trick
+
+            // Activate this player => he's the one who starts the next trick
             $this->gamestate->changeActivePlayer($best_card['location_arg']);
 
             // Notify
@@ -832,6 +866,7 @@ class dk extends Table
                 'player_name' => $players[$best_card['location_arg']]['player_name'],
             ));
 
+            // XXX Doppelkopf und Fox
             foreach ($foxes as $fox) {
                 if ($fox['location_arg'] != $best_card['location_arg']) {
                     $card_id = $fox['id'];
@@ -852,7 +887,7 @@ class dk extends Table
                     );
                 }
             }
-            //TODO switching FOX
+
             if (4 == self::getUniqueValueFromDB(
                 "SELECT
                         COUNT(`card_id`)
@@ -1271,7 +1306,7 @@ class dk extends Table
             "DELETE FROM `doppelkopf`;" // NOI18N
         );
 
-        if (self::getGameStateValue('round') > 4) {
+        if (self::getGameStateValue('round') > 24) {
             $this->gamestate->nextState('endGame');
         } else {
             $this->gamestate->nextState('nextHand');

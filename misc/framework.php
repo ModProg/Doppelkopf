@@ -526,6 +526,18 @@ class Table
      */
     protected function setupNewGame(array $players, $options = array())
     {}
+
+
+    /**
+     * Compute and return the current game progression.
+     * The number returned must be an integer beween 0 ( = the game just started ) and
+     * 100 ( = the game is finished or almost finished ).
+     * 
+     * This method is called each time we are in a game state with the 'updateGameProgression' property set to true
+     * ( see states.inc.php )
+     * @return int
+     */
+    public function getGameProgression(){}
 }
 
 class Gamestate

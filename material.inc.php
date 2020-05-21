@@ -46,6 +46,14 @@ if (!defined("ACE")) {
     define("KING", 12);
     define("TEN", 13);
     define("ACE", 14);
+
+    define("SOLODIAMOND", 1);
+    define("SOLOHEART", 2);
+    define("SOLOSPADE", 3);
+    define("SOLOCLUB", 4);
+    define("SOLOQUEEN", 5);
+    define("SOLOJACK", 6);
+    define("SOLOACE", 7);
 }
 
 $this->suits = array(

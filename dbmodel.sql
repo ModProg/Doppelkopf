@@ -38,6 +38,11 @@ ALTER TABLE
 ADD 
     `player_throw` BOOLEAN NOT NULL DEFAULT '0';
 
+ALTER TABLE
+    `player`
+ADD 
+    `player_solo` BOOLEAN NOT NULL DEFAULT '0';
+
 CREATE TABLE IF NOT EXISTS `fox`(
     `fox_card` INT(10) UNSIGNED NOT NULL PRIMARY KEY,
     `fox_catcher` INT(10) UNSIGNED NOT NULL,

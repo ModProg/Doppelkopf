@@ -218,7 +218,7 @@ define([
             this.addActionButton(
               "button_vorbehalt",
               dojo.string.substitute(_("Vorbehalt: ${r}"),
-              {r: lable.join(_("/"))}),
+                { r: lable.join(_("/")) }),
               "onVorbehalt"
             );
             break;
@@ -321,19 +321,19 @@ define([
           var card_id = items[0].id;
           this.ajaxcall(
             "/" +
-              this.game_name +
-              "/" +
-              this.game_name +
-              "/" +
-              action +
-              ".html",
+            this.game_name +
+            "/" +
+            this.game_name +
+            "/" +
+            action +
+            ".html",
             {
               id: card_id,
               lock: true,
             },
             this,
-            function (result) {},
-            function (is_error) {}
+            function (result) { },
+            function (is_error) { }
           );
 
           this.playerHand.unselectAll();
@@ -351,8 +351,8 @@ define([
             lock: true,
           },
           this,
-          function (result) {},
-          function (is_error) {}
+          function (result) { },
+          function (is_error) { }
         );
 
         this.playerHand.unselectAll();
@@ -367,8 +367,8 @@ define([
             lock: true,
           },
           this,
-          function (result) {},
-          function (is_error) {}
+          function (result) { },
+          function (is_error) { }
         );
 
         this.playerHand.unselectAll();
@@ -415,17 +415,27 @@ define([
         this,
         "notif_giveAllCardsToPlayer"
       );
-      dojo.subscribe("wrongCard", this, "notif_wrongCard");
       dojo.subscribe("giveSpecToPlayer", this, "notif_giveSpecToPlayer");
       dojo.subscribe("sumCards", this, "notif_sumCards");
       this.notifqueue.setSynchronous("sumCards", 500);
       dojo.subscribe("winner", this, "notif_winner");
       dojo.subscribe("wedding", this, "notif_wedding");
+      dojo.subscribe("gesund", this, "notif_gesund");
+      dojo.subscribe("vorbehalt", this, "notif_vorbehalt");
       dojo.subscribe("weddingComplete", this, "notif_weddingComplete");
+    },
+
+    notif_gesund: function (notif) {
+      this.showBubble('playertablecard_' + notif.args.player_id, _("Gesund"))
+    },
+
+    notif_vorbehalt: function (notif) {
+      this.showBubble('playertablecard_' + notif.args.player_id, _("Vorbehalt"))
     },
 
     notif_wedding: function (notif) {
       this.showMessage(_("Wedding!"), "info");
+      this.showBubble('playertablecard_' + notif.args.player_id, _("Wedding!"))
 
       dojo.place(
         this.format_block("jstpl_weddingrings", {
@@ -442,6 +452,7 @@ define([
     notif_sumCards: function (notif) {
       // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
     },
+
     notif_winner: function (notif) {
       for (var player_id in this.gamedatas.players) {
         console.log("Score:");
@@ -453,7 +464,7 @@ define([
     },
 
     notif_newHand: function (notif) {
-      // We received a new full hand of 13 cards.
+      // We received a new full hand of 12 cards.
       this.playerHand.removeAll();
 
       for (var i in notif.args.cards) {
@@ -479,7 +490,6 @@ define([
     notif_trickWin: function (notif) {
       // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
     },
-    notif_wrongCard: function (notif) {},
 
     notif_giveSpecToPlayer: function (notif) {
       this.playCardBelowTable(
