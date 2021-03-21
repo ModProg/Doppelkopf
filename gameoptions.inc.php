@@ -26,6 +26,22 @@
 
 $game_options = array(
 
+    100 => array(
+        'name' => totranslate('Auto Throw'),
+        'values' => array(
+            0 => array(
+                'name' => totranslate('Disable auto throwing')
+            ),
+            1 => array(
+                'name' => totranslate('Reshuffle automatically when a player could throw')
+            ),
+            3 => array(
+                'name' => totranslate('Reshuffle on wedding as well')
+            )
+        )
+    )
+
+
     /*
     
     // note: game variant ID should start at 100 (ie: 100, 101, 102, ...). The maximum is 199.

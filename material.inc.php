@@ -2,7 +2,7 @@
 
 /**
  *------
- * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel dasasdasdasolin <ecolin@boardgamearena.com>
+ * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
  * dk implementation : © Roland Fredenhagen roland@van-fredenhagen.de
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
@@ -35,17 +35,18 @@ $this->card_types = array(
 
 if (!defined("ACE")) {
 
-    define("DIAMOND", 1);
-    define("HEART", 2);
-    define("SPADE", 3);
-    define("CLUB", 4);
-    define("TRUMP", 5);
-    define("NINE", 9);
-    define("JACK", 10);
-    define("QUEEN", 11);
-    define("KING", 12);
-    define("TEN", 13);
-    define("ACE", 14);
+    define("DIAMOND", 0);
+    define("HEART", 1);
+    define("SPADE", 2);
+    define("CLUB", 3);
+    define("TRUMP", 4);
+  
+    define("NINE", 0);
+    define("JACK", 1);
+    define("QUEEN", 2);
+    define("KING", 3);
+    define("TEN", 4);
+    define("ACE", 5);
 
     define("SOLODIAMOND", 1);
     define("SOLOHEART", 2);

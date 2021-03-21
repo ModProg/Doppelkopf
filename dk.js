@@ -14,6 +14,33 @@
  * In this file, you are describing the logic of your user interface, in Javascript language.
  *
  */
+// Suits
+const DIAMOND = 0;
+const HEART = 1;
+const SPADE = 2;
+const CLUB = 3;
+const TRUMP = 4;
+
+// Values
+const NINE = 0;
+const JACK = 1;
+const QUEEN = 2;
+const KING = 3;
+const TEN = 4;
+const ACE = 5;
+
+// Modes
+const NORMAL = 0;
+const SOLODIAMOND = 1;
+const SOLOHEART = 2;
+const SOLOSPADE = 3;
+const SOLOCLUB = 4;
+const SOLOQUEEN = 5;
+const SOLOJACK = 6;
+const SOLOACE = 7;
+
+const CARDWIDTH = 72;
+const CARDHEIGTH = 105;
 
 define([
   "dojo",
@@ -30,33 +57,15 @@ define([
 
       //while (dojo.query(".expressswitch").length > 0)
       //    dojo.destroy(dojo.query(".expressswitch")[0]);
-
-      this.cardwidth = 72;
-      this.cardheight = 105;
     },
-
-    /*
-                setup:
-                
-                This method must set up the game user interface according to current game situation specified
-                in parameters.
-                
-                The method is called each time the game interface is displayed to a player, ie:
-                _ when the game starts
-                _ when a player refreshes the game page (F5)
-                
-                "gamedatas" argument contains all datas retrieved by your "getAllDatas" PHP method.
-            */
-
     setup: function (gamedatas) {
+      this.gamedatas = gamedatas
       //dojo.destroy('debug_output');
       console.log("Starting game setup");
       console.log("DK:", this);
       // Setting up player boards
-      console.log(gamedatas);
+      console.log("Gamedatas:", gamedatas);
       for (var player_id in gamedatas.players) {
-        var player = gamedatas.players[player_id];
-
         if (gamedatas.wedding && player_id == gamedatas.wedding) {
           this.showMessage(_("Wedding!"), "info");
           dojo.place(
@@ -73,45 +82,10 @@ define([
           }),
           "player_board_" + player_id
         );
-
-        // TODO: Setting up players boards if needed
       }
 
-      // TODO: Set up your game interface here, according to "gamedatas"
+      this.setupHandCards();
 
-      // Player hand
-      this.playerHand = new ebg.stock(); // new stock object for hand
-      this.playerHand.create(
-        this,
-        $("myhand"),
-        this.cardwidth,
-        this.cardheight
-      );
-      this.playerHand.image_items_per_row = 6;
-      dojo.connect(
-        this.playerHand,
-        "onChangeSelection",
-        this,
-        "onPlayerHandSelectionChanged"
-      );
-      for (let card of this.gamedatas.cardSorting) {
-        let type = this.getCardUniqueId(card.suit, card.value);
-        this.playerHand.addItemType(
-          type,
-          type + card.trump * 30,
-          g_gamethemeurl + "img/cards.png",
-          type
-        );
-      }
-      console.log("Placing Cards in Hand");
-
-      // Cards in player's hand
-      for (let card of this.gamedatas.hand) {
-        this.playerHand.addToStockWithId(
-          this.getCardUniqueId(card.suit, card.value),
-          card.id
-        );
-      }
       console.log("Placing Cards on Table");
 
       // Cards played on table
@@ -119,8 +93,9 @@ define([
         var card = this.gamedatas.table[i];
         var suit = card.type;
         var value = card.type_arg;
-        var player_id = card.location_arg;
+        player_id = card.location_arg;
         this.playCardOnTable(player_id, suit, value, card.id);
+        console.log(suit, value);
       }
 
       console.log("Placing Foxes");
@@ -204,10 +179,12 @@ define([
 
       if (this.isCurrentPlayerActive()) {
         switch (stateName) {
-          case "playerChoose":
+          case "playerReservation":
             this.addActionButton(
               "button_gesund",
-              this.gamedatas.res2 ? _("Gesund (Silent Solo)") : _("Gesund (Normal Game)"),
+              this.gamedatas.res2
+                ? _("Gesund (Silent Solo)")
+                : _("Gesund (Normal Game)"),
               "onGesund"
             );
             var lable = [];
@@ -216,11 +193,28 @@ define([
             lable.push(_("Solo"));
 
             this.addActionButton(
-              "button_vorbehalt",
-              dojo.string.substitute(_("Vorbehalt: ${r}"),
-                { r: lable.join(_("/")) }),
-              "onVorbehalt"
+              "button_reservation",
+              dojo.string.substitute(_("Reservation: ${r}"), {
+                r: lable.join(_("/")),
+              }),
+              "onReservation"
             );
+            break;
+          case "playerMandatory":
+            if (this.gamedatas.throw || this.gamedatas.res2) {
+              this.addActionButton("button_yes", _("Yes"), "onSolo");
+              lable = [];
+              if (this.gamedatas.throw) lable.push(_("Throwing"));
+              if (this.gamedatas.res2) lable.push(_("Wedding"));
+
+              this.addActionButton(
+                "button_no",
+                dojo.string.substitute(_("No: ${r}"), {
+                  r: lable.join(_("/")),
+                }),
+                "onNo"
+              );
+            } else this.onSolo();
             break;
           /*               
             Example:
@@ -247,17 +241,56 @@ define([
                 script.
             
             */
+
+    setupHandCards: function () {
+      // Player hand
+      this.playerHand = new ebg.stock(); // new stock object for hand
+      this.playerHand.create(
+        this,
+        $("myhand"),
+        CARDWIDTH,
+        CARDHEIGTH
+      );
+      this.playerHand.image_items_per_row = 6;
+      dojo.connect(
+        this.playerHand,
+        "onChangeSelection",
+        this,
+        "onPlayerHandSelectionChanged"
+      );
+      for (let card of this.gamedatas.cardSorting) {
+        let type = this.getCardUniqueId(card.suit, card.value);
+        console.log("type", type)
+        console.log("order",this.gamedatas.cardSorting)
+        this.playerHand.addItemType(
+          type,
+          type + card.trump * 30,
+          g_gamethemeurl + "img/cards.png",
+          type
+        );
+      }
+      console.log("Placing Cards in Hand");
+
+      // Cards in player's hand
+      for (let card of this.gamedatas.hand) {
+        this.playerHand.addToStockWithId(
+          this.getCardUniqueId(card.suit, card.value),
+          card.id
+        );
+      }
+    },
+
     // Get card unique identifier based on its suit and value
     getCardUniqueId: function (suit, value) {
-      return (suit - 1) * 6 + (value - 9);
+      return (suit) * 6 + (value);
     },
 
     playCardOnTable: function (player_id, suit, value, card_id) {
       // player_id => direction
       dojo.place(
         this.format_block("jstpl_cardontable", {
-          x: this.cardwidth * (value - 9),
-          y: this.cardheight * (suit - 1),
+          x: this.cardwidth * (value),
+          y: this.cardheight * (suit),
           player_id: player_id,
         }),
         "playertablecard_" + player_id
@@ -293,8 +326,8 @@ define([
       // player_id => direction
       dojo.place(
         this.format_block("jstpl_cardbelowtable", {
-          x: this.cardwidth * (value - 9),
-          y: this.cardheight * (suit - 1),
+          x: this.cardwidth * (value),
+          y: this.cardheight * (suit),
           card_id: card_id,
         }),
         "cardsbelowtable_" + player_id
@@ -310,69 +343,54 @@ define([
      * Most of the time, these methods: _ check the action is possible at this game state. _ make a call to the game server
      *
      */
-
+    action: function (action, options = {}) {
+      if (this.checkAction(action)) {
+        this.ajaxcall(
+          "/" + this.game_name + "/" + this.game_name + "/" + action + ".html",
+          {
+            lock: true,
+            ...options,
+          },
+          this,
+          function (result) {},
+          function (is_error) {}
+        );
+      }
+    },
     onPlayerHandSelectionChanged: function () {
       var items = this.playerHand.getSelectedItems();
 
       if (items.length > 0) {
-        var action = "playCard";
-        if (this.checkAction(action, true)) {
-          // Can play a card
-          var card_id = items[0].id;
-          this.ajaxcall(
-            "/" +
-            this.game_name +
-            "/" +
-            this.game_name +
-            "/" +
-            action +
-            ".html",
-            {
-              id: card_id,
-              lock: true,
-            },
-            this,
-            function (result) { },
-            function (is_error) { }
-          );
-
-          this.playerHand.unselectAll();
-        } else {
-          this.playerHand.unselectAll();
-        }
+        this.action("playCard", { id: items[0].id });
+        this.playerHand.unselectAll();
       }
     },
     onGesund: function () {
-      var action = "gesund";
-      if (this.checkAction(action, true)) {
-        this.ajaxcall(
-          "/" + this.game_name + "/" + this.game_name + "/" + action + ".html",
-          {
-            lock: true,
-          },
-          this,
-          function (result) { },
-          function (is_error) { }
-        );
-
-        this.playerHand.unselectAll();
-      }
+      this.action("gesund");
     },
-    onVorbehalt: function () {
-      var action = "vorbehalt";
-      if (this.checkAction(action, true)) {
-        this.ajaxcall(
-          "/" + this.game_name + "/" + this.game_name + "/" + action + ".html",
-          {
-            lock: true,
-          },
-          this,
-          function (result) { },
-          function (is_error) { }
-        );
+    onReservation: function () {
+      this.action("reservation");
+    },
+    onSolo: function () {
+      var keys = [];
+      keys[SOLODIAMOND] = _("Diamand Solo");
+      keys[SOLOHEART] = _("Heart Solo");
+      keys[SOLOSPADE] = _("Spade Solo");
+      keys[SOLOCLUB] = _("Club Solo");
+      keys[SOLOQUEEN] = _("Queen Solo");
+      keys[SOLOJACK] = _("Jack Solo");
+      keys[SOLOACE] = _("Ace Solo");
 
-        this.playerHand.unselectAll();
-      }
+      this.multipleChoiceDialog(
+        _("Which solo do you want to play?"),
+        keys,
+        dojo.hitch(this, function (choice) {
+          this.action("mandatorySolo", { solo: choice });
+        })
+      );
+    },
+    onNo: function () {
+      this.action("no");
     },
 
     /*
@@ -421,21 +439,24 @@ define([
       dojo.subscribe("winner", this, "notif_winner");
       dojo.subscribe("wedding", this, "notif_wedding");
       dojo.subscribe("gesund", this, "notif_gesund");
-      dojo.subscribe("vorbehalt", this, "notif_vorbehalt");
+      dojo.subscribe("reservation", this, "notif_reservation");
       dojo.subscribe("weddingComplete", this, "notif_weddingComplete");
     },
 
     notif_gesund: function (notif) {
-      this.showBubble('playertablecard_' + notif.args.player_id, _("Gesund"))
+      this.showBubble("playertablecard_" + notif.args.player_id, _("Gesund"));
     },
 
-    notif_vorbehalt: function (notif) {
-      this.showBubble('playertablecard_' + notif.args.player_id, _("Vorbehalt"))
+    notif_reservation: function (notif) {
+      this.showBubble(
+        "playertablecard_" + notif.args.player_id,
+        _("Reservation")
+      );
     },
 
     notif_wedding: function (notif) {
       this.showMessage(_("Wedding!"), "info");
-      this.showBubble('playertablecard_' + notif.args.player_id, _("Wedding!"))
+      this.showBubble("playertablecard_" + notif.args.player_id, _("Wedding!"));
 
       dojo.place(
         this.format_block("jstpl_weddingrings", {
@@ -464,18 +485,11 @@ define([
     },
 
     notif_newHand: function (notif) {
-      // We received a new full hand of 12 cards.
-      this.playerHand.removeAll();
+      this.gamedatas.cardSorting = notif.args.cardSorting;
+      
+      this.gamedatas.hand = notif.args.hand;
 
-      for (var i in notif.args.cards) {
-        var card = notif.args.cards[i];
-        var suit = card.suit;
-        var value = card.value;
-        this.playerHand.addToStockWithId(
-          this.getCardUniqueId(suit, value),
-          card.id
-        );
-      }
+      this.setupHandCards();
     },
 
     notif_playCard: function (notif) {

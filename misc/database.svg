@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg
+PUBLIC "-//W3C//DTD SVG 1.1//EN"
+       "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="313 -11 1803 928" width="1490px" height="939px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <line x1="869" y1="579" x2="879" y2="579" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="1185" y1="483" x2="1195" y2="483" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="879" y1="579" x2="1185" y2="483" style="stroke:#cb0;stroke-width:1;"/>
+   <line x1="876.5" y1="579" x2="872.96446609407" y2="582.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="876.5" y1="579" x2="872.96446609407" y2="575.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1190" y1="483" x2="1186.4644660941" y2="486.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="1190" y1="483" x2="1186.4644660941" y2="479.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+   <line x1="732" y1="559" x2="722" y2="559" style="stroke:#c00;stroke-width:1;"/>
+   <line x1="475" y1="468" x2="465" y2="468" style="stroke:#c00;stroke-width:1;"/>
+   <line x1="722" y1="559" x2="475" y2="468" style="stroke:#c00;stroke-width:1;"/>
+   <line x1="724.5" y1="559" x2="728.03553390593" y2="562.53553390593" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="724.5" y1="559" x2="728.03553390593" y2="555.46446609407" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="470" y1="468" x2="473.53553390593" y2="471.53553390593" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="470" y1="468" x2="473.53553390593" y2="464.46446609407" style="stroke:#c00;stroke-width:2;"/>
+   <line x1="844" y1="466" x2="854" y2="466" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="1185" y1="483" x2="1195" y2="483" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="854" y1="466" x2="1185" y2="483" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="851.5" y1="466" x2="847.96446609407" y2="469.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="851.5" y1="466" x2="847.96446609407" y2="462.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="1190" y1="483" x2="1186.4644660941" y2="486.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="1190" y1="483" x2="1186.4644660941" y2="479.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="844" y1="486" x2="854" y2="486" style="stroke:#333;stroke-width:1;"/>
+   <line x1="1185" y1="483" x2="1195" y2="483" style="stroke:#333;stroke-width:1;"/>
+   <line x1="854" y1="486" x2="1185" y2="483" style="stroke:#333;stroke-width:1;"/>
+   <line x1="851.5" y1="486" x2="847.96446609407" y2="489.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="851.5" y1="486" x2="847.96446609407" y2="482.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="1190" y1="483" x2="1186.4644660941" y2="486.53553390593" style="stroke:#333;stroke-width:2;"/>
+   <line x1="1190" y1="483" x2="1186.4644660941" y2="479.46446609407" style="stroke:#333;stroke-width:2;"/>
+   <line x1="756" y1="446" x2="746" y2="446" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="475" y1="468" x2="465" y2="468" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="746" y1="446" x2="475" y2="468" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="748.5" y1="446" x2="752.03553390593" y2="449.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="748.5" y1="446" x2="752.03553390593" y2="442.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="470" y1="468" x2="473.53553390593" y2="471.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="470" y1="468" x2="473.53553390593" y2="464.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <rect width="137" height="20" x="328" y="438" style="fill:#007;stroke:black;"/>
+   <text width="137" height="20" x="333" y="452" style="fill:#fff;" font-family="Arial" font-size="16px"> card</text>
+   <rect width="137" height="20" x="328" y="458" style="fill:#aea;stroke:black;"/>
+   <text width="137" height="20" x="333" y="472" style="fill:black;" font-family="Arial" font-size="16px">card_id</text>
+   <rect width="137" height="20" x="328" y="478" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="492" style="fill:black;" font-family="Arial" font-size="16px">card_type</text>
+   <rect width="137" height="20" x="328" y="498" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="512" style="fill:black;" font-family="Arial" font-size="16px">card_type_arg</text>
+   <rect width="137" height="20" x="328" y="518" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="532" style="fill:black;" font-family="Arial" font-size="16px">card_location</text>
+   <rect width="137" height="20" x="328" y="538" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="552" style="fill:black;" font-family="Arial" font-size="16px">card_location_arg</text>
+   <rect width="137" height="20" x="328" y="558" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="572" style="fill:black;" font-family="Arial" font-size="16px">card_last_changed</text>
+   <rect width="137" height="20" x="328" y="578" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="592" style="fill:black;" font-family="Arial" font-size="16px">card_trumpN</text>
+   <rect width="137" height="20" x="328" y="598" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="612" style="fill:black;" font-family="Arial" font-size="16px">card_trumpD</text>
+   <rect width="137" height="20" x="328" y="618" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="632" style="fill:black;" font-family="Arial" font-size="16px">card_trumpH</text>
+   <rect width="137" height="20" x="328" y="638" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="652" style="fill:black;" font-family="Arial" font-size="16px">card_trumpS</text>
+   <rect width="137" height="20" x="328" y="658" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="672" style="fill:black;" font-family="Arial" font-size="16px">card_trumpC</text>
+   <rect width="137" height="20" x="328" y="678" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="692" style="fill:black;" font-family="Arial" font-size="16px">card_trumpQ</text>
+   <rect width="137" height="20" x="328" y="698" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="712" style="fill:black;" font-family="Arial" font-size="16px">card_trumpJ</text>
+   <rect width="137" height="20" x="328" y="718" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="333" y="732" style="fill:black;" font-family="Arial" font-size="16px">card_trumpA</text>
+   <rect width="137" height="20" x="732" y="529" style="fill:#007;stroke:black;"/>
+   <text width="137" height="20" x="737" y="543" style="fill:#fff;" font-family="Arial" font-size="16px"> doppelkopf</text>
+   <rect width="137" height="20" x="732" y="549" style="fill:#aea;stroke:black;"/>
+   <text width="137" height="20" x="737" y="563" style="fill:black;" font-family="Arial" font-size="16px">doppelkopf_card</text>
+   <rect width="137" height="20" x="732" y="569" style="fill:none;stroke:black;"/>
+   <text width="137" height="20" x="737" y="583" style="fill:black;" font-family="Arial" font-size="16px">doppelkopf_owner</text>
+   <rect width="88" height="20" x="756" y="416" style="fill:#007;stroke:black;"/>
+   <text width="88" height="20" x="761" y="430" style="fill:#fff;" font-family="Arial" font-size="16px"> fox</text>
+   <rect width="88" height="20" x="756" y="436" style="fill:#aea;stroke:black;"/>
+   <text width="88" height="20" x="761" y="450" style="fill:black;" font-family="Arial" font-size="16px">fox_card</text>
+   <rect width="88" height="20" x="756" y="456" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="761" y="470" style="fill:black;" font-family="Arial" font-size="16px">fox_catcher</text>
+   <rect width="88" height="20" x="756" y="476" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="761" y="490" style="fill:black;" font-family="Arial" font-size="16px">fox_looser</text>
+   <rect width="175" height="20" x="705" y="8" style="fill:#007;stroke:black;"/>
+   <text width="175" height="20" x="710" y="22" style="fill:#fff;" font-family="Arial" font-size="16px"> gamelog</text>
+   <rect width="175" height="20" x="705" y="28" style="fill:#aea;stroke:black;"/>
+   <text width="175" height="20" x="710" y="42" style="fill:black;" font-family="Arial" font-size="16px">gamelog_packet_id</text>
+   <rect width="175" height="20" x="705" y="48" style="fill:none;stroke:black;"/>
+   <text width="175" height="20" x="710" y="62" style="fill:black;" font-family="Arial" font-size="16px">gamelog_move_id</text>
+   <rect width="175" height="20" x="705" y="68" style="fill:none;stroke:black;"/>
+   <text width="175" height="20" x="710" y="82" style="fill:black;" font-family="Arial" font-size="16px">gamelog_private</text>
+   <rect width="175" height="20" x="705" y="88" style="fill:none;stroke:black;"/>
+   <text width="175" height="20" x="710" y="102" style="fill:black;" font-family="Arial" font-size="16px">gamelog_time</text>
+   <rect width="175" height="20" x="705" y="108" style="fill:none;stroke:black;"/>
+   <text width="175" height="20" x="710" y="122" style="fill:black;" font-family="Arial" font-size="16px">gamelog_player</text>
+   <rect width="175" height="20" x="705" y="128" style="fill:none;stroke:black;"/>
+   <text width="175" height="20" x="710" y="142" style="fill:black;" font-family="Arial" font-size="16px">gamelog_current_player</text>
+   <rect width="175" height="20" x="705" y="148" style="fill:none;stroke:black;"/>
+   <text width="175" height="20" x="710" y="162" style="fill:black;" font-family="Arial" font-size="16px">gamelog_notification</text>
+   <rect width="96" height="20" x="1692" y="10" style="fill:#007;stroke:black;"/>
+   <text width="96" height="20" x="1697" y="24" style="fill:#fff;" font-family="Arial" font-size="16px"> global</text>
+   <rect width="96" height="20" x="1692" y="30" style="fill:#aea;stroke:black;"/>
+   <text width="96" height="20" x="1697" y="44" style="fill:black;" font-family="Arial" font-size="16px">global_id</text>
+   <rect width="96" height="20" x="1692" y="50" style="fill:none;stroke:black;"/>
+   <text width="96" height="20" x="1697" y="64" style="fill:black;" font-family="Arial" font-size="16px">global_value</text>
+   <rect width="230" height="20" x="1195" y="433" style="fill:#007;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="447" style="fill:#fff;" font-family="Arial" font-size="16px"> player</text>
+   <rect width="230" height="20" x="1195" y="453" style="fill:#aea;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="467" style="fill:black;" font-family="Arial" font-size="16px">player_no</text>
+   <rect width="230" height="20" x="1195" y="473" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="487" style="fill:black;" font-family="Arial" font-size="16px">player_id</text>
+   <rect width="230" height="20" x="1195" y="493" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="507" style="fill:black;" font-family="Arial" font-size="16px">player_canal</text>
+   <rect width="230" height="20" x="1195" y="513" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="527" style="fill:black;" font-family="Arial" font-size="16px">player_name</text>
+   <rect width="230" height="20" x="1195" y="533" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="547" style="fill:black;" font-family="Arial" font-size="16px">player_avatar</text>
+   <rect width="230" height="20" x="1195" y="553" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="567" style="fill:black;" font-family="Arial" font-size="16px">player_color</text>
+   <rect width="230" height="20" x="1195" y="573" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="587" style="fill:black;" font-family="Arial" font-size="16px">player_score</text>
+   <rect width="230" height="20" x="1195" y="593" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="607" style="fill:black;" font-family="Arial" font-size="16px">player_score_aux</text>
+   <rect width="230" height="20" x="1195" y="613" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="627" style="fill:black;" font-family="Arial" font-size="16px">player_zombie</text>
+   <rect width="230" height="20" x="1195" y="633" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="647" style="fill:black;" font-family="Arial" font-size="16px">player_ai</text>
+   <rect width="230" height="20" x="1195" y="653" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="667" style="fill:black;" font-family="Arial" font-size="16px">player_eliminated</text>
+   <rect width="230" height="20" x="1195" y="673" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="687" style="fill:black;" font-family="Arial" font-size="16px">player_next_notif_no</text>
+   <rect width="230" height="20" x="1195" y="693" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="707" style="fill:black;" font-family="Arial" font-size="16px">player_enter_game</text>
+   <rect width="230" height="20" x="1195" y="713" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="727" style="fill:black;" font-family="Arial" font-size="16px">player_over_time</text>
+   <rect width="230" height="20" x="1195" y="733" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="747" style="fill:black;" font-family="Arial" font-size="16px">player_is_multiactive</text>
+   <rect width="230" height="20" x="1195" y="753" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="767" style="fill:black;" font-family="Arial" font-size="16px">player_start_reflexion_time</text>
+   <rect width="230" height="20" x="1195" y="773" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="787" style="fill:black;" font-family="Arial" font-size="16px">player_remaining_reflexion_time</text>
+   <rect width="230" height="20" x="1195" y="793" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="807" style="fill:black;" font-family="Arial" font-size="16px">player_beginner</text>
+   <rect width="230" height="20" x="1195" y="813" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="827" style="fill:black;" font-family="Arial" font-size="16px">player_re</text>
+   <rect width="230" height="20" x="1195" y="833" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="847" style="fill:black;" font-family="Arial" font-size="16px">player_vorbehalt</text>
+   <rect width="230" height="20" x="1195" y="853" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="867" style="fill:black;" font-family="Arial" font-size="16px">player_throw</text>
+   <rect width="230" height="20" x="1195" y="873" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="887" style="fill:black;" font-family="Arial" font-size="16px">player_poverty</text>
+   <rect width="230" height="20" x="1195" y="893" style="fill:none;stroke:black;"/>
+   <text width="230" height="20" x="1200" y="907" style="fill:black;" font-family="Arial" font-size="16px">player_solo</text>
+   <rect width="123" height="20" x="1037" y="7" style="fill:#007;stroke:black;"/>
+   <text width="123" height="20" x="1042" y="21" style="fill:#fff;" font-family="Arial" font-size="16px"> replaysavepoint</text>
+   <rect width="123" height="20" x="1037" y="27" style="fill:#aea;stroke:black;"/>
+   <text width="123" height="20" x="1042" y="41" style="fill:black;" font-family="Arial" font-size="16px">rsp_move_id</text>
+   <rect width="123" height="20" x="1037" y="47" style="fill:#aea;stroke:black;"/>
+   <text width="123" height="20" x="1042" y="61" style="fill:black;" font-family="Arial" font-size="16px">rsp_player_id</text>
+   <rect width="123" height="20" x="1037" y="67" style="fill:none;stroke:black;"/>
+   <text width="123" height="20" x="1042" y="81" style="fill:black;" font-family="Arial" font-size="16px">rsp_gamedatas</text>
+   <rect width="110" height="20" x="1419" y="4" style="fill:#007;stroke:black;"/>
+   <text width="110" height="20" x="1424" y="18" style="fill:#fff;" font-family="Arial" font-size="16px"> stats</text>
+   <rect width="110" height="20" x="1419" y="24" style="fill:#aea;stroke:black;"/>
+   <text width="110" height="20" x="1424" y="38" style="fill:black;" font-family="Arial" font-size="16px">stats_id</text>
+   <rect width="110" height="20" x="1419" y="44" style="fill:none;stroke:black;"/>
+   <text width="110" height="20" x="1424" y="58" style="fill:black;" font-family="Arial" font-size="16px">stats_type</text>
+   <rect width="110" height="20" x="1419" y="64" style="fill:none;stroke:black;"/>
+   <text width="110" height="20" x="1424" y="78" style="fill:black;" font-family="Arial" font-size="16px">stats_player_id</text>
+   <rect width="110" height="20" x="1419" y="84" style="fill:none;stroke:black;"/>
+   <text width="110" height="20" x="1424" y="98" style="fill:black;" font-family="Arial" font-size="16px">stats_value</text>
+</svg>

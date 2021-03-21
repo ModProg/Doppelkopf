@@ -68,24 +68,24 @@
 .playertable_N {
     left: 50%;
     top: 0px;
-    margin-left: -100px; /* half of 200 */
+    margin-left: -100px;
     margin-top: 2px;
 }
 .playertable_S {
     left: 50%;
     bottom: 0px;
-    margin-left: -100px; /* half of 200 */
+    margin-left: -100px;
     margin-bottom: 0px;
 }
 .playertable_W {
     left: 0px;
     top: 50%;
-    margin-top: -75px; /* half of 150 */
+    margin-top: -75px;
 }
 .playertable_E {
     right: 0px;
     top: 50%;
-    margin-top: -75px; /* half of 150 */
+    margin-top: -75px;
 }
 
 .playertablecard {
@@ -94,7 +94,6 @@
     margin-top: 5px;
     width: 72px;
     height: 105px;
-    /* we remove background-image here */
 }
 
 /*** cards on table ***/

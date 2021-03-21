@@ -1,4 +1,5 @@
 <?php
+
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
@@ -15,7 +16,7 @@
  */
 
 /*
-Game state machine is a tool used to facilitate game developpement by doing common stuff that can be set up
+Game state machine is a tool used to facilitate game development by doing common stuff that can be set up
 in a very easy way from this configuration file.
 
 Please check the BGA Studio presentation about game state to understand this, and associated documentation.
@@ -37,7 +38,7 @@ _ type: defines the type of game states ( activeplayer / multipleactiveplayer / 
 _ action: name of the method to call when this game state become the current game state. Usually, the
 action method is prefixed by 'st' ( ex: 'stMyGameStateName' ).
 _ possibleactions: array that specify possible player actions on this step. It allows you to use 'checkAction'
-method on both client side ( Javacript: this.checkAction ) and server side ( PHP: self::checkAction ).
+method on both client side ( Javascript: this.checkAction ) and server side ( PHP: self::checkAction ).
 _ transitions: the transitions are the possible paths to go from a game state to another. You must name
 transitions in order to use transition names in 'nextState' PHP method, and use IDs to
 specify the next game state for each transition.
@@ -57,42 +58,124 @@ $machinestates = array(
         'description' => '',
         'type' => 'manager',
         'action' => 'stGameSetup',
-        'transitions' => array('' => 20)
+        'transitions' => array('' => 10)
     ),
-
-    // Note: ID = 2 => your first state
-
+    
     /// New hand
-    20 => array(
+    10 => array(
         'name' => 'newHand',
         'description' => '',
         'type' => 'game',
         'action' => 'stNewHand',
         'updateGameProgression' => true,
-        'transitions' => array('' => 30)
+        'transitions' => array('' => 20)
     ),
 
-    30 => array(
-        'name' => 'preGame',
+    // TODO Reset Player States
+    20 => array(
+        'name' => 'preRound',
         'description' => '',
         'type' => 'game',
         'action' => 'stPreRound',
-        'transitions' => array('playerChoose' => 31, 'reshuffle' => 20)
+        'transitions' => array('playerChoose' => 22, 'startGame' => 40, 'reshuffle' => 10)
     ),
-    31 => array(
-        'name' => 'playerChoose',
-        'description' => clienttranslate( '${actplayer} must choose how to play'),
+
+
+    // Reservation
+    21 => array(
+        'name' => 'playerReservation',
+        'description' => clienttranslate('${actplayer} must choose how to play'),
         'descriptionmyturn' => clienttranslate('${you} must choose:'),
         'type' => 'activeplayer',
-        'possibleactions' => array('gesund', 'vorbehalt'),
-        'transitions' => array('nextPlayer' => 32)
+        'possibleactions' => array('gesund', 'reservation'),
+        'transitions' => array('' => 22)
     ),
-    32 => array(
-        'name' => 'nextChoose',
+    22 => array(
+        'name' => 'nextReservation',
         'description' => '',
         'type' => 'game',
-        'action' => 'stNextChoose',
-        'transitions' => array('nextPlayer' => 31, 'startGame' => 40, 'reshuffle' => 20)
+        'action' => 'stNextReservation',
+        'transitions' => array('nextPlayer' => 21, 'mandatorySolo' => 24)
+    ),
+
+    // Mandatory Solo
+    23 => array(
+        'name' => 'playerMandatory',
+        'description' => clienttranslate('${actplayer} must choose if they want to play a mandatory solo'),
+        'descriptionmyturn' => clienttranslate('Do ${you} want to play a mandatory solo?'),
+        'type' => 'activeplayer',
+        'possibleactions' => array('mandatorySolo', 'no'),
+        'transitions' => array('' => 24)
+    ),
+    24 => array(
+        'name' => 'nextMandatory',
+        'description' => '',
+        'type' => 'game',
+        'action' => 'stNextMandatory',
+        'transitions' => array('nextPlayer' => 23, 'normalSolo' => 26)
+    ),
+
+    // Normal Solo
+    // TODO Only ask already mandatory solo
+    25 => array(
+        'name' => 'playerSolo',
+        'description' => clienttranslate('${actplayer} must choose if they want to play a solo'),
+        'descriptionmyturn' => clienttranslate('Do ${you} want to play a solo?'),
+        'type' => 'activeplayer',
+        'possibleactions' => array('solo', 'no'),
+        'transitions' => array('nextPlayer' => 26)
+    ),
+    // TODO Wedding!
+    26 => array(
+        'name' => 'nextSolo',
+        'description' => '',
+        'type' => 'game',
+        'action' => 'stNextSolo',
+        'transitions' => array('nextPlayer' => 25, 'throwing' => 28)
+    ),
+
+    // Throwing
+    27 => array(
+        'name' => 'playerThrowing',
+        'description' => clienttranslate('${actplayer} must choose to play'),
+        'descriptionmyturn' => clienttranslate('Do ${you} want to play?'),
+        'type' => 'activeplayer',
+        'possibleactions' => array('throw', 'no'),
+        'transitions' => array('' => 28)
+    ),
+    28 => array(
+        'name' => 'nextThrowing',
+        'description' => '',
+        'type' => 'game',
+        'action' => 'stNextThrowing',
+        'transitions' => array('nextPlayer' => 27, 'poverty' => 30, 'reshuffle' => 10)
+    ),
+
+    // Poverty
+    29 => array(
+        'name' => 'playerPoverty',
+        'description' => clienttranslate('${actplayer} must choose to poverty'),
+        'descriptionmyturn' => clienttranslate('Do ${you} want to play poverty?'),
+        'type' => 'activeplayer',
+        'possibleactions' => array('poverty', 'no'),
+        'transitions' => array('' => 30)
+    ),
+    30 => array(
+        'name' => 'nextPoverty',
+        'description' => '',
+        'type' => 'game',
+        'action' => 'stNextSolo',
+        'transitions' => array('nextPlayer' => 29, 'reshuffle' => 10, 'takeOver' => 31)
+    ),
+    31 => array(
+        'name' => 'takeOver',
+        'description' => clienttranslate('${actplayer} needs to decide if they want to take over ${otherplayer}?'),
+        'args' => 'argTakeOver',
+        'descriptionmyturn' => clienttranslate('Do ${you} want to take over ${otherplayer}?'),
+        'type' => 'multipleactiveplayer',
+        'action' => 'stTakeOver',
+        'possibleactions' => array('takeOver', 'no'),
+        'transitions' => array('startGame' => 40, 'reshuffle' => 10)
     ),
 
     // Trick
@@ -102,11 +185,11 @@ $machinestates = array(
         'description' => '',
         'type' => 'game',
         'action' => 'stNewTrick',
-        'transitions' => array('' => 41)
+        'transitions' => array('' => 42)
     ),
     41 => array(
         'name' => 'playerTurn',
-        'description' => clienttranslate( '${actplayer} must play a card'),
+        'description' => clienttranslate('${actplayer} must play a card'),
         'descriptionmyturn' => clienttranslate('${you} must play a card'),
         'type' => 'activeplayer',
         'possibleactions' => array('playCard'),
@@ -128,7 +211,7 @@ $machinestates = array(
         'type' => 'game',
         'action' => 'stEndHand',
         'updateGameProgression' => true,
-        'transitions' => array('nextHand' => 20, 'endGame' => 99)
+        'transitions' => array('newRound' => 10, 'endGame' => 99)
     ),
 
     // Final state.
