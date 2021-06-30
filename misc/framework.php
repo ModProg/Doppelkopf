@@ -161,10 +161,11 @@ class Table
      *  - player_name - the name of the player
      *  - player_color (ex: ff0000) - the color code of the player
      *  - player_no - the position of the player at the start of the game in natural table order, i.e. 1,2,3
-     * @return array
+     * 
      */
-    static function loadPlayersBasicInfos()
+    public function loadPlayersBasicInfos()
     {
+        return array();
     }
 
     /**

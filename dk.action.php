@@ -64,7 +64,7 @@ class action_dk extends APP_GameAction
     public function mandatorySolo()
     {
         self::setAjaxMode();
-        $solo = self::getArg('solo', AT_posint, true);
+        $solo = self::getArg("solo", AT_posint, true);
         $this->game->mandatorySolo($solo);
         self::ajaxResponse();
     }
@@ -72,7 +72,7 @@ class action_dk extends APP_GameAction
     public function playerSolo()
     {
         self::setAjaxMode();
-        $solo = self::getArg('solo', AT_posint, true);
+        $solo = self::getArg("solo", AT_posint, true);
         $this->game->playerSolo($solo);
         self::ajaxResponse();
     }

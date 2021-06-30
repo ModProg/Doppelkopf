@@ -122,16 +122,15 @@ $machinestates = array(
         'description' => clienttranslate('${actplayer} must choose if they want to play a solo'),
         'descriptionmyturn' => clienttranslate('Do ${you} want to play a solo?'),
         'type' => 'activeplayer',
-        'possibleactions' => array('solo', 'no'),
+        'possibleactions' => array('playerSolo', 'no'),
         'transitions' => array('nextPlayer' => 26)
     ),
-    // TODO Wedding!
     26 => array(
         'name' => 'nextSolo',
         'description' => '',
         'type' => 'game',
         'action' => 'stNextSolo',
-        'transitions' => array('nextPlayer' => 25, 'throwing' => 28)
+        'transitions' => array('nextPlayer' => 25, 'throwing' => 40)
     ),
 
     // Throwing
@@ -164,8 +163,8 @@ $machinestates = array(
         'name' => 'nextPoverty',
         'description' => '',
         'type' => 'game',
-        'action' => 'stNextSolo',
-        'transitions' => array('nextPlayer' => 29, 'reshuffle' => 10, 'takeOver' => 31)
+        'action' => 'stNextPoverty',
+        'transitions' => array('nextPlayer' => 29,'startGame' => 40, 'reshuffle' => 10, 'takeOver' => 31)
     ),
     31 => array(
         'name' => 'takeOver',
@@ -185,7 +184,7 @@ $machinestates = array(
         'description' => '',
         'type' => 'game',
         'action' => 'stNewTrick',
-        'transitions' => array('' => 42)
+        'transitions' => array('' => 41)
     ),
     41 => array(
         'name' => 'playerTurn',
@@ -193,7 +192,7 @@ $machinestates = array(
         'descriptionmyturn' => clienttranslate('${you} must play a card'),
         'type' => 'activeplayer',
         'possibleactions' => array('playCard'),
-        'transitions' => array('playCard' => 42)
+        'transitions' => array('' => 42)
     ),
     42 => array(
         'name' => 'nextPlayer',

@@ -95,7 +95,6 @@ define([
         var value = card.type_arg;
         player_id = card.location_arg;
         this.playCardOnTable(player_id, suit, value, card.id);
-        console.log(suit, value);
       }
 
       console.log("Placing Foxes");
@@ -175,8 +174,6 @@ define([
     //                        action status bar (ie: the HTML links in the status bar).
     //
     onUpdateActionButtons: function (stateName, args) {
-      //console.log('onUpdateActionButtons: ' + stateName);
-
       if (this.isCurrentPlayerActive()) {
         switch (stateName) {
           case "playerReservation":
@@ -188,23 +185,42 @@ define([
               "onGesund"
             );
             var lable = [];
-            if (this.gamedatas.throw) lable.push(_("Throwing"));
+            if (this.gamedatas.canThrow) lable.push(_("Throwing"));
             if (this.gamedatas.res2) lable.push(_("Wedding"));
-            lable.push(_("Solo"));
+            if (this.gamedatas.solo_allowed) lable.push(_("Solo"));
 
-            this.addActionButton(
-              "button_reservation",
-              dojo.string.substitute(_("Reservation: ${r}"), {
-                r: lable.join(_("/")),
-              }),
-              "onReservation"
-            );
+            if (lable.length > 0) {
+              this.addActionButton(
+                "button_reservation",
+                dojo.string.substitute(_("Reservation: ${r}"), {
+                  r: lable.join(_("/")),
+                }),
+                "onReservation"
+              );
+            }
             break;
           case "playerMandatory":
-            if (this.gamedatas.throw || this.gamedatas.res2) {
-              this.addActionButton("button_yes", _("Yes"), "onSolo");
+            this.addActionButton("button_yes", _("Yes"), "onSolo");
+            if (this.gamedatas.canThrow || this.gamedatas.res2) {
               lable = [];
-              if (this.gamedatas.throw) lable.push(_("Throwing"));
+              if (this.gamedatas.canThrow) lable.push(_("Throwing"));
+              if (this.gamedatas.res2) lable.push(_("Wedding"));
+
+              this.addActionButton(
+                "button_no",
+                dojo.string.substitute(_("No: ${r}"), {
+                  r: lable.join(_("/")),
+                }),
+                "onNo"
+              );
+              this.mandatory = true;
+            } else this.onSolo();
+          case "playerSolo":
+            this.mandatory = false;
+            this.addActionButton("button_yes", _("Yes"), "onSolo");
+            if (this.gamedatas.canThrow || this.gamedatas.res2) {
+              lable = [];
+              if (this.gamedatas.canThrow) lable.push(_("Throwing"));
               if (this.gamedatas.res2) lable.push(_("Wedding"));
 
               this.addActionButton(
@@ -244,44 +260,54 @@ define([
 
     setupHandCards: function () {
       // Player hand
-      this.playerHand = new ebg.stock(); // new stock object for hand
-      this.playerHand.create(
-        this,
-        $("myhand"),
-        CARDWIDTH,
-        CARDHEIGTH
-      );
-      this.playerHand.image_items_per_row = 6;
-      dojo.connect(
-        this.playerHand,
-        "onChangeSelection",
-        this,
-        "onPlayerHandSelectionChanged"
-      );
-      for (let card of this.gamedatas.cardSorting) {
-        let type = this.getCardUniqueId(card.suit, card.value);
-        console.log("type", type)
-        console.log("order",this.gamedatas.cardSorting)
-        this.playerHand.addItemType(
-          type,
-          type + card.trump * 30,
-          g_gamethemeurl + "img/cards.png",
-          type
+      if (!this.playerHand) {
+        this.playerHand = new ebg.stock(); // new stock object for hand
+        this.playerHand.create(
+          this,
+          $("myhand"),
+          CARDWIDTH,
+          CARDHEIGTH
         );
-      }
-      console.log("Placing Cards in Hand");
+        this.playerHand.image_items_per_row = 6;
+        dojo.connect(
+          this.playerHand,
+          "onChangeSelection",
+          this,
+          "onPlayerHandSelectionChanged"
+        );
+        for (let card of this.gamedatas.cardSorting) {
+          let type = this.getCardUniqueId(card.suit, card.value);
+          this.playerHand.addItemType(
+            type,
+            type + card.trump * 30,
+            g_gamethemeurl + "img/cards.png",
+            type
+          );
+        }
+        console.log("Placing Cards in Hand");
 
-      // Cards in player's hand
-      for (let card of this.gamedatas.hand) {
-        this.playerHand.addToStockWithId(
-          this.getCardUniqueId(card.suit, card.value),
-          card.id
-        );
+        // Cards in player's hand
+        for (let card of this.gamedatas.hand) {
+          this.playerHand.addToStockWithId(
+            this.getCardUniqueId(card.suit, card.value),
+            card.id
+          );
+        }
+      } else {
+        console.log("Resorting Cards in Hand");
+        let weights = {};
+        for (let card of this.gamedatas.cardSorting) {
+          let type = this.getCardUniqueId(card.suit, card.value);
+          weights[type] = type + card.trump * 30;
+        }
+        this.playerHand.changeItemsWeight(weights)
       }
     },
 
     // Get card unique identifier based on its suit and value
     getCardUniqueId: function (suit, value) {
+      suit = Number.parseInt(suit)
+      value = Number.parseInt(value)
       return (suit) * 6 + (value);
     },
 
@@ -289,8 +315,8 @@ define([
       // player_id => direction
       dojo.place(
         this.format_block("jstpl_cardontable", {
-          x: this.cardwidth * (value),
-          y: this.cardheight * (suit),
+          x: CARDWIDTH * Number.parseInt(value),
+          y: CARDHEIGTH * Number.parseInt(suit),
           player_id: player_id,
         }),
         "playertablecard_" + player_id
@@ -326,8 +352,8 @@ define([
       // player_id => direction
       dojo.place(
         this.format_block("jstpl_cardbelowtable", {
-          x: this.cardwidth * (value),
-          y: this.cardheight * (suit),
+          x: CARDWIDTH * (value),
+          y: CARDHEIGTH * (suit),
           card_id: card_id,
         }),
         "cardsbelowtable_" + player_id
@@ -352,8 +378,8 @@ define([
             ...options,
           },
           this,
-          function (result) {},
-          function (is_error) {}
+          function (result) { },
+          function (is_error) { }
         );
       }
     },
@@ -381,13 +407,14 @@ define([
       keys[SOLOJACK] = _("Jack Solo");
       keys[SOLOACE] = _("Ace Solo");
 
-      this.multipleChoiceDialog(
+      console.log(this.multipleChoiceDialog(
         _("Which solo do you want to play?"),
         keys,
         dojo.hitch(this, function (choice) {
-          this.action("mandatorySolo", { solo: choice });
+          this.action(this.mandatory ? "mandatorySolo" : "playerSolo", { solo: choice });
         })
-      );
+      ));
+      dojo.style(dojo.byId("popin_multipleChoice_dialog_close"), "display", "none");
     },
     onNo: function () {
       this.action("no");
@@ -441,6 +468,7 @@ define([
       dojo.subscribe("gesund", this, "notif_gesund");
       dojo.subscribe("reservation", this, "notif_reservation");
       dojo.subscribe("weddingComplete", this, "notif_weddingComplete");
+      dojo.subscribe("solo", this, "notif_solo");
     },
 
     notif_gesund: function (notif) {
@@ -470,6 +498,12 @@ define([
       dojo.destroy(dojo.query(".weddingrings")[0]);
     },
 
+    notif_solo: function (notif) {
+      console.log("Rearanging Cards");
+      this.gamedatas.cardSorting = notif.args.cardSorting;
+      this.setupHandCards();
+    },
+
     notif_sumCards: function (notif) {
       // We do nothing here (just wait in order players can view the 4 cards played before they're gone.
     },
@@ -486,7 +520,7 @@ define([
 
     notif_newHand: function (notif) {
       this.gamedatas.cardSorting = notif.args.cardSorting;
-      
+
       this.gamedatas.hand = notif.args.hand;
 
       this.setupHandCards();

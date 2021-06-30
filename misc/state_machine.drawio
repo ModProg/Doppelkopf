@@ -1,1 +1,264 @@
-<mxfile host="Electron" modified="2021-03-21T16:39:48.100Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.4.3 Chrome/87.0.4280.141 Electron/11.3.0 Safari/537.36" etag="2_u4SWz5QrO5G5ZOiUzN" version="14.4.3" type="device"><diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">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</diagram></mxfile>
+<mxfile>
+    <diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">
+        <mxGraphModel dx="948" dy="1128" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="382b91b5511bd0f7-1" value="" style="ellipse;html=1;shape=startState;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;direction=south;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fontColor=#ffffff;fillColor=#F0F0F0;strokeColor=#CC0000;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="55" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="382b91b5511bd0f7-6" target="ApR5YPtHUiVUApXNm_wz-1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="382b91b5511bd0f7-6" value="1 gameSetup" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;sketch=0;glass=0;labelBorderColor=#009900;" parent="1" vertex="1">
+                    <mxGeometry x="150" y="40" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="2a3bc250acf0617d-9" style="edgeStyle=orthogonalEdgeStyle;html=1;labelBackgroundColor=none;endArrow=open;endSize=8;fontFamily=Noto Sans Mono;fontSize=12;align=left;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="382b91b5511bd0f7-1" target="382b91b5511bd0f7-6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-1" target="ApR5YPtHUiVUApXNm_wz-3" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="500" y="60"/>
+                            <mxPoint x="500" y="60"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-1" value="10 newHand" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;labelBorderColor=#009900;" parent="1" vertex="1">
+                    <mxGeometry x="330" y="40" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-6" value="playerChoose" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;entryX=0.565;entryY=-0.006;entryDx=0;entryDy=0;entryPerimeter=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-3" target="ApR5YPtHUiVUApXNm_wz-18" edge="1">
+                    <mxGeometry x="0.0018" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="610" y="140"/>
+                            <mxPoint x="730" y="140"/>
+                            <mxPoint x="730" y="160"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-10" value="reshuffle" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-3" target="ApR5YPtHUiVUApXNm_wz-1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-3" target="ApR5YPtHUiVUApXNm_wz-12" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="610" y="140"/>
+                            <mxPoint x="430" y="140"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-3" value="20 preRound" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="40" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-5" target="ApR5YPtHUiVUApXNm_wz-18" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="830" y="200"/>
+                            <mxPoint x="830" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-5" value="21 playerReservation&lt;br&gt;&lt;i&gt;&lt;u&gt;&lt;span&gt;gesund&lt;/span&gt;&lt;br&gt;&lt;span&gt;reservation&lt;/span&gt;&lt;/u&gt;&lt;/i&gt;" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="180" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-12" target="ApR5YPtHUiVUApXNm_wz-45" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-12" value="TODO&lt;br&gt;chooseTogether" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;arcSize=24;comic=0;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="230" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-20" value="nextPlayer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-18" target="ApR5YPtHUiVUApXNm_wz-5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="890" y="215" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-31" value="mandatorySolo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-18" target="ApR5YPtHUiVUApXNm_wz-30" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="720" y="280"/>
+                            <mxPoint x="720" y="280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-18" value="22 nextReservation" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="180" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-53" value="normalSolo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-30" target="ApR5YPtHUiVUApXNm_wz-36" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-30" value="24 nextMandatory" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="280" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-57" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;font-size: 11px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; display: inline; float: none;&quot;&gt;nextPlayer&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;labelBackgroundColor=#2A2A2A;fontColor=#F0F0F0;" parent="1" source="ApR5YPtHUiVUApXNm_wz-36" target="ApR5YPtHUiVUApXNm_wz-54" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-58" value="throwing" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-36" target="ApR5YPtHUiVUApXNm_wz-39" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-36" value="26 nextSolo" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="380" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-63" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;font-size: 11px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; display: inline; float: none;&quot;&gt;nextPlayer&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;labelBackgroundColor=#2A2A2A;fontColor=#F0F0F0;" parent="1" source="ApR5YPtHUiVUApXNm_wz-39" target="ApR5YPtHUiVUApXNm_wz-59" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-65" value="poverty" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-39" target="ApR5YPtHUiVUApXNm_wz-41" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-84" value="reshuffle" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-59" target="ApR5YPtHUiVUApXNm_wz-1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="990" y="450"/>
+                            <mxPoint x="560" y="450"/>
+                            <mxPoint x="560" y="120"/>
+                            <mxPoint x="420" y="120"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-39" value="28&amp;nbsp;nextThrowing" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="480" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-64" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;font-size: 11px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; display: inline; float: none;&quot;&gt;nextPlayer&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;labelBackgroundColor=#2A2A2A;fontColor=#F0F0F0;" parent="1" source="ApR5YPtHUiVUApXNm_wz-41" target="ApR5YPtHUiVUApXNm_wz-60" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;labelBackgroundColor=#2A2A2A;" parent="1" source="ApR5YPtHUiVUApXNm_wz-82" target="ApR5YPtHUiVUApXNm_wz-45" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-86" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;noto sans mono&amp;quot;; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; display: inline; float: none;&quot;&gt;takeOver&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;labelBackgroundColor=#2A2A2A;fontColor=#F0F0F0;" parent="ApR5YPtHUiVUApXNm_wz-66" vertex="1" connectable="0">
+                    <mxGeometry x="-0.426" y="3" relative="1" as="geometry">
+                        <mxPoint x="0.69" y="-3" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;endArrow=none;endFill=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-82" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="560" y="450" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-87" value="&lt;strike&gt;startGame&lt;/strike&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;endArrow=classic;endFill=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;dashed=1;spacingTop=-3;labelBackgroundColor=#2A2A2A;" parent="1" source="ApR5YPtHUiVUApXNm_wz-41" target="ApR5YPtHUiVUApXNm_wz-45" edge="1">
+                    <mxGeometry x="0.2727" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="480" y="610"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-41" value="30 nextPoverty" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="640" y="580" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-45" target="ApR5YPtHUiVUApXNm_wz-72" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-45" value="40&amp;nbsp;newTrick" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="360" y="380" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-47" target="ApR5YPtHUiVUApXNm_wz-30" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-47" value="23 playerMandatory&lt;br&gt;&lt;i&gt;&lt;u&gt;&lt;span&gt;mandatorySolo&lt;/span&gt;&lt;br&gt;&lt;span&gt;no&lt;/span&gt;&lt;/u&gt;&lt;/i&gt;" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="280" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-51" value="nextPlayer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="ApR5YPtHUiVUApXNm_wz-30" target="ApR5YPtHUiVUApXNm_wz-47" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="800" y="350" as="sourcePoint"/>
+                        <mxPoint x="910" y="350" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-54" target="ApR5YPtHUiVUApXNm_wz-36" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-54" value="25 playerSolo&lt;br&gt;&lt;i&gt;&lt;u&gt;&lt;span&gt;solo&lt;/span&gt;&lt;br&gt;&lt;span&gt;no&lt;/span&gt;&lt;/u&gt;&lt;/i&gt;" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="380" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-59" target="ApR5YPtHUiVUApXNm_wz-39" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-59" value="27 playerThrowing&lt;br&gt;&lt;i&gt;&lt;u&gt;&lt;span&gt;throw&lt;/span&gt;&lt;br&gt;&lt;span&gt;no&lt;/span&gt;&lt;/u&gt;&lt;/i&gt;" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="480" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-60" target="ApR5YPtHUiVUApXNm_wz-41" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-60" value="29 playerPoverty&lt;br&gt;&lt;i&gt;&lt;u&gt;&lt;span&gt;poverty&lt;/span&gt;&lt;br&gt;&lt;span&gt;no&lt;/span&gt;&lt;/u&gt;&lt;/i&gt;" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="580" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-68" target="ApR5YPtHUiVUApXNm_wz-72" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-68" value="41 playerTurn&lt;br&gt;&lt;u&gt;&lt;i&gt;playCard&lt;/i&gt;&lt;/u&gt;" style="rounded=1;html=1;arcSize=24;shadow=0;comic=0;labelBackgroundColor=none;fontFamily=Noto Sans Mono;fontSize=12;align=center;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="480" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-74" value="nextTrick" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-72" target="ApR5YPtHUiVUApXNm_wz-45" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-75" value="nextPlayer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-72" target="ApR5YPtHUiVUApXNm_wz-68" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-78" value="endHand" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;labelBackgroundColor=none;" parent="1" source="ApR5YPtHUiVUApXNm_wz-72" target="ApR5YPtHUiVUApXNm_wz-77" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-72" value="42 nextPlayer" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="380" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-79" value="newRound" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-77" target="ApR5YPtHUiVUApXNm_wz-1" edge="1">
+                    <mxGeometry x="-0.1268" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-40" y="270"/>
+                            <mxPoint x="230" y="270"/>
+                            <mxPoint x="230" y="150"/>
+                            <mxPoint x="390" y="150"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-81" value="endGame" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-77" target="ApR5YPtHUiVUApXNm_wz-80" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-89" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-77" target="ApR5YPtHUiVUApXNm_wz-88" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-77" value="50 endHand" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="-120" y="380" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;" parent="1" source="ApR5YPtHUiVUApXNm_wz-80" target="ApR5YPtHUiVUApXNm_wz-92" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-80" value="99 gameEnd" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;arcSize=24;comic=0;verticalAlign=middle;spacing=2;spacingTop=-3;" parent="1" vertex="1">
+                    <mxGeometry x="-120" y="520" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-82" value="31 takeOver&lt;br&gt;&lt;i&gt;&lt;u&gt;takeOver&lt;/u&gt;&lt;/i&gt;" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;arcSize=24;comic=0;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="680" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-83" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;noto sans mono&amp;quot;; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; display: inline; float: none;&quot;&gt;takeOver&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;labelBackgroundColor=#2A2A2A;fontColor=#F0F0F0;" parent="1" source="ApR5YPtHUiVUApXNm_wz-41" target="ApR5YPtHUiVUApXNm_wz-82" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="640" y="610" as="sourcePoint"/>
+                        <mxPoint x="440" y="440" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-90" value="endGame" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-88" target="ApR5YPtHUiVUApXNm_wz-80" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-230" y="480"/>
+                            <mxPoint x="-80" y="480"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-91" value="newRound" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;endArrow=classic;endFill=1;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;spacingTop=-3;" parent="1" source="ApR5YPtHUiVUApXNm_wz-88" target="ApR5YPtHUiVUApXNm_wz-1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-230" y="130"/>
+                            <mxPoint x="360" y="130"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-88" value="TODO&lt;br&gt;voteEnd" style="html=1;rounded=1;shadow=0;fontFamily=Noto Sans Mono;arcSize=24;comic=0;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;verticalAlign=middle;spacing=2;spacingTop=-3;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="-290" y="380" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="ApR5YPtHUiVUApXNm_wz-92" value="" style="ellipse;html=1;shape=endState;fontFamily=Noto Sans Mono;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BMono;strokeColor=#CC0000;fillColor=#F0F0F0;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="-55" y="610" width="30" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

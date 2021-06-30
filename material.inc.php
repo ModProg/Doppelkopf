@@ -33,29 +33,7 @@ $this->card_types = array(
 
  */
 
-if (!defined("ACE")) {
-
-    define("DIAMOND", 0);
-    define("HEART", 1);
-    define("SPADE", 2);
-    define("CLUB", 3);
-    define("TRUMP", 4);
-  
-    define("NINE", 0);
-    define("JACK", 1);
-    define("QUEEN", 2);
-    define("KING", 3);
-    define("TEN", 4);
-    define("ACE", 5);
-
-    define("SOLODIAMOND", 1);
-    define("SOLOHEART", 2);
-    define("SOLOSPADE", 3);
-    define("SOLOCLUB", 4);
-    define("SOLOQUEEN", 5);
-    define("SOLOJACK", 6);
-    define("SOLOACE", 7);
-}
+include "defines.php";
 
 $this->suits = array(
     DIAMOND => array(
@@ -98,5 +76,37 @@ $this->values_label = array(
     ACE => array(
         'name' =>  clienttranslate('Ace'),
         'nametr' => self::_('Ace')
+    ),
+);
+
+
+$this->solos = array(
+    SOLODIAMOND => array(
+        'name' =>  clienttranslate('Diamond Solo'),
+        'nametr' => self::_('Diamond Solo')
+    ),
+    SOLOHEART => array(
+        'name' =>  clienttranslate('Heart Solo'),
+        'nametr' => self::_('Heart Solo')
+    ),
+    SOLOSPADE => array(
+        'name' =>  clienttranslate('Spade Solo'),
+        'nametr' => self::_('Spade Solo')
+    ),
+    SOLOCLUB => array(
+        'name' =>  clienttranslate('Club Solo'),
+        'nametr' => self::_('Club Solo')
+    ),
+    SOLOJACK => array(
+        'name' =>  clienttranslate('Jack Solo'),
+        'nametr' => self::_('Jack Solo')
+    ),
+    SOLOQUEEN => array(
+        'name' =>  clienttranslate('Queen Solo'),
+        'nametr' => self::_('Queen Solo')
+    ),
+    SOLOACE => array(
+        'name' =>  clienttranslate('Ace Solo'),
+        'nametr' => self::_('Ace Solo')
     ),
 );

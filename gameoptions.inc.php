@@ -24,22 +24,69 @@
  *
  */
 
+include "defines.php";
+
 $game_options = array(
 
-    100 => array(
-        'name' => totranslate('Auto Throw'),
+    // 100 => array(
+    //     'name' => totranslate('Auto Throw'),
+    //     'values' => array(
+    //         0 => array(
+    //             'name' => totranslate('Disable auto throwing'),
+    //             'default' => true
+    //         ),
+    //         1 => array(
+    //             'name' => totranslate('Reshuffle automatically when a player could throw'),
+    //             'beta' => true,
+
+    //         ),
+    //         3 => array(
+    //             'name' => totranslate('Reshuffle on wedding as well'),
+    //             'beta' => true,
+    //         ),
+    //     )
+    // ),
+
+    OPT_SOLO_ID => array(
+        'name' => totranslate("Solos"),
         'values' => array(
-            0 => array(
-                'name' => totranslate('Disable auto throwing')
+            // ON => array(
+            //     'name' => totranslate('On'),
+            //     'beta' => true,
+            // ),
+            OFF => array(
+                'name' => totranslate('No Solos'),
+                'beta' => true,
             ),
-            1 => array(
-                'name' => totranslate('Reshuffle automatically when a player could throw')
+            SOLO_ONLY_VOL => array(
+                'name' => totranslate('Only Voluntary Solos'),
+                'default' => true,'beta' => true,
             ),
-            3 => array(
-                'name' => totranslate('Reshuffle on wedding as well')
-            )
         )
-    )
+    ),
+
+
+    OPT_ROUNDS_ID => array(
+        'name' => totranslate('Number of Games'),
+        'values' => array(
+            4 => array(
+                'name' => totranslate('One Game (4 Rounds)'),
+                'default' => true
+            ),
+            8 => array(
+                'name' => totranslate('Two Games (8 Rounds)')
+
+            ),
+            12 => array(
+                'name' => totranslate('Three Games (12 Rounds)')
+
+            ),
+            16 => array(
+                'name' => totranslate('Four Games (16 Rounds)')
+
+            ),
+        )
+    ),
 
 
     /*
@@ -67,5 +114,3 @@ $game_options = array(
     */
 
 );
-
-
