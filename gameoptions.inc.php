@@ -70,11 +70,11 @@ $game_options = array(
         'name' => totranslate('Second ♥ 10 beats first'),
         'values' => array(
             OFF => array(
-                'name' => totranslate('On'),
+                'name' => totranslate('Off'),
                 'default' => true
             ),
             ON => array(
-                'name' => totranslate('Off')
+                'name' => totranslate('On')
 
             ),
         )
