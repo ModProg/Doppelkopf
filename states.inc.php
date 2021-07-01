@@ -60,7 +60,7 @@ $machinestates = array(
         'action' => 'stGameSetup',
         'transitions' => array('' => 10)
     ),
-    
+
     /// New hand
     10 => array(
         'name' => 'newHand',
@@ -130,24 +130,24 @@ $machinestates = array(
         'description' => '',
         'type' => 'game',
         'action' => 'stNextSolo',
-        'transitions' => array('nextPlayer' => 25, 'throwing' => 40)
+        'transitions' => array('nextPlayer' => 25, 'throwing' => 28)
     ),
 
     // Throwing
     27 => array(
         'name' => 'playerThrowing',
         'description' => clienttranslate('${actplayer} must choose to play'),
-        'descriptionmyturn' => clienttranslate('Do ${you} want to play?'),
+        'descriptionmyturn' => clienttranslate('Do ${you} want to throw?'),
         'type' => 'activeplayer',
         'possibleactions' => array('throw', 'no'),
-        'transitions' => array('' => 28)
+        'transitions' => array('nextPlayer' => 28, 'reshuffle' => 10)
     ),
     28 => array(
         'name' => 'nextThrowing',
         'description' => '',
         'type' => 'game',
         'action' => 'stNextThrowing',
-        'transitions' => array('nextPlayer' => 27, 'poverty' => 30, 'reshuffle' => 10)
+        'transitions' => array('nextPlayer' => 27, 'poverty' => 40, 'reshuffle' => 10)
     ),
 
     // Poverty
@@ -164,7 +164,7 @@ $machinestates = array(
         'description' => '',
         'type' => 'game',
         'action' => 'stNextPoverty',
-        'transitions' => array('nextPlayer' => 29,'startGame' => 40, 'reshuffle' => 10, 'takeOver' => 31)
+        'transitions' => array('nextPlayer' => 29, 'startGame' => 40, 'reshuffle' => 10, 'takeOver' => 31)
     ),
     31 => array(
         'name' => 'takeOver',

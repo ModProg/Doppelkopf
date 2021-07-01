@@ -28,7 +28,6 @@ define("VAR_ROUND", "var_round");
 define("VAR_TRICK_SUIT", "var_trick_suit");
 define("VAR_CHARLIE", "var_charlie");
 define("VAR_WEDDING", "var_wedding");
-define("VAR_RES2", "var_res2");
 define("VAR_CHOSEN", "var_chosen");
 define("VAR_SOLO", "var_solo");
 define("VAR_SOLOS", "var_solos");
@@ -41,6 +40,8 @@ define("OPT_ROUNDS", "opt_rounds");
 define("OPT_ROUNDS_ID", 102);
 define("OPT_H10", "opt_h10");
 define("OPT_H10_ID", 103);
+define("OPT_THROW", "opt_throw");
+define("OPT_THROW_ID", 104);
 
 define("OFF", 0);
 define("ON", 1);

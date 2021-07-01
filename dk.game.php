@@ -36,14 +36,14 @@ class dk extends Table
       VAR_TRICK_SUIT => 11,
       VAR_CHARLIE => 12,
       VAR_WEDDING => 13,
-      VAR_RES2 => 14,
       VAR_CHOSEN => 15,
       VAR_SOLO => 16,
       VAR_SOLOS => 17,
       OPT_AUTO_THROW => OPT_AUTO_THROW_ID,
       OPT_SOLO => OPT_SOLO_ID,
       OPT_ROUNDS => OPT_ROUNDS_ID,
-      OPT_H10 => OPT_H10_ID
+      OPT_H10 => OPT_H10_ID,
+      OPT_THROW => OPT_THROW_ID,
     ));
 
     $this->cards = $this->getNew('module.common.deck');
@@ -59,6 +59,82 @@ class dk extends Table
   protected function setupNewGame($players, $options = array())
   {
 
+    // SHOULD be in dbmodel.sql but doesn't work
+    $this->DbQuery("CREATE VIEW player_counts AS
+        SELECT
+            nines,
+            kings,
+            ninesCol,
+            tenAce,
+            goodTrump,
+            res,
+            player_id,
+            player_name,
+            CASE WHEN nines >= 5 OR nines >= 4 AND kings >= 4 OR ninesCol = 4 OR tenAce >= 7 OR goodTrump = 0 THEN 1 ELSE 0 END canThrow 
+        FROM
+            player p
+            LEFT JOIN  (
+                SELECT
+                    COUNT(*) nines,
+                  card_location_arg
+                FROM
+                    card
+                WHERE card.card_type_arg = 0
+                GROUP BY
+                    card.card_location_arg
+            ) n  ON n.card_location_arg = p.player_id LEFT JOIN 
+            (
+                SELECT
+                    COUNT(*) kings,
+                card_location_arg
+                FROM
+                    card
+                WHERE card.card_type_arg = 3
+                GROUP BY card_location_arg
+            ) k ON k.card_location_arg = p.player_id LEFT JOIN 
+            (
+                SELECT
+                    COUNT(DISTINCT card.card_type) ninesCol,
+                card_location_arg
+                FROM
+                    card
+                WHERE
+                     card.card_type_arg = 0
+                GROUP BY
+                card_location_arg
+            ) nc ON nc.card_location_arg = p.player_id LEFT JOIN 
+            (
+                SELECT
+                    COUNT(*) tenAce,card_location_arg
+                FROM
+                    card
+                WHERE
+                        card.card_type_arg = 4
+                        OR card.card_type_arg = 5
+                GROUP BY
+                card_location_arg
+                    
+            ) ta ON ta.card_location_arg = p.player_id LEFT JOIN 
+            (
+                SELECT
+                    COUNT(*) goodTrump,card_location_arg
+                FROM
+                    card
+                WHERE
+                     card.card_trumpN <= 4
+                GROUP BY
+                card_location_arg
+            ) gt ON gt.card_location_arg = p.player_id LEFT JOIN 
+            (
+                SELECT
+                    COUNT(*) res,card_location_arg
+                FROM
+                    card
+                WHERE
+                     card.card_type = 3 AND card.card_type_arg = 2
+                GROUP BY
+                card_location_arg
+            ) r ON r.card_location_arg = p.player_id;");
 
     $DIAMOND = DIAMOND;
     $HEART = HEART;
@@ -100,7 +176,6 @@ class dk extends Table
     $this->setGameStateInitialValue(VAR_TRICK_SUIT, -1);
     $this->setGameStateInitialValue(VAR_CHARLIE, 0);
     $this->setGameStateInitialValue(VAR_WEDDING, 0);
-    $this->setGameStateInitialValue(VAR_RES2, 0);
     $this->setGameStateInitialValue(VAR_CHOSEN, 0);
     $this->setGameStateInitialValue(VAR_SOLO, 0);
     $this->setGameStateInitialValue(VAR_SOLOS, 0);
@@ -184,15 +259,15 @@ class dk extends Table
       $result["wedding"] = $this->getGameStateValue(VAR_WEDDING);
     }
 
-    if ($this->getGameStateValue(VAR_RES2) == $current_player_id) {
+    if ($this->getUniqueValueFromDB("SELECT player_id FROM player_counts WHERE res = 2") == $current_player_id) {
       $result["res2"] = true;
     }
-
-    $result['throw'] = $this->getUniqueValueFromDB(
-      "SELECT `player_reservation`
-      FROM `player`
+    if ($this->getGameStateValue(OPT_THROW) && $this->getUniqueValueFromDB(
+      "SELECT `canThrow`
+      FROM `player_counts`
       WHERE `player_id` = '$current_player_id'"
-    );
+    ))
+      $result['canThrow'] = 1;
 
     return $result;
   }
@@ -222,11 +297,6 @@ class dk extends Table
   //////////// XXX Utility functions
   ////////////
   #region Util
-
-  public function canThrow($player_id)
-  {
-    return false;
-  }
 
   public function getSoloPlayer()
   {
@@ -536,6 +606,18 @@ class dk extends Table
     $this->gamestate->nextState();
   }
 
+  public function throw()
+  {
+    $this->checkAction('throw');
+    $player_id = $this->getActivePlayerId();
+    $this->notifyAllPlayers('throws', '${player_name} THROWS.', array(
+      'player_name' => $this->getActivePlayerName(),
+      'player_id' => $player_id
+    ));
+
+    $this->gamestate->nextState("reshuffle");
+  }
+
 
   //////////////////////////////////////////////////////////////////////////////
   //////////// Game state arguments
@@ -586,12 +668,23 @@ class dk extends Table
     $players = $this->loadPlayersBasicInfos();
     foreach ($players as $player_id => $player) {
       $this->cards->pickCards(12, 'deck', $player_id);
-
-      // Notify player about his cards
-      $this->notifyPlayer($player_id, 'newHand', '', array(
+      $data = array(
         'hand' => $this->getHand($player_id),
         'cardSorting' => $this->getCurrentCardSorting()
-      ));
+      );
+
+      if ($this->getGameStateValue(OPT_THROW) && $this->getUniqueValueFromDB(
+        "SELECT `canThrow`
+      FROM `player_counts`
+      WHERE `player_id` = '$player_id'"
+      ))
+        $data['canThrow'] = 1;
+
+      if ($this->getUniqueValueFromDB("SELECT player_id FROM player_counts WHERE res = 2") == $player_id)
+        $data["res2"] = true;
+
+      // Notify player about his cards
+      $this->notifyPlayer($player_id, 'newHand', '', $data);
     }
     $this->gamestate->nextState('');
   }
@@ -616,135 +709,10 @@ class dk extends Table
       SET `player_reservation` = 0,
       `player_re` = 0,
       `player_reservation` = 0,
-      `player_throw` = 0,
       `player_poverty` = 0,
       `player_solo` = 0"
     );
 
-    $this->gamestate->changeActivePlayer($this->getStartPlayer());
-
-    // TODO wedding
-    $wedding = 1 == $this->getUniqueValueFromDB(
-      "SELECT
-          COUNT(DISTINCT `card_location_arg`)
-        FROM
-          `card`
-        WHERE
-          `card_type` = $CLUB AND `card_type_arg` = '$QUEEN';"
-    );
-
-    $neunen = 5 <= $this->getUniqueValueFromDB(
-      "SELECT
-          MAX(nines)
-        FROM
-          (
-          SELECT
-            `card`.`card_location_arg`,
-            COUNT(`card`.`card_location_arg`) nines
-          FROM
-            `card`
-          WHERE
-            `card`.`card_type_arg` = '$NINE'
-          GROUP BY
-            `card`.`card_location_arg`
-        ) test"
-    );
-
-    $neunenKönige = 1 <= $this->getUniqueValueFromDB(
-      "SELECT
-          COUNT(test.`card_location_arg`) `count`
-        FROM
-          (
-          SELECT
-            `card`.`card_location_arg`,
-            COUNT(`card`.`card_location_arg`) neunen
-          FROM
-            `card`
-          WHERE
-            `card`.`card_type_arg` = '$NINE'
-          GROUP BY
-            `card`.`card_location_arg`
-        ) test
-        JOIN
-          (
-          SELECT
-            `card`.`card_location_arg`,
-            COUNT(`card`.`card_location_arg`) kings
-          FROM
-            `card`
-          WHERE
-            `card`.`card_type_arg` = '$KING'
-          GROUP BY
-            `card`.`card_location_arg`
-        ) test2 ON test.`card_location_arg` = test2.`card_location_arg`
-        WHERE
-          `neunen` >= 4 AND `kings` >= 4"
-    );
-    $neunenFarb = 4 <= $this->getUniqueValueFromDB(
-      "SELECT
-          MAX(neunenCount)
-        FROM
-          (
-          SELECT
-            `card`.`card_location_arg`,
-            COUNT(DISTINCT `card`.`card_type`) neunenCount
-          FROM
-            `card`
-          WHERE
-            `card`.`card_type_arg` = '$NINE'
-          GROUP BY
-            `card`.`card_location_arg`
-        ) test"
-    );
-
-    $tens = 7 <= $this->getUniqueValueFromDB(
-      "SELECT
-          MAX(neunenCount)
-        FROM
-          (
-          SELECT
-            `card`.`card_location_arg`,
-            COUNT(`card`.`card_location_arg`) neunenCount
-          FROM
-            `card`
-          WHERE
-            `card`.`card_type_arg` = '$TEN' OR `card`.`card_type_arg` = '$ACE'
-          GROUP BY
-            `card`.`card_location_arg`
-        ) test"
-    );
-
-    $diamondJack = $this->getUniqueValueFromDB(
-      "SELECT
-          `card`.`card_trumpN`
-        FROM
-          `card`
-        WHERE
-          `card`.`card_type` = $DIAMOND AND `card`.`card_type_arg` = $JACK
-        LIMIT 1"
-    );
-    $goodTrump = 0 == $this->getUniqueValueFromDB(
-      "SELECT
-          MIN(`count`)
-        FROM
-          (
-          SELECT
-          COUNT(`card_location_arg`) `count`
-          FROM
-          `player`
-          LEFT JOIN
-            (
-            SELECT
-              *
-            FROM
-              `card`
-            WHERE
-              `card`.`card_trumpN` >= '$diamondJack'
-            ) temp2 ON temp2.`card_location_arg` = `player`.`player_id`
-        GROUP BY
-          `player`.`player_id`
-        ) temp"
-    );
     $fox = $this->getUniqueValueFromDB(
       "SELECT
            `card`.`card_trumpN`
@@ -780,7 +748,10 @@ class dk extends Table
 
     // TODO AutoThrow
 
-    if ($this->getGameStateValue(OPT_AUTO_THROW) && ($neunen || $tens || $neunenFarb || $neunenKönige || $goodTrump || $trump)) {
+    if ($this->getGameStateValue(OPT_AUTO_THROW) && ($this->getUniqueValueFromDB(
+      "SELECT MAX(`canThrow`)
+      FROM `player_counts`"
+    ) == 1 || $trump)) {
       return $this->gamestate->nextState('reshuffle');
     }
 
@@ -806,13 +777,7 @@ class dk extends Table
       true
     );
     if (count($res) == 1) {
-      $this->notifyPlayer($res[0], "res2", "", array());
-      $this->setGameStateValue(VAR_RES2, $res[0]);
     }
-    // XXX FORCE WEDDING
-    // else {
-    //   return $this->gamestate->nextState("reshuffle");
-    // }
 
     // TODO Mandtory Solo (vorgeführt)
     // if ($this->getGameStateValue(OPT_ROUNDS) - $this->getGameStateValue(VAR_ROUND) <= $this->getUniqueValueFromDB(
@@ -856,6 +821,20 @@ class dk extends Table
     }
   }
 
+  public function nextReservedPlayer()
+  {
+    $this->incGameStateValue(VAR_CHOSEN, -1);
+    $player_id = $this->activeNextPlayer();
+    if ($this->getUniqueValueFromDB(
+      "SELECT `player_reservation`
+      FROM `player`
+      WHERE `player_id` = $player_id"
+    ) == 0)
+      return true;
+
+    $this->giveExtraTime($player_id);
+  }
+
   public function stNextMandatory()
   {
     if ($this->getGameStateValue(VAR_CHOSEN) == 0 || $this->getGameStateValue(OPT_SOLO) == OFF || $this->getGameStateValue(OPT_SOLO) == SOLO_ONLY_VOL) {
@@ -867,20 +846,7 @@ class dk extends Table
       $this->gamestate->changeActivePlayer($this->getStartPlayer(-1));
       $this->gamestate->nextState('normalSolo');
     } else {
-      // Standard case ( not the end of the trick )
-      // => just active the next player
-
-      $this->incGameStateValue(VAR_CHOSEN, -1);
-      $player_id = $this->activeNextPlayer();
-
-      if ($this->getUniqueValueFromDB(
-        "SELECT `player_reservation`
-        FROM `player`
-        WHERE `player_id` = $player_id"
-      ) == 0)
-        return $this->stNextMandatory();
-
-      $this->giveExtraTime($player_id);
+      if ($this->nextReservedPlayer()) return $this->stNextMandatory();
       $this->gamestate->nextState('nextPlayer');
     }
   }
@@ -897,26 +863,14 @@ class dk extends Table
       $this->gamestate->changeActivePlayer($this->getStartPlayer(-1));
       $this->gamestate->nextState('throwing');
     } else {
-      // Standard case ( not the end of the trick )
-      // => just active the next player
-      $this->incGameStateValue(VAR_CHOSEN, -1);
-
-      $player_id = $this->activeNextPlayer();
-
-      if ($this->getUniqueValueFromDB(
-        "SELECT `player_reservation`
-        FROM `player`
-        WHERE `player_id` = $player_id"
-      ) == 0)
-        return $this->stNextSolo();
-      $this->giveExtraTime($player_id);
+      if ($this->nextReservedPlayer())  return $this->stNextSolo();
       $this->gamestate->nextState('nextPlayer');
     }
   }
   public function stNextThrowing()
   {
 
-    if ($this->getGameStateValue(VAR_CHOSEN) == 0) {
+    if ($this->getGameStateValue(VAR_CHOSEN) == 0 || $this->getGameStateValue(OPT_THROW) == OFF) {
       // End of the trick
       $this->setGameStateValue(
         VAR_CHOSEN,
@@ -925,11 +879,7 @@ class dk extends Table
       $this->gamestate->changeActivePlayer($this->getStartPlayer(-1));
       $this->gamestate->nextState('poverty');
     } else {
-      $this->incGameStateValue(VAR_CHOSEN, -1);
-      // Standard case ( not the end of the trick )
-      // => just active the next player
-      $player_id = $this->activeNextPlayer();
-      $this->giveExtraTime($player_id);
+      if ($this->nextReservedPlayer())  return $this->stNextThrowing();
       $this->gamestate->nextState('nextPlayer');
     }
   }
@@ -969,10 +919,9 @@ class dk extends Table
     // New trick: activate the player who won the last trick or the starting player
     // Reset trick suit to 0 ( = no suit )
     if ($this->cards->countCardInLocation('hand') == 48) {
-      $this->error($this->getGameStateValue(VAR_RES2));
       $wed_id = $this->getObjectFromDB("SELECT 
       `player`.`player_id`,
-      `player`.`player_name` FROM `player` WHERE `player_reservation` = 1 AND `player_id` = {$this->getGameStateValue(VAR_RES2)}");
+      `player`.`player_name` FROM `player` JOIN `player_counts` WHERE `player_reservation` = 1 AND `res` = 2");
       if ($wed_id) {
         $this->setGameStateValue(VAR_WEDDING, $wed_id['player_id']);
         $this->notifyAllPlayers("wedding", clienttranslate('Wedding by ${player_name}.'), array(

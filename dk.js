@@ -232,18 +232,37 @@ define([
               );
             } else this.onSolo();
             break;
-          /*               
-            Example:
+          case "playerThrowing":
+            this.addActionButton(
+              "button_throw", _("Throw"),
+              "onThrow"
+            );
+            var lable = [];
+            if (this.gamedatas.res2) lable.push(_("Wedding"));
 
-            case 'myGameState':
-            
-            // Add 3 action buttons in the action status bar:
-            
-            this.addActionButton( 'button_1_id', _('Button 1 label'), 'onMyMethodToCall1' ); 
-            this.addActionButton( 'button_2_id', _('Button 2 label'), 'onMyMethodToCall2' ); 
-            this.addActionButton( 'button_3_id', _('Button 3 label'), 'onMyMethodToCall3' ); 
+            if (lable.length > 0) {
+
+              this.addActionButton(
+                "button_no",
+                dojo.string.substitute(_("No: ${r}"), {
+                  r: lable.join(_("/")),
+                }),
+                "onNo"
+              );
+            }
             break;
-        */
+          /*               
+           Example:
+
+           case 'myGameState':
+           
+           // Add 3 action buttons in the action status bar:
+           
+           this.addActionButton( 'button_1_id', _('Button 1 label'), 'onMyMethodToCall1' ); 
+           this.addActionButton( 'button_2_id', _('Button 2 label'), 'onMyMethodToCall2' ); 
+           this.addActionButton( 'button_3_id', _('Button 3 label'), 'onMyMethodToCall3' ); 
+           break;
+       */
         }
       }
     },
@@ -257,10 +276,19 @@ define([
                 script.
             
             */
+    resortHand: function () {
 
+      let weights = {};
+      for (let card of this.gamedatas.cardSorting) {
+        let type = this.getCardUniqueId(card.suit, card.value);
+        weights[type] = type + card.trump * 30;
+      }
+      this.playerHand.changeItemsWeight(weights)
+    },
     setupHandCards: function () {
       // Player hand
       if (!this.playerHand) {
+        console.log("Creating Hand")
         this.playerHand = new ebg.stock(); // new stock object for hand
         this.playerHand.create(
           this,
@@ -284,23 +312,18 @@ define([
             type
           );
         }
-        console.log("Placing Cards in Hand");
-
-        // Cards in player's hand
-        for (let card of this.gamedatas.hand) {
-          this.playerHand.addToStockWithId(
-            this.getCardUniqueId(card.suit, card.value),
-            card.id
-          );
-        }
       } else {
-        console.log("Resorting Cards in Hand");
-        let weights = {};
-        for (let card of this.gamedatas.cardSorting) {
-          let type = this.getCardUniqueId(card.suit, card.value);
-          weights[type] = type + card.trump * 30;
-        }
-        this.playerHand.changeItemsWeight(weights)
+        console.log("Clearing Hand")
+        this.playerHand.removeAll()
+      }
+      console.log("Placing Cards in Hand");
+
+      // Cards in player's hand
+      for (let card of this.gamedatas.hand) {
+        this.playerHand.addToStockWithId(
+          this.getCardUniqueId(card.suit, card.value),
+          card.id
+        );
       }
     },
 
@@ -393,6 +416,9 @@ define([
     },
     onGesund: function () {
       this.action("gesund");
+    },
+    onThrow: function () {
+      this.action("throw");
     },
     onReservation: function () {
       this.action("reservation");
@@ -501,7 +527,7 @@ define([
     notif_solo: function (notif) {
       console.log("Rearanging Cards");
       this.gamedatas.cardSorting = notif.args.cardSorting;
-      this.setupHandCards();
+      this.resortHand();
     },
 
     notif_sumCards: function (notif) {
@@ -522,7 +548,8 @@ define([
       this.gamedatas.cardSorting = notif.args.cardSorting;
 
       this.gamedatas.hand = notif.args.hand;
-
+      this.gamedatas.canThrow = notif.args.canThrow;
+      this.gamedatas.res2 = notif.args.res2;
       this.setupHandCards();
     },
 

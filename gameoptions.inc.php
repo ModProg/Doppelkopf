@@ -80,6 +80,20 @@ $game_options = array(
     ),
 
 
+    OPT_THROW_ID => array(
+        'name' => totranslate('Allow Throwing'),
+        'values' => array(
+            OFF => array(
+                'name' => totranslate('Off'),
+                'default' => true
+            ),
+            ON => array(
+                'name' => totranslate('On')
+            ),
+        )
+    ),
+
+
     /*
     
     // note: game variant ID should start at 100 (ie: 100, 101, 102, ...). The maximum is 199.
