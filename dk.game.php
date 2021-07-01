@@ -42,7 +42,8 @@ class dk extends Table
       VAR_SOLOS => 17,
       OPT_AUTO_THROW => OPT_AUTO_THROW_ID,
       OPT_SOLO => OPT_SOLO_ID,
-      OPT_ROUNDS => OPT_ROUNDS_ID
+      OPT_ROUNDS => OPT_ROUNDS_ID,
+      OPT_H10 => OPT_H10_ID
     ));
 
     $this->cards = $this->getNew('module.common.deck');
@@ -317,12 +318,6 @@ class dk extends Table
     $sql = $this->getTrumpSH();
     return $this->getUniqueValueFromDB("SELECT `card_trump$sql` FROM `card` WHERE `card`.`card_id` = '{$card['id']}'");
   }
-
-  public function h10($best_card, $card)
-  {
-    return $card['type'] == HEART && $card['type_arg'] == TEN && $best_card['type'] == HEART && $best_card['type_arg'] == TEN;
-  }
-
   public function getTrumpSH()
   {
     switch ($this->getGameStateValue(VAR_SOLO)) {
@@ -377,15 +372,19 @@ class dk extends Table
   }
 
 
+  public function h10($card)
+  {
+    return $this->getGameStateValue(OPT_H10) == ON && $card['type'] == HEART && $card['type_arg'] == TEN;
+  }
+
+
   public function beats($firstCard, $secondCard)
   {
     //TODO heart 10
-    if ($this->getTrump($secondCard) > $this->getTrump($firstCard)) {
-      return true;
-    }
-    if ($this->beatsNormal($firstCard, $secondCard)) {
-      return $this->getTrump($firstCard) == 0;
-    }
+    if ($this->getTrump($secondCard)) {
+      return $this->getTrump($secondCard) > $this->getTrump($firstCard) || $this->h10($secondCard);
+    } else
+      return $this->beatsNormal($firstCard, $secondCard);
   }
   #endregion
 

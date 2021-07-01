@@ -66,23 +66,15 @@ $game_options = array(
     ),
 
 
-    OPT_ROUNDS_ID => array(
-        'name' => totranslate('Number of Games'),
+    OPT_H10_ID => array(
+        'name' => totranslate('Second ♥ 10 beats first'),
         'values' => array(
-            4 => array(
-                'name' => totranslate('One Game (4 Rounds)'),
+            OFF => array(
+                'name' => totranslate('On'),
                 'default' => true
             ),
-            8 => array(
-                'name' => totranslate('Two Games (8 Rounds)')
-
-            ),
-            12 => array(
-                'name' => totranslate('Three Games (12 Rounds)')
-
-            ),
-            16 => array(
-                'name' => totranslate('Four Games (16 Rounds)')
+            ON => array(
+                'name' => totranslate('Off')
 
             ),
         )

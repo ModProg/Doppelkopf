@@ -23,11 +23,6 @@ define("SOLOQUEEN", 5);
 define("SOLOJACK", 6);
 define("SOLOACE", 7);
 
-define("OFF", 0);
-define("ON", 1);
-
-define("SOLO_ONLY_VOL", 2);
-
 // Variables
 define("VAR_ROUND", "var_round");
 define("VAR_TRICK_SUIT", "var_trick_suit");
@@ -44,4 +39,11 @@ define("OPT_SOLO", "opt_solo");
 define("OPT_SOLO_ID", 101);
 define("OPT_ROUNDS", "opt_rounds");
 define("OPT_ROUNDS_ID", 102);
+define("OPT_H10", "opt_h10");
+define("OPT_H10_ID", 103);
+
+define("OFF", 0);
+define("ON", 1);
+
+define("SOLO_ONLY_VOL", 2);
 }
