@@ -75,7 +75,6 @@ $game_options = array(
             ),
             ON => array(
                 'name' => totranslate('On')
-
             ),
         )
     ),
